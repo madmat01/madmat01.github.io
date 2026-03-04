@@ -1,7 +1,52 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
+baseURL = 'https://madmat01.github.io/'
+languageCode = 'en-gb'
 title = 'Matthew Collinge'
 theme = 'hugo-profile'
+
 [caches]
   [caches.images]
     dir = ':cacheDir/images'
+[params]
+  # Theme customization
+  animate = true
+
+  [params.hero]
+    enable = true
+    intro = "Hello, my name is"
+    title = "Matthew Collinge"
+    subtitle = "Power Platform Specialist | Dataverse, Power Apps & Power Automate"
+    content = "I am a Microsoft Power Platform specialist with expertise in Dataverse, Power Apps, and Power Automate. I am also an AI enthusiast and active speaker in the tech community."
+    image = "images/profile.png"
+    roundImage = true
+
+  [params.about]
+    enable = true
+    title = "About Me"
+    content = "I am a passionate technologist focusing on the Microsoft Power Platform. I enjoy building solutions that automate business processes and improve efficiency. I am also a participant in the 90 Day Mentoring Challenge."
+      [params.about.skills]
+      enable = true
+      title = "Here are some technologies I work with:"
+      items = ["Power Apps", "Power Automate", "Dataverse", "Microsoft 365", "Azure AI"]
+
+  [params.contact]
+    enable = true
+    title = "Get in Touch"
+    content = "If you have any questions or want to collaborate, feel free to reach out!"
+    email = "matthewjcollinge@gmail.com"
+
+[menu]
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "#about"
+    weight = 1
+  [[menu.main]]
+    identifier = "posts"
+    name = "Posts"
+    url = "/posts"
+    weight = 2
+  [[menu.main]]
+    identifier = "contact"
+    name = "Contact"
+    url = "#contact"
+    weight = 3

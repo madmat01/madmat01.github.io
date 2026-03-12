@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
+<link rel="icon" href="/fav.png" type="image/gif">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+>
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      media="print" onload="this.media='all'" />
+<noscript>
+  <link
+          href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet">
+</noscript>
+
+
+<link rel="stylesheet" href="/css/font.css" media="all">
+
+
+
+<meta property="og:url" content="http://localhost:1313/posts/passing-a-choices-list-from-power-apps-to-an-adaptive-card/">
+  <meta property="og:site_name" content="Matthew Collinge">
+  <meta property="og:title" content="Passing a Choices List from Power Apps to an Adaptive Card">
+  <meta property="og:description" content="Introduction In a follow-on from my previous post Passing Objects from Power Apps to Power Automate I am now going to cover a method I have found to ‘render’ our JSON Object in an Adaptive Card that is part of an Approval Process.
+Recap After we have got our Object into Power Automate I mentioned that we can then reference a property by first referencing the name of the Object (varObject) and then the property name variables(&#39;varObject&#39;)?[&#39;____&#39;]. These can be used inside of an Adaptive Card to show single text values, but what if we want to have a dynamically generated dropdown (choice) list inside of the Adaptive Card?">
+  <meta property="og:locale" content="en_gb">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-01-13T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-01-13T00:00:00+00:00">
+    <meta property="article:tag" content="Power Apps">
+    <meta property="article:tag" content="Adaptive Cards">
+    <meta property="article:tag" content="Power Automate">
+    <meta property="article:tag" content="JSON">
+    <meta property="article:tag" content="UI Design">
+    <meta property="article:tag" content="Low Code">
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Passing a Choices List from Power Apps to an Adaptive Card">
+  <meta name="twitter:description" content="Introduction In a follow-on from my previous post Passing Objects from Power Apps to Power Automate I am now going to cover a method I have found to ‘render’ our JSON Object in an Adaptive Card that is part of an Approval Process.
+Recap After we have got our Object into Power Automate I mentioned that we can then reference a property by first referencing the name of the Object (varObject) and then the property name variables(&#39;varObject&#39;)?[&#39;____&#39;]. These can be used inside of an Adaptive Card to show single text values, but what if we want to have a dynamically generated dropdown (choice) list inside of the Adaptive Card?">
+
+
+
+
+
+<link rel="stylesheet" href="/bootstrap-5/css/bootstrap.min.css" media="all"><link rel="stylesheet" href="/css/header.css" media="all">
+<link rel="stylesheet" href="/css/language-switcher.css" media="all">
+<link rel="stylesheet" href="/css/footer.css" media="all">
+
+
+<link rel="stylesheet" href="/css/theme.css" media="all">
+
+<style>
+    :root {
+        --text-color: #343a40;
+        --text-secondary-color: #6c757d;
+        --text-link-color: #007bff;
+        --background-color: #eaedf0;
+        --secondary-background-color: #64ffda1a;
+        --primary-color: #007bff;
+        --secondary-color: #f8f9fa;
+
+         
+        --text-color-dark: #e4e6eb;
+        --text-secondary-color-dark: #b0b3b8;
+        --text-link-color-dark: #ffffff;
+        --background-color-dark: #18191a;
+        --secondary-background-color-dark: #212529;
+        --primary-color-dark: #ffffff;
+        --secondary-color-dark: #212529;
+    }
+    body {
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        text-align: left;
+    }
+
+    html {
+        background-color: var(--background-color) !important;
+    }
+
+    body::-webkit-scrollbar {
+        height: 0px;
+        width: 8px;
+        background-color: var(--background-color);
+    }
+
+    ::-webkit-scrollbar-track {
+        border-radius: 1rem;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 1rem;
+        background: #b0b0b0;
+        outline: 1px solid var(--background-color);
+    }
+
+    #search-content::-webkit-scrollbar {
+        width: .5em;
+        height: .1em;
+        background-color: var(--background-color);
+    }
+</style>
+
+
+
+<meta name="description" content="">
+<link rel="stylesheet" href="/css/single.css">
+
+
+<script defer src="/fontawesome-6/all-6.4.2.js"></script>
+
+
+  
+  
+
+  <title>
+Passing a Choices List from Power Apps to an Adaptive Card | Matthew Collinge
+
+  </title>
+</head>
+
+<body class="light">
+  
+  
+<script>
+    let localStorageValue = localStorage.getItem("pref-theme");
+    let mediaQuery = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    switch (localStorageValue) {
+        case "dark":
+            document.documentElement.classList.add('dark');
+            document.body.classList.add('dark');
+            break;
+        case "light":
+            document.body.classList.remove('dark');
+            document.documentElement.classList.remove('dark');
+            break;
+        default:
+            if (mediaQuery) {
+                document.documentElement.classList.add('dark');
+                document.body.classList.add('dark');
+            }
+            break;
+    }
+</script>
+
+
+
+
+
+<header id="profileHeader">
+    <nav class="pt-3 navbar navbar-expand-lg animate">
+        <div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5">
+            
+            <a class="navbar-brand primary-font text-wrap" href="/">
+                
+                
+                
+            </a>
+
+            
+                <div>
+                    <input id="search" autocomplete="off" class="form-control mr-sm-2 d-none d-md-block" placeholder='Search...'
+                        aria-label="Search" oninput="searchOnChange(event)">
+                </div>
+            
+
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <svg aria-hidden="true" height="24" viewBox="0 0 16 16" version="1.1" width="24" data-view-component="true">
+                    <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"></path>
+                </svg>
+            </button>
+
+            
+            <div class="collapse navbar-collapse text-wrap primary-font" id="navbarContent">
+                <ul class="navbar-nav ms-auto text-center">
+                    
+                        <li class="nav-item navbar-text d-block d-md-none">
+                            <div class="nav-link">
+                                <input id="search" autocomplete="off" class="form-control mr-sm-2" placeholder='Search...' aria-label="Search" oninput="searchOnChange(event)">
+                            </div>
+                        </li>
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/#about" aria-label="about">
+                            About Me
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/#contact"
+                            aria-label="contact">
+                            Get in Touch
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    
+                    
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="#about" title="">
+                            
+                            About
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/posts" title="">
+                            
+                            Posts
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="#contact" title="">
+                            
+                            Contact
+                        </a>
+                    </li>
+                    
+                    
+
+                    <li class="nav-item navbar-text">
+                        
+                        <div class="text-center">
+                            <button id="theme-toggle" type="button" aria-label="Toggle dark mode">
+                                <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                </svg>
+                                <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="5"></circle>
+                                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </li>
+                    
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>
+<div id="content">
+<section id="single">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-md-12 col-lg-9">
+        <div class="pr-lg-4">
+          <div class="title mb-5">
+            <h1 class="text-center mb-4">Passing a Choices List from Power Apps to an Adaptive Card</h1>
+            <div class="text-center">
+              
+              Jan 13, 2024
+
+              
+              <span id="readingTime">
+                min read
+              </span>
+              
+            </div>
+          </div>
+          
+          <article class="page-content  p-2">
+          <h2 id="introduction">Introduction</h2>
+<p>In a follow-on from my previous post <a href="https://dev.to/mcombp/passing-objects-from-power-apps-to-power-automate-31ji">Passing Objects from Power Apps to Power Automate</a> I am now going to cover a method I have found to &lsquo;render&rsquo; our JSON Object in an Adaptive Card that is part of an Approval Process.</p>
+<h2 id="recap">Recap</h2>
+<p>After we have got our Object into Power Automate I mentioned that we can then reference a property by first referencing the name of the Object (varObject) and then the property name <code>variables('varObject')?['____']</code>. These can be used inside of an Adaptive Card to show single text values, but what if we want to have a dynamically generated dropdown (choice) list inside of the Adaptive Card?</p>
+<h2 id="choiceset">ChoiceSet</h2>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/c3hq5qpbzttizr2325md.png" alt="Adaptive Card - ChoiceSet"> <a href="https://adaptivecards.io/explorer/Input.ChoiceSet.html">Adaptive Card - ChoiceSet</a>
+The Adaptive Card Input.ChoiceSet needs a <strong>Title</strong> and a <strong>Value</strong> for each choice. <strong>Title</strong> is the user friendly name and <strong>Value</strong> is the value passed to your app our service.</p>
+<pre tabindex="0"><code>{
+            &#34;type&#34;: &#34;Input.ChoiceSet&#34;,
+            &#34;choices&#34;: [
+                {
+                    &#34;title&#34;: &#34;Choice 1&#34;,
+                    &#34;value&#34;: &#34;Choice 1&#34;
+                },
+                {
+                    &#34;title&#34;: &#34;Choice 2&#34;,
+                    &#34;value&#34;: &#34;Choice 2&#34;
+                }
+            ],
+            &#34;placeholder&#34;: &#34;Placeholder text&#34;
+        }
+</code></pre><p>So, we need to prepare our data in that format.</p>
+<h2 id="choice-collection">Choice Collection</h2>
+<p>The method I have been using to do this is done back in Power Apps&hellip;
+This is where I am already using a Collection inside my OnVisible property of the Form Screen.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/o6il1irs1uyw24eoucxz.png" alt="Power Apps - colCountry Collection"></p>
+<p>This is a very basic collection, but in practice your use case may involve generating this from a Datasource Such as Dataverse or SharePoint <a href="https://www.matthewdevaney.com/powerapps-collections-cookbook/create-a-collection-from-datasource/">Create A Collection (from a datasource) - Matthew Devaney</a>.</p>
+<pre tabindex="0"><code>Collect(
+    colCountry,
+    &#34;England&#34;,
+    &#34;Northern Ireland&#34;,
+    &#34;Scotland&#34;,
+    &#34;Wales&#34;
+)
+</code></pre><p>This Collection works well for the Country Combobox in our Form.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/p3qszploqjct21gztex9.jpg" alt="Power Apps - colCountry Combobox"></p>
+<p>But, this Collection isn&rsquo;t quite right for a ChoiceSet yet as it only has a &ldquo;Value&rdquo; column. So, to sort this out I have written this, which can run before we create the varObject.</p>
+<pre tabindex="0"><code>ClearCollect(
+    colCurrentCountries,//Array of Current countries for passing to Adaptive Card
+    ForAll(
+        ShowColumns(
+            SortByColumns(//Sort Alphabetically
+                colCountry,
+                &#34;Value&#34;,
+                SortOrder.Ascending
+            ),
+            &#34;Value&#34;//We only want this column
+        ),
+        {
+            value: Value,
+            title: Value
+        }
+    )
+)
+</code></pre><p>I will break down what is happening here:</p>
+<ul>
+<li>
+<p>First we create a collection called &ldquo;colCurrentCountries&rdquo; <code>ClearCollect(colCurrentCountries,</code></p>
+</li>
+<li>
+<p>Then we&rsquo;re going to loop through each country in the existing &ldquo;colCountry&rdquo; Collection using ForAll() to do the looping. But, we only need the &ldquo;Value&rdquo; column (this isn&rsquo;t strictly necessary in my example). Neither is &lsquo;SortByColumns()&rsquo;, but it keeps things tidy 🙂.</p>
+</li>
+</ul>
+<pre tabindex="0"><code>ForAll(
+       ShowColumns(
+           SortByColumns(//Sort Alphabetically
+               colCountry,
+               &#34;Value&#34;,
+               SortOrder.Ascending
+           ),
+           &#34;Value&#34;//We only want this column
+       ),`
+</code></pre><ul>
+<li>The last part to construct is the schema of each record inside this Collection. To do this I&rsquo;m just repeating the &ldquo;Value&rdquo; column for both the Title and Value as I&rsquo;ve no need to for these to be different in the Adaptive Card.</li>
+</ul>
+<pre tabindex="0"><code>        {
+            value: Value,
+            title: Value
+        }
+</code></pre><h2 id="adding-the-collection-to-the-object">Adding the Collection to the Object</h2>
+<p>To add the Collection or Array to the Object we just need to add the line &lsquo;Countries: colCurrentCountries&rsquo; like so:</p>
+<pre tabindex="0"><code>Set(
+    varObject,
+    {
+        Name: txt_Name.Text,
+        Address_1: txt_Address_1.Text,
+        Address_2: txt_Address_2.Text,
+        City: txt_City.Text,
+        Country: cbx_Country.Selected.Value,
+        Mortgaged: tgl_Mortgaged.Value,
+        Rating: rtg_Rating.Value,
+        **Countries: colCurrentCountries**
+    }
+</code></pre><p>So now with everything put together in Power Apps we have this in the OnSelect Property that runs the Flow:</p>
+<pre tabindex="0"><code>ClearCollect(
+    colCurrentCountries,//Array of Current countries for passing to Adaptive Card
+    ForAll(
+        ShowColumns(
+            SortByColumns(//Sort Alphabetically
+                colCountry,
+                &#34;Value&#34;,
+                SortOrder.Ascending
+            ),
+            &#34;Value&#34;//We only want this column
+        ),
+        {
+            value: Value,
+            title: Value
+        }
+    )
+);
+Set(
+    varObject,
+    {
+        Name: txt_Name.Text,
+        Address_1: txt_Address_1.Text,
+        Address_2: txt_Address_2.Text,
+        City: txt_City.Text,
+        Country: cbx_Country.Selected.Value,
+        Mortgaged: tgl_Mortgaged.Value,
+        Rating: rtg_Rating.Value,
+        Countries: colCurrentCountries
+    }
+);
+&#39;[proxy]-ObjectFlow&#39;.Run(
+    JSON(
+        varObject
+    )
+)
+</code></pre><h2 id="power-automate">Power Automate</h2>
+<p>To see this in an Adaptive Card in Power Automate for now we need to add an Action: &ldquo;Post card in a chat or channel&rdquo; Posting As: <strong>Flow Bot</strong> and Post In: <strong>Chat with Flow Bot</strong>. For testing add your email address for our &ldquo;Approver&rdquo; and then we can construct the Message.
+<img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ownwyd8ofxksxgbph7wd.png" alt="Power Automate - Adaptive Card Message"> <em>Yes, this screenshot is from the V2 designer</em> 😫</p>
+<h2 id="adaptive-card">Adaptive Card</h2>
+<p>I would recommend you build your full Adaptive Card by previewing it with the Help of (<a href="https://adaptivecards.io/designer/)%5BThe">https://adaptivecards.io/designer/)[The</a> Adaptive Card Designer] or the (<a href="https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.vscode-adaptive-cards#:~:text=The%20Microsoft%20Adaptive%20Card%20Previewer,%2C%20and%20high%2Dcontrast%20themes.)%5BVSCode">https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.vscode-adaptive-cards#:~:text=The%20Microsoft%20Adaptive%20Card%20Previewer,%2C%20and%20high%2Dcontrast%20themes.)[VSCode</a> Microsoft Adaptive Card Previewer]</p>
+<p>To help us out a little, here is a basic Adaptive Card with a Single ChoiceSet Input, with it waiting for you to type in some choices:</p>
+<pre tabindex="0"><code>{
+    &#34;type&#34;: &#34;AdaptiveCard&#34;,
+    &#34;body&#34;: [
+        {
+            &#34;type&#34;: &#34;Input.ChoiceSet&#34;,
+            &#34;choices&#34;: [
+                {
+                    &#34;title&#34;: &#34;Choice 1&#34;,
+                    &#34;value&#34;: &#34;Choice 1&#34;
+                },
+                {
+                    &#34;title&#34;: &#34;Choice 2&#34;,
+                    &#34;value&#34;: &#34;Choice 2&#34;
+                }
+            ],
+            &#34;placeholder&#34;: &#34;Placeholder text&#34;
+        }
+    ],
+    &#34;$schema&#34;: &#34;http://adaptivecards.io/schemas/adaptive-card.json&#34;,
+    &#34;version&#34;: &#34;1.5&#34;
+}
+</code></pre><p>Now to make this work with the Data passed over from our varObject Variable in Power Automate.</p>
+<ul>
+<li>First Remove the &ldquo;choices&rdquo; array - the <strong>[</strong> to the <strong>]</strong> and replace this with a reference to our Countries list in varObject, like this:</li>
+</ul>
+<pre tabindex="0"><code>&#34;choices&#34;: @{variables(&#39;varObject&#39;)?[&#39;Countries&#39;]},
+</code></pre><ul>
+<li>Then we can add the Country value that was selected in the Power App Form, by adding this (The ? operator is only needed for handling null values.):</li>
+</ul>
+<pre tabindex="0"><code>&#34;value&#34;: &#34;@{variables(&#39;varObject&#39;)?[&#39;Country&#39;]}&#34;
+</code></pre><ul>
+<li>Then  we need to add an ID for the field.</li>
+</ul>
+<pre tabindex="0"><code>&#34;id&#34;: &#34;Country&#34;,
+</code></pre><ul>
+<li>And for reasons I don&rsquo;t understand we need to change the version from 1.5 to 1.4 to work with Teams version 1.7?!?`</li>
+</ul>
+<pre tabindex="0"><code>    &#34;version&#34;: &#34;1.4&#34;
+}
+</code></pre><h2 id="power-automate-1">Power Automate</h2>
+<p>We then have an Adaptive Card that we can paste in to the Message in Power Automate.</p>
+<pre tabindex="0"><code>{
+    &#34;type&#34;: &#34;AdaptiveCard&#34;,
+    &#34;body&#34;: [
+        {
+            &#34;type&#34;: &#34;Input.ChoiceSet&#34;,
+            &#34;choices&#34;: @{variables(&#39;varObject&#39;)?[&#39;Countries&#39;]},
+            &#34;placeholder&#34;: &#34;Placeholder text&#34;,
+            &#34;id&#34;: &#34;Country&#34;,
+            &#34;value&#34;: &#34;@{variables(&#39;varObject&#39;)?[&#39;Country&#39;]}&#34;
+        }
+    ],
+    &#34;$schema&#34;: &#34;http://adaptivecards.io/schemas/adaptive-card.json&#34;,
+    &#34;version&#34;: &#34;1.4&#34;
+}
+</code></pre><p>Save the Flow and Refresh the Flow in the Power App too. If you get
+&ldquo;<em>[proxy]-ObjectFlow.Run failed: { &ldquo;code&rdquo;:
+&ldquo;InvokerConnectionOverrideFailed&rdquo;, &ldquo;message&rdquo;: &ldquo;Failed to parse invoker connections from trigger &lsquo;manual&rsquo; outputs. Exception: Could not find any valid connection for connection reference name
+&lsquo;shared_teams&rsquo; in APIM header.&rdquo; }</em>&rdquo; Just Save and Re-Open the Power App 🙂.</p>
+<h2 id="teams">Teams</h2>
+<p>Submit the Form in the Power Apps and Teams should now send you a message with the Selected Country and when you select the Choices, give you a selection of other Countries.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/k88ompzkx2pi4qpjp0lv.png" alt="Teams - Selected Country"></p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/aiyw79dssrxm3tihzt3f.png" alt="Teams - Countries"></p>
+<p>##Conclusion
+Hopefully this is a helpful tip and I will elaborate on how we can get more in to Adaptive Cards soon.
+Please leave any questions or comments below.</p>
+
+          </article>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-3">
+        <div id="stickySideBar" class="sticky-sidebar">
+          
+          <aside class="toc">
+              <h5>
+                Table Of Contents
+              </h5>
+              <div class="toc-content">
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#recap">Recap</a></li>
+    <li><a href="#choiceset">ChoiceSet</a></li>
+    <li><a href="#choice-collection">Choice Collection</a></li>
+    <li><a href="#adding-the-collection-to-the-object">Adding the Collection to the Object</a></li>
+    <li><a href="#power-automate">Power Automate</a></li>
+    <li><a href="#adaptive-card">Adaptive Card</a></li>
+    <li><a href="#power-automate-1">Power Automate</a></li>
+    <li><a href="#teams">Teams</a></li>
+  </ul>
+</nav>
+              </div>
+          </aside>
+          
+
+          
+          <aside class="tags">
+            <h5>Tags</h5>
+            <ul class="tags-ul list-unstyled list-inline">
+              
+              
+              <li class="list-inline-item"><a href="/tags/power-apps"
+                target="_blank"
+              >Power Apps</a></li>
+              
+              
+              <li class="list-inline-item"><a href="/tags/adaptive-cards"
+                target="_blank"
+              >Adaptive Cards</a></li>
+              
+              
+              <li class="list-inline-item"><a href="/tags/power-automate"
+                target="_blank"
+              >Power Automate</a></li>
+              
+              
+              <li class="list-inline-item"><a href="/tags/json"
+                target="_blank"
+              >JSON</a></li>
+              
+              
+              <li class="list-inline-item"><a href="/tags/ui-design"
+                target="_blank"
+              >UI Design</a></li>
+              
+              
+              <li class="list-inline-item"><a href="/tags/low-code"
+                target="_blank"
+              >Low Code</a></li>
+              
+            </ul>
+          </aside>
+          
+
+          
+          <aside class="social">
+            <h5>Social</h5>
+            <div class="social-content">
+              <ul class="list-inline">
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://www.linkedin.com/feed/?shareActive=true&text= http%3a%2f%2flocalhost%3a1313%2fposts%2fpassing-a-choices-list-from-power-apps-to-an-adaptive-card%2f">
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href='https://twitter.com/share?text=Passing%20a%20Choices%20List%20from%20Power%20Apps%20to%20an%20Adaptive%20Card&url=http%3a%2f%2flocalhost%3a1313%2fposts%2fpassing-a-choices-list-from-power-apps-to-an-adaptive-card%2f&hashtags=Power%20Apps%2cAdaptive%20Cards%2cPower%20Automate%2cJSON%2cUI%20Design%2cLow%20Code'>
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://api.whatsapp.com/send?text=Passing%20a%20Choices%20List%20from%20Power%20Apps%20to%20an%20Adaptive%20Card: http%3a%2f%2flocalhost%3a1313%2fposts%2fpassing-a-choices-list-from-power-apps-to-an-adaptive-card%2f">
+                    <i class="fab fa-whatsapp"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href='mailto:?subject=Passing%20a%20Choices%20List%20from%20Power%20Apps%20to%20an%20Adaptive%20Card&amp;body=Check%20out%20this%20site http%3a%2f%2flocalhost%3a1313%2fposts%2fpassing-a-choices-list-from-power-apps-to-an-adaptive-card%2f'>
+                    <i class="fa fa-envelope"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </aside>
+          
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-9 p-4">
+        
+      </div>
+    </div>
+  </div>
+  <button class="p-2 px-3" onclick="topFunction()" id="topScroll">
+    <i class="fas fa-angle-up"></i>
+  </button>
+</section>
+
+
+<div class="progress">
+  <div id="scroll-progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<Script src="/js/scrollProgressBar.js"></script>
+
+
+<script>
+  var topScroll = document.getElementById("topScroll");
+  window.onscroll = function() {scrollFunction()};
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      topScroll.style.display = "block";
+    } else {
+      topScroll.style.display = "none";
+    }
+  }
+
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
+  
+  let stickySideBarElem = document.getElementById("stickySideBar");
+  let stickyNavBar =  false ;
+  if(stickyNavBar) {
+    let headerElem = document.getElementById("profileHeader");
+    let headerHeight = headerElem.offsetHeight + 15;
+    stickySideBarElem.style.top = headerHeight + "px";
+  } else {
+    stickySideBarElem.style.top = "50px";
+  }
+</script>
+
+
+<script src="/js/readingTime.js"></script>
+
+
+
+  </div><footer>
+    
+
+
+ 
+
+<div class="text-center pt-2">
+    
+
+    
+
+    
+
+    
+
+    
+</div><div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-4 text-center">
+            
+            &copy; 2026  All Rights Reserved
+            <div class="text-secondary">
+                Made with
+                <span class="text-danger">
+                    &#10084;
+                </span>
+                and
+                <a href="https://github.com/gurusabarish/hugo-profile" target="_blank"
+                    title="Designed and developed by gurusabarish">
+                    Hugo Profile
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</footer><script src="/bootstrap-5/js/bootstrap.bundle.min.js"></script>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+        document.documentElement.classList.remove('dark');
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+    }
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            document.documentElement.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+
+</script>
+
+
+    <script>
+      
+      window.searchIndexURL = "/index.json";
+    </script>
+    <script src="/js/search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+  <section id="search-content" class="py-2">
+    <div class="container" id="search-results"></div>
+  </section>
+</body>
+
+</html>

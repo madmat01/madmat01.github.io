@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data Transfer on Matthew Collinge</title>
+    <link>http://localhost:1313/tags/data-transfer/</link>
+    <description>Recent content in Data Transfer on Matthew Collinge</description>
+    <generator>Hugo</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Wed, 10 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/data-transfer/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Passing Objects from Power Apps to Power Automate</title>
+      <link>http://localhost:1313/posts/passing-objects-from-power-apps-to-power-automate/</link>
+      <pubDate>Wed, 10 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/passing-objects-from-power-apps-to-power-automate/</guid>
+      <description>&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;This is the first part, in what I hope will be a series of posts describing how to trigger an advanced approval process. Starting with Power Apps capturing data in a Form and then passing that as a JSON Object or &amp;ldquo;Record&amp;rdquo;.&lt;/p&gt;&#xA;&lt;p&gt;We are passing a JavaScript object as a JSON string from Power Automate to Power Automate. Power Automate has many actions and expressions available to allow us to reference and manipulate the Object once it has been received. More on that later.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

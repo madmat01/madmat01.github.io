@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Table Extraction on Matthew Collinge</title>
+    <link>http://localhost:1313/tags/table-extraction/</link>
+    <description>Recent content in Table Extraction on Matthew Collinge</description>
+    <generator>Hugo</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Wed, 16 Oct 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/table-extraction/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Extract table data from Documents using Azure AI Document Intelligence</title>
+      <link>http://localhost:1313/posts/extract-table-data-from-documents-using-azure-ai-document-intelligence/</link>
+      <pubDate>Wed, 16 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/extract-table-data-from-documents-using-azure-ai-document-intelligence/</guid>
+      <description>&lt;p&gt;##Extract table data from Documents Using Azure AI Document Intelligence Layout Model with Power Automate&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/x6so0e1ifuegxe8n025f.png&#34; alt=&#34;Document Intelligence Studio&#34;&gt;&#xA;Azure AI Document Intelligence is a cloud-based service that allows you to build intelligent document processing solutions. It uses machine learning to extract text, tables, and key-value pairs from documents, providing structured data for easy use.&lt;/p&gt;&#xA;&lt;p&gt;In this post, I’m going to go through how to send a PDF document using an Azure AI Document Intelligence REST API request and return the text and table information using the Layout model. I’ll go through some of my processes for transforming the received JSON output into an array that can be used to create rows in a Dataverse table, all within Power Automate.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

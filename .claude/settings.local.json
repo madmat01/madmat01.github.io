@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /c/git/website1 remote -v)",
+      "Bash(git -C /c/git/website1 status)"
+    ]
+  }
+}

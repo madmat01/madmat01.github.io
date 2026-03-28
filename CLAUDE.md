@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+This is a **Hugo** static site. For Hugo-specific instructions, shortcodes, content creation, and theme override patterns, see [skill.md](skill.md).
+
 ## Overview
 
 Personal portfolio and blog site for Matthew Collinge (Power Platform Specialist), built with Hugo and deployed to GitHub Pages at `https://madmat01.github.io/`.

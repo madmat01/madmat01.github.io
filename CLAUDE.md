@@ -39,3 +39,7 @@ git submodule update --init --recursive
 **Layouts/Assets**: `layouts/` and `assets/` are empty — the site uses the theme's defaults. Add files here to override theme templates or styles without modifying the submodule.
 
 **Output**: `public/` contains the last built site — this is what GitHub Pages serves.
+
+## Security
+
+Whenever modifying baseurl or deployment scripts, automatically invoke the static-sec-audit skill to prevent secret leakage.

@@ -9,7 +9,12 @@
       "Bash(node -e \"const fs=require\\(''fs''\\);try{JSON.parse\\(fs.readFileSync\\(''/c/git/website1/.claude/settings.json'',''utf8''\\)\\);console.log\\(''JSON valid''\\);}catch\\(e\\){console.error\\(''JSON error:'',e.message\\);}\")",
       "Bash(node -e \"const fs=require\\(''fs''\\);try{JSON.parse\\(fs.readFileSync\\(''C:/git/website1/.claude/settings.json'',''utf8''\\)\\);console.log\\(''JSON valid''\\);}catch\\(e\\){console.error\\(''JSON error:'',e.message\\);}\")",
       "Bash(node -e \":*)",
-      "Bash(hugo build:*)"
+      "Bash(hugo build:*)",
+      "Bash(hugo version:*)",
+      "Bash(gh api:*)",
+      "WebFetch(domain:api.github.com)",
+      "Bash(curl -s \"https://api.github.com/repos/actions/upload-pages-artifact/git/refs/tags/v3\")",
+      "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); print\\(data[''''object''''][''''sha''''], data[''''object''''][''''type'''']\\)\")"
     ]
   }
 }

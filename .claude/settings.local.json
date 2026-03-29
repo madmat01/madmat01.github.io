@@ -2,7 +2,14 @@
   "permissions": {
     "allow": [
       "Bash(git -C /c/git/website1 remote -v)",
-      "Bash(git -C /c/git/website1 status)"
+      "Bash(git -C /c/git/website1 status)",
+      "Bash(find /c/git/website1/themes/hugo-profile -name *.css)",
+      "Bash(find /c/git/website1/themes/hugo-profile/layouts -name baseof* -o -name _default*)",
+      "Bash(find /c/git/website1 -name style.css -o -name *animation* -o -name *animate*)",
+      "Bash(node -e \"const fs=require\\(''fs''\\);try{JSON.parse\\(fs.readFileSync\\(''/c/git/website1/.claude/settings.json'',''utf8''\\)\\);console.log\\(''JSON valid''\\);}catch\\(e\\){console.error\\(''JSON error:'',e.message\\);}\")",
+      "Bash(node -e \"const fs=require\\(''fs''\\);try{JSON.parse\\(fs.readFileSync\\(''C:/git/website1/.claude/settings.json'',''utf8''\\)\\);console.log\\(''JSON valid''\\);}catch\\(e\\){console.error\\(''JSON error:'',e.message\\);}\")",
+      "Bash(node -e \":*)",
+      "Bash(hugo build:*)"
     ]
   }
 }

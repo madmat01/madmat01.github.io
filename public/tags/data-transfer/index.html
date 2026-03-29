@@ -51,27 +51,27 @@
 
 <style>
     :root {
-        --text-color: #343a40;
-        --text-secondary-color: #6c757d;
-        --text-link-color: #007bff;
-        --background-color: #eaedf0;
-        --secondary-background-color: #64ffda1a;
-        --primary-color: #007bff;
-        --secondary-color: #f8f9fa;
+        --text-color: #1e293b;
+        --text-secondary-color: #475569;
+        --text-link-color: #0052cc;
+        --background-color: #f0f2f5;
+        --secondary-background-color: #dbeafe;
+        --primary-color: #0052cc;
+        --secondary-color: #ffffff;
 
          
-        --text-color-dark: #e4e6eb;
-        --text-secondary-color-dark: #b0b3b8;
-        --text-link-color-dark: #ffffff;
-        --background-color-dark: #18191a;
-        --secondary-background-color-dark: #212529;
-        --primary-color-dark: #ffffff;
-        --secondary-color-dark: #212529;
+        --text-color-dark: #e6edf3;
+        --text-secondary-color-dark: #8b949e;
+        --text-link-color-dark: #58a6ff;
+        --background-color-dark: #0d1117;
+        --secondary-background-color-dark: #1a2332;
+        --primary-color-dark: #58a6ff;
+        --secondary-color-dark: #161b22;
     }
     body {
         font-size: 1rem;
         font-weight: 400;
-        line-height: 1.5;
+        line-height: 1.7;
         text-align: left;
     }
 
@@ -110,6 +110,8 @@
 
   
   
+    <link rel="stylesheet" href="/style.css">
+  
 
   <title>
 Data Transfer | Matthew Collinge
@@ -146,11 +148,14 @@ Data Transfer | Matthew Collinge
 
 
 
+<a class="skip-to-content" href="#hero">Skip to content</a>
+
+
 <header id="profileHeader">
-    <nav class="pt-3 navbar navbar-expand-lg animate">
+    <nav class="pt-3 navbar navbar-expand-lg animate" role="navigation" aria-label="Main navigation">
         <div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5">
             
-            <a class="navbar-brand primary-font text-wrap" href="/">
+            <a class="navbar-brand primary-font text-wrap" href="/" aria-label=" — home">
                 
                 
                 
@@ -158,7 +163,8 @@ Data Transfer | Matthew Collinge
 
             
                 <div>
-                    <input id="search" autocomplete="off" class="form-control mr-sm-2 d-none d-md-block" placeholder='Search...'
+                    <label for="search-desktop" class="sr-only">Search</label>
+                    <input id="search-desktop" autocomplete="off" class="form-control mr-sm-2 d-none d-md-block" placeholder='Search...'
                         aria-label="Search" oninput="searchOnChange(event)">
                 </div>
             
@@ -177,7 +183,8 @@ Data Transfer | Matthew Collinge
                     
                         <li class="nav-item navbar-text d-block d-md-none">
                             <div class="nav-link">
-                                <input id="search" autocomplete="off" class="form-control mr-sm-2" placeholder='Search...' aria-label="Search" oninput="searchOnChange(event)">
+                                <label for="search-mobile" class="sr-only">Search</label>
+                                <input id="search-mobile" autocomplete="off" class="form-control mr-sm-2" placeholder='Search...' aria-label="Search" oninput="searchOnChange(event)">
                             </div>
                         </li>
                     
@@ -246,10 +253,10 @@ Data Transfer | Matthew Collinge
                         
                         <div class="text-center">
                             <button id="theme-toggle" type="button" aria-label="Toggle dark mode">
-                                <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <svg id="moon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                                 </svg>
-                                <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <svg id="sun" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <circle cx="12" cy="12" r="5"></circle>
                                     <line x1="12" y1="1" x2="12" y2="3"></line>
                                     <line x1="12" y1="21" x2="12" y2="23"></line>

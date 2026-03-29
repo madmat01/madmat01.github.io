@@ -9,6 +9,34 @@ theme = 'hugo-profile'
 [params]
   # Theme customization
   animate = true
+  customCSS = true
+
+  # Typography
+  [params.font]
+    fontSize   = "1rem"
+    fontWeight = "400"
+    lineHeight = "1.7"
+    textAlign  = "left"
+
+  # Color palette — 60-30-10 rule
+  # 60% background (#f0f2f5), 30% surface (#ffffff), 10% accent (#0052cc)
+  [params.color]
+    textColor                 = "#1e293b"
+    secondaryTextColor        = "#475569"
+    textLinkColor             = "#0052cc"
+    backgroundColor           = "#f0f2f5"
+    secondaryBackgroundColor  = "#dbeafe"
+    primaryColor              = "#0052cc"
+    secondaryColor            = "#ffffff"
+
+    [params.color.darkmode]
+      textColor                = "#e6edf3"
+      secondaryTextColor       = "#8b949e"
+      textLinkColor            = "#58a6ff"
+      backgroundColor          = "#0d1117"
+      secondaryBackgroundColor = "#1a2332"
+      primaryColor             = "#58a6ff"
+      secondaryColor           = "#161b22"
 
   [params.hero]
     enable = true

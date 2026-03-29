@@ -1,0 +1,39 @@
+<span>
+    {{ range .Site.Params.hero.socialLinks.fontAwesomeIcons }}
+    {{- /* Derive a human-readable label from the icon class, e.g. "fab fa-github" → "GitHub" */}}
+    {{- $iconClass := .icon -}}
+    {{- $parts := split $iconClass " " -}}
+    {{- $iconName := "" -}}
+    {{- range $parts -}}
+        {{- if hasPrefix . "fa-" -}}
+            {{- $iconName = strings.TrimPrefix "fa-" . -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $label := $iconName | title -}}
+    <span class="px-1">
+        <a href="{{ .url }}"
+            {{ if not (hasPrefix .url "#") }} target="_blank" rel="noopener noreferrer" {{ end }}
+            class="btn social-icon"
+            aria-label="{{ $label }}"
+        >
+            <i class="{{ .icon }}" aria-hidden="true"></i>
+        </a>
+    </span>
+    {{ end }}
+
+    {{ range .Site.Params.hero.socialLinks.customIcons }}
+    {{- /* Use the last path segment of the URL as a label */}}
+    {{- $parts := split .url "/" -}}
+    {{- $lastPart := index $parts (sub (len $parts) 1) -}}
+    {{- $label := $lastPart | title -}}
+    <span class="px-1">
+        <a href="{{ .url }}"
+            {{ if not (hasPrefix .url "#") }} target="_blank" rel="noopener noreferrer" {{ end }}
+            class="btn social-icon"
+            aria-label="{{ $label }}"
+        >
+            <img src="{{ .icon }}" alt="" aria-hidden="true">
+        </a>
+    </span>
+    {{ end }}
+</span>

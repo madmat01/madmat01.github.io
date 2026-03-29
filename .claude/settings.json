@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "statusMessage": "Building Hugo site...",
+            "command": "node -e \"let d='';process.stdin.on('data',c=>d+=c);process.stdin.on('end',()=>{try{const o=JSON.parse(d);console.log(o.tool_input?.file_path||'');}catch(e){console.log('');}});\" | { read -r f || exit 0; [[ \"$f\" == */public/* ]] && exit 0; hugo build --gc --minify 2>&1 | tail -5; } 2>/dev/null || true"
+          }
+        ]
+      }
+    ]
+  }
+}

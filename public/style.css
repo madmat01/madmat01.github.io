@@ -1,0 +1,565 @@
+/* ============================================================
+   Matthew Collinge — Custom Design System
+   Structure:
+     1. Design tokens (spacing, shadow, radius)
+     2. Typography
+     3. Visual polish & layout
+     4. Motion & micro-interactions
+   ============================================================ */
+
+/* ============================================================
+   1. DESIGN TOKENS
+   Color variables are set via hugo.toml → params.color.
+   These tokens cover spacing (8px scale), shadows, and radii.
+   ============================================================ */
+
+:root {
+  /* Spacing — 8px scale */
+  --sp-1:  8px;
+  --sp-2:  16px;
+  --sp-3:  24px;
+  --sp-4:  32px;
+  --sp-5:  40px;
+  --sp-6:  48px;
+  --sp-8:  64px;
+  --sp-10: 80px;
+  --sp-12: 96px;
+
+  /* Shadow levels */
+  --shadow-sm:  0 1px 3px 0 rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow-md:  0 4px 6px -1px rgb(0 0 0 / 0.10), 0 2px 4px -2px rgb(0 0 0 / 0.08);
+  --shadow-lg:  0 10px 15px -3px rgb(0 0 0 / 0.10), 0 4px 6px -4px rgb(0 0 0 / 0.08);
+  --shadow-xl:  0 20px 25px -5px rgb(0 0 0 / 0.10), 0 8px 10px -6px rgb(0 0 0 / 0.06);
+
+  /* Border radii */
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   14px;
+  --radius-xl:   20px;
+  --radius-full: 9999px;
+
+  /* Typography scale */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  1.875rem;
+  --text-4xl:  2.25rem;
+
+  /* Leading */
+  --leading-tight:   1.25;
+  --leading-snug:    1.4;
+  --leading-body:    1.7;
+  --leading-relaxed: 1.9;
+
+  /* Font families */
+  --font-heading: "Lora", Georgia, serif;
+  --font-body:    "Roboto", system-ui, sans-serif;
+  --font-ui:      "Alata", system-ui, sans-serif;
+
+  /* Border widths */
+  --border-thin:   1px;
+  --border-medium: 2px;
+  --border-thick:  3px;
+}
+
+
+/* ============================================================
+   2. TYPOGRAPHY
+   • Lora (serif) for headings — editorial, authoritative
+   • Roboto (sans-serif) for body — readable, clean
+   • Alata (geometric sans) for UI chrome — nav, labels, caps
+   ============================================================ */
+
+/* Body — switch from Lora to Roboto for prose legibility */
+body {
+  font-family: var(--font-body) !important;
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings — Lora serif for premium editorial feel */
+h1, h2, h3, h4,
+.h1, .h2, .h3, .h4 {
+  font-family: var(--font-heading) !important;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.015em;
+}
+
+/* UI chrome — Alata for nav items, labels, small-cap contexts */
+.navbar,
+.navbar .nav-link,
+#hero .subtitle,
+#about ul li,
+.card .card-title {
+  font-family: var(--font-ui) !important;
+}
+
+/* Hero h1 — tighter tracking for large display text */
+#hero h1 {
+  letter-spacing: -0.03em;
+  line-height: var(--leading-tight);
+}
+
+/* Hero h2 (subtitle) — lighter weight serif */
+#hero h2 {
+    font-size: clamp(15px, 2vw, 20px); /* adjust to taste - this is the subheader font size*/
+}
+
+
+/* Section headings — accent bar left-aligned */
+#about h3,
+#experience h3,
+#education .container > h3,
+#achievements h3,
+#contact h3,
+#recent-posts h3 {
+  font-family: var(--font-heading) !important;
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  padding-bottom: var(--sp-1);
+  border-bottom: var(--border-medium) solid var(--primary-color);
+  display: inline-block;
+  margin-bottom: var(--sp-4) !important;
+}
+
+/* Card titles — slightly smaller, Alata for visual contrast */
+#recent-posts .card-title {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: var(--leading-snug);
+}
+
+
+/* ============================================================
+   3. VISUAL POLISH & LAYOUT
+   60-30-10 rule:
+     60% — background (set via hugo.toml: #f0f2f5)
+     30% — card surfaces (set via hugo.toml: #ffffff)
+     10% — primary accent (set via hugo.toml: #0052cc)
+   ============================================================ */
+
+/* --- Global section rhythm --------------------------------- */
+section {
+  padding-top: var(--sp-12) !important;
+  padding-bottom: var(--sp-12) !important;
+}
+
+/* --- Hero -------------------------------------------------- */
+#hero {
+  /* Asymmetric vertical padding — heavier on top for visual weight */
+  padding-top: var(--sp-12) !important;
+  padding-bottom: var(--sp-10) !important;
+}
+
+#hero .image img {
+  border-radius: var(--radius-xl) !important;
+  box-shadow: var(--shadow-xl) !important;
+  border-width: var(--border-medium) !important;
+}
+
+#hero a.btn:not(.social-icon) {
+  border-radius: var(--radius-md) !important;
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.65rem 1.75rem !important;
+  border-width: var(--border-medium) !important;
+}
+
+#hero a.btn.social-icon {
+  border-radius: var(--radius-full) !important;
+  border-width: var(--border-thin) !important;
+}
+
+/* --- About ------------------------------------------------- */
+#about {
+  /* Slight asymmetric left offset for content block */
+  position: relative;
+}
+
+#about .image img {
+  border-radius: var(--radius-xl) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+#about .content {
+  line-height: var(--leading-relaxed) !important;
+}
+
+/* Skills list — tighter grid with refined bullets */
+#about ul {
+  gap: var(--sp-1) var(--sp-2) !important;
+  margin-top: var(--sp-3) !important;
+}
+
+#about ul li {
+  font-size: var(--text-sm);
+  letter-spacing: 0.01em;
+  padding-left: var(--sp-3) !important;
+}
+
+/* --- Experience -------------------------------------------- */
+#experience .experience-container {
+  border-radius: var(--radius-xl) !important;
+  box-shadow: var(--shadow-lg) !important;
+  border: var(--border-thin) solid rgba(0,0,0,0.06);
+}
+
+/* Tab nav — give it more visual weight */
+#experience .nav-item .nav-link {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  letter-spacing: 0.03em;
+  padding: var(--sp-2) var(--sp-3);
+}
+
+#experience .nav-item .nav-link.active {
+  border-bottom-width: var(--border-thick) !important;
+}
+
+/* Tab pane content — breathing room */
+#experience .tab-content {
+  padding: var(--sp-3) !important;
+}
+
+/* --- Education cards --------------------------------------- */
+#education .card {
+  border-radius: var(--radius-xl) !important;
+  box-shadow: var(--shadow-md) !important;
+  border-width: var(--border-thin) !important;
+  overflow: hidden;
+}
+
+#education .card:hover {
+  box-shadow: var(--shadow-xl) !important;
+}
+
+#education .card .card-body {
+  padding: var(--sp-4) !important;
+}
+
+/* --- Achievements cards ------------------------------------ */
+#achievements .card {
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-md) !important;
+  border-width: var(--border-thin) !important;
+}
+
+#achievements .card:hover {
+  box-shadow: var(--shadow-xl) !important;
+}
+
+/* --- Contact ---------------------------------------------- */
+#contact .btn {
+  border-radius: var(--radius-md) !important;
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.65rem 2rem !important;
+  border-width: var(--border-medium) !important;
+}
+
+#contact form .form-control {
+  border-radius: var(--radius-md) !important;
+  border-width: var(--border-thin) !important;
+  padding: var(--sp-2) !important;
+  font-family: var(--font-body);
+}
+
+#contact form .form-control:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 3px rgb(0 82 204 / 0.12) !important;
+  outline: none;
+}
+
+/* --- Recent posts ------------------------------------------ */
+#recent-posts .card {
+  border-radius: var(--radius-xl) !important;
+  box-shadow: var(--shadow-md) !important;
+  border-width: var(--border-thin) !important;
+  overflow: hidden;
+}
+
+#recent-posts .card:hover {
+  box-shadow: var(--shadow-xl) !important;
+}
+
+#recent-posts .card .card-body {
+  padding: var(--sp-4) !important;
+}
+
+/* --- Navbar ------------------------------------------------ */
+.navbar {
+  font-family: var(--font-ui) !important;
+  letter-spacing: 0.02em;
+}
+
+.navbar .nav-link {
+  font-size: var(--text-sm) !important;
+}
+
+/* --- Footer ----------------------------------------------- */
+footer {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+}
+
+
+/* ============================================================
+   4. ACCESSIBILITY — FOCUS STATES & TOUCH TARGETS
+   WCAG 2.4.7: Focus visible; 2.5.5: Target size ≥ 44×44px
+   Using :focus-visible so mouse users are unaffected.
+   ============================================================ */
+
+/* Remove the theme's outline:0 override and restore a visible ring */
+#theme-toggle:focus-visible,
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--primary-color) !important;
+  outline-offset: 3px !important;
+  box-shadow: none !important; /* prevent double-indicator confusion */
+}
+
+/* Hero / experience / education / contact button focus ring */
+#hero a.btn:focus-visible,
+#contact .btn:focus-visible,
+#education .card .card-body a.btn:focus-visible,
+#experience .experience-container .tab-content .tab-pane .featuredLink a.btn:focus-visible {
+  outline: 3px solid var(--primary-color) !important;
+  outline-offset: 3px !important;
+  box-shadow: none !important;
+}
+
+/* Nav links */
+.nav-link:focus-visible {
+  outline: 3px solid var(--primary-color) !important;
+  outline-offset: 2px !important;
+  border-radius: var(--radius-sm);
+}
+
+/* Card links (education, recent-posts) */
+#education .card .card-body > a:focus-visible,
+#recent-posts .card:focus-within {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 3px;
+}
+
+/* Theme toggle — ensure minimum 44×44px touch target */
+button#theme-toggle {
+  min-width:  44px !important;
+  min-height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 10px !important;
+  border-radius: var(--radius-sm) !important;
+}
+
+/* Social icon buttons — minimum 44×44px */
+#hero a.btn.social-icon {
+  min-width:  44px !important;
+  min-height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Skip-to-content link (injected via layout override) */
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: var(--sp-2);
+  z-index: 9999;
+  padding: var(--sp-1) var(--sp-2);
+  background: var(--primary-color);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: top 0.1s;
+}
+
+.skip-to-content:focus {
+  top: var(--sp-2);
+}
+
+/* Visually hidden utility (for form labels, screen-reader-only text) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Contact form inputs — explicit focus ring */
+#contact form .form-control:focus {
+  outline: 3px solid var(--primary-color) !important;
+  outline-offset: 0 !important;
+}
+
+
+/* ============================================================
+   5. MOTION & MICRO-INTERACTIONS
+   Rules:
+     • All animations wrapped in prefers-reduced-motion: no-preference
+     • Only transform and opacity animated (no layout properties)
+     • Standard easing: cubic-bezier(0.4, 0, 0.2, 1)
+   ============================================================ */
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* ----------------------------------------------------------
+     Override theme animation easing with cubic-bezier
+     ---------------------------------------------------------- */
+
+  header .navbar.animate {
+    animation: mc-nav-in 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  @keyframes mc-nav-in {
+    from { transform: translateY(-10px); opacity: 0; }
+    to   { transform: translateY(0);     opacity: 1; }
+  }
+
+  #hero .content.animate {
+    animation: mc-slide-left 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  @keyframes mc-slide-left {
+    from { transform: translateX(-16px); opacity: 0; }
+    to   { transform: translateX(0);     opacity: 1; }
+  }
+
+  #hero .image.animate img {
+    animation: mc-fade-in 0.9s cubic-bezier(0.4, 0, 0.2, 1) both;
+    animation-delay: 0.2s;
+  }
+
+  @keyframes mc-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ----------------------------------------------------------
+     Hero image — scale on hover
+     ---------------------------------------------------------- */
+
+  #hero .image.animate img {
+    transition: transform  0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+
+  #hero .image.animate img:hover {
+    transform: scale(1.02);
+  }
+
+  /* ----------------------------------------------------------
+     Button micro-interactions — lift on hover, compress on active
+     ---------------------------------------------------------- */
+
+  #hero a.btn,
+  #hero a.btn.social-icon,
+  #contact .btn,
+  #education .card .card-body a.btn,
+  #experience .experience-container .tab-content .tab-pane .featuredLink a.btn {
+    transition: transform 0.18s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity   0.18s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+
+  #hero a.btn:hover,
+  #hero a.btn.social-icon:hover,
+  #contact .btn:hover,
+  #education .card .card-body a.btn:hover,
+  #experience .experience-container .tab-content .tab-pane .featuredLink a.btn:hover {
+    transform: translateY(-2px);
+  }
+
+  #hero a.btn:active,
+  #hero a.btn.social-icon:active,
+  #contact .btn:active,
+  #education .card .card-body a.btn:active,
+  #experience .experience-container .tab-content .tab-pane .featuredLink a.btn:active {
+    transform: scale(0.98);
+  }
+
+  /* ----------------------------------------------------------
+     Card hover lift — education, achievements, recent-posts
+     ---------------------------------------------------------- */
+
+  #education .card,
+  #achievements .card,
+  #recent-posts .card {
+    transition: transform     0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow    0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color  0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+
+  #education .card:hover,
+  #achievements .card:hover,
+  #recent-posts .card:hover {
+    transform: translateY(-4px);
+  }
+
+  /* ----------------------------------------------------------
+     Skills list — staggered entrance (0.1 s increments)
+     ---------------------------------------------------------- */
+
+  #about ul li {
+    opacity: 0;
+    transform: translateX(-8px);
+    animation: mc-skill-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  #about ul li:nth-child(1)  { animation-delay: 0.10s; }
+  #about ul li:nth-child(2)  { animation-delay: 0.20s; }
+  #about ul li:nth-child(3)  { animation-delay: 0.30s; }
+  #about ul li:nth-child(4)  { animation-delay: 0.40s; }
+  #about ul li:nth-child(5)  { animation-delay: 0.50s; }
+  #about ul li:nth-child(6)  { animation-delay: 0.60s; }
+  #about ul li:nth-child(7)  { animation-delay: 0.70s; }
+  #about ul li:nth-child(8)  { animation-delay: 0.80s; }
+
+  @keyframes mc-skill-in {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* ----------------------------------------------------------
+     Experience tab nav — smooth transition
+     ---------------------------------------------------------- */
+
+  #experience .nav-item .nav-link {
+    transition: opacity      0.2s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+
+  /* Section headings — fade-up on load */
+  #about h3,
+  #experience h3,
+  #education .container > h3,
+  #achievements h3,
+  #contact h3,
+  #recent-posts h3 {
+    animation: mc-fade-in 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+}

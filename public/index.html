@@ -103,6 +103,7 @@
     }
 </style>
 
+<script src="/js/scroll-animations.js" defer></script>
 
 
 <meta name="description" content=ZgotmplZ>
@@ -283,14 +284,14 @@ Matthew Collinge
         </div>
     </nav>
 </header>
-<div id="content"><section id="hero" class="py-5 align-middle">
+<div id="content"><section id="hero" class="py-5 align-middle" aria-labelledby="hero-heading" tabindex="-1">
     <div class="container px-3 px-sm-5 px-md-5 px-lg-5 pt-lg-3">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-8 content animate" id="primary-font">
                 <span class="subtitle">
                     Hello, my name is
                 </span>
-                <h1>
+                <h1 id="hero-heading">
                     Matthew Collinge
                 </h1>
                 <h2>
@@ -589,9 +590,9 @@ Matthew Collinge
     
 </section>
 
-<section id="about" class="py-0 py-sm-5">
+<section id="about" class="py-0 py-sm-5" aria-labelledby="about-heading">
     <div class="container bg-transparent">
-        <h3 class="text-center bg-transparent">About Me</h3>
+        <h3 id="about-heading" class="text-center bg-transparent">About Me</h3>
         <div class="bg-transparent row justify-content-center px-3 py-5">
             
             <div class="col-sm-12 col-md-12 col-lg-8 content">
@@ -619,9 +620,11 @@ Matthew Collinge
 </section>
 
 
-<section id="contact" class="py-5">
+
+
+<section id="contact" class="py-5" aria-labelledby="contact-heading">
     <div class="container">
-        <h3 class="text-center">Get in Touch</h3>
+        <h3 id="contact-heading" class="text-center">Get in Touch</h3>
         <div class="px-0 px-md-5 px-lg-5">
             <div class="row justify-content-center px-md-5">
                 <div class="col-md-8 py-3">
@@ -639,6 +642,12 @@ Matthew Collinge
                             class="btn"
                         >
                             Get in Touch
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:0.3em;vertical-align:middle;">
+                              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                              <polyline points="15 3 21 3 21 9"></polyline>
+                              <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                            <span class="sr-only">(opens in new tab)</span>
                         </a>
                     </div>
                     

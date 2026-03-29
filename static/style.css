@@ -447,6 +447,7 @@ button#theme-toggle {
   }
 
   #hero .content.animate {
+    will-change: transform, opacity;
     animation: mc-slide-left 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
   }
 
@@ -456,6 +457,7 @@ button#theme-toggle {
   }
 
   #hero .image.animate img {
+    will-change: transform, opacity;
     animation: mc-fade-in 0.9s cubic-bezier(0.4, 0, 0.2, 1) both;
     animation-delay: 0.2s;
   }
@@ -514,9 +516,9 @@ button#theme-toggle {
   #education .card,
   #achievements .card,
   #recent-posts .card {
-    transition: transform     0.25s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow    0.25s cubic-bezier(0.4, 0, 0.2, 1),
-                border-color  0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    will-change: transform, opacity;
+    transition: transform  0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
   }
 
   #education .card:hover,
@@ -529,28 +531,6 @@ button#theme-toggle {
      Skills list — staggered entrance (0.1 s increments)
      ---------------------------------------------------------- */
 
-  #about ul li {
-    opacity: 0;
-    transform: translateX(-8px);
-    animation: mc-skill-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-
-  #about ul li:nth-child(1)  { animation-delay: 0.10s; }
-  #about ul li:nth-child(2)  { animation-delay: 0.20s; }
-  #about ul li:nth-child(3)  { animation-delay: 0.30s; }
-  #about ul li:nth-child(4)  { animation-delay: 0.40s; }
-  #about ul li:nth-child(5)  { animation-delay: 0.50s; }
-  #about ul li:nth-child(6)  { animation-delay: 0.60s; }
-  #about ul li:nth-child(7)  { animation-delay: 0.70s; }
-  #about ul li:nth-child(8)  { animation-delay: 0.80s; }
-
-  @keyframes mc-skill-in {
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
   /* ----------------------------------------------------------
      Experience tab nav — smooth transition
      ---------------------------------------------------------- */
@@ -560,13 +540,48 @@ button#theme-toggle {
                 border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
   }
 
-  /* Section headings — fade-up on load */
+  /* Section headings — fade-in when .is-animated is added by IntersectionObserver */
   #about h3,
   #experience h3,
   #education .container > h3,
   #achievements h3,
   #contact h3,
   #recent-posts h3 {
-    animation: mc-fade-in 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
+
+  #about h3.is-animated,
+  #experience h3.is-animated,
+  #education .container > h3.is-animated,
+  #achievements h3.is-animated,
+  #contact h3.is-animated,
+  #recent-posts h3.is-animated {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Skills list — staggered entrance triggered by IntersectionObserver */
+  #about ul li {
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  #about ul li.is-animated {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  #about ul li:nth-child(1)  { transition-delay: 0.10s; }
+  #about ul li:nth-child(2)  { transition-delay: 0.20s; }
+  #about ul li:nth-child(3)  { transition-delay: 0.30s; }
+  #about ul li:nth-child(4)  { transition-delay: 0.40s; }
+  #about ul li:nth-child(5)  { transition-delay: 0.50s; }
+  #about ul li:nth-child(6)  { transition-delay: 0.60s; }
+  #about ul li:nth-child(7)  { transition-delay: 0.70s; }
+  #about ul li:nth-child(8)  { transition-delay: 0.80s; }
 }

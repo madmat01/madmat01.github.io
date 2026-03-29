@@ -1,8 +1,8 @@
 {{ if .Site.Params.contact.enable | default false }}
 {{- $contact := .Site.Language.Params.contact | default .Site.Params.contact -}}
-<section id="contact" class="py-5">
+<section id="contact" class="py-5" aria-labelledby="contact-heading">
     <div class="container">
-        <h3 class="text-center">{{ $contact.title | default (i18n "contact") }}</h3>
+        <h3 id="contact-heading" class="text-center">{{ $contact.title | default (i18n "contact") }}</h3>
         <div class="px-0 px-md-5 px-lg-5">
             <div class="row justify-content-center px-md-5">
                 <div class="col-md-8 py-3">
@@ -40,6 +40,12 @@
                             class="btn"
                         >
                             {{ $contact.btnName | default .Site.Params.contact.btnName | default (i18n "contact") }}
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:0.3em;vertical-align:middle;">
+                              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                              <polyline points="15 3 21 3 21 9"></polyline>
+                              <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                            <span class="sr-only">(opens in new tab)</span>
                         </a>
                     </div>
                     {{ end }}

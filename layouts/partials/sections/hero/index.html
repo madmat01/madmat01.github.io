@@ -1,13 +1,13 @@
 {{ if .Site.Params.hero.enable | default false }}
 {{- $hero := .Site.Language.Params.hero | default .Site.Params.hero -}}
-<section id="hero" class="py-5 align-middle">
+<section id="hero" class="py-5 align-middle" aria-labelledby="hero-heading" tabindex="-1">
     <div class="container px-3 px-sm-5 px-md-5 px-lg-5 pt-lg-3">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-8 content {{ if .Site.Params.animate }}animate{{ end }}" id="primary-font">
                 <span class="subtitle">
                     {{ $hero.intro }}
                 </span>
-                <h1>
+                <h1 id="hero-heading">
                     {{ $hero.title }}
                 </h1>
                 <h2>

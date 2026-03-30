@@ -1,7 +1,7 @@
 +++
 title = "Extract table data from Documents using Azure AI Document Intelligence"
 date = 2024-10-16
-draft = true
+draft = false
 tags = ["Azure AI", "Document Intelligence", "Power Automate", "AI Builder", "OCR", "Table Extraction"]
 +++
 

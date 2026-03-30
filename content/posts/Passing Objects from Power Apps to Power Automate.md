@@ -1,7 +1,7 @@
 +++
 title = "Passing Objects from Power Apps to Power Automate"
 date = 2024-01-10
-draft = true
+draft = false
 tags = ["Power Apps", "Power Automate", "JSON", "Data Transfer", "Development", "Performance"]
 +++
 

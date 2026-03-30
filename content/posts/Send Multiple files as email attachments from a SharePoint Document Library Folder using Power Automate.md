@@ -1,7 +1,7 @@
 +++
 title = "Send Multiple files as email attachments from a SharePoint Document Library Folder using Power Automate"
 date = 2024-03-23
-draft = true
+draft = false
 tags = ["Power Automate", "SharePoint", "Outlook", "Automation", "Document Management", "Cloud Flows"]
 +++
 

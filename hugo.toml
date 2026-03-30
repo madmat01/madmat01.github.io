@@ -56,6 +56,9 @@ theme = 'hugo-profile'
       title = "Here are some technologies I work with:"
       items = ["Power Apps", "Power Automate", "Dataverse", "Microsoft 365", "Azure AI"]
 
+  [params.recentPosts]
+    title = "Posts"
+
   [params.contact]
     enable = true
     title = "Get in Touch"
@@ -71,7 +74,7 @@ theme = 'hugo-profile'
   [[menu.main]]
     identifier = "posts"
     name = "Posts"
-    url = "/posts"
+    url = "/#recent-posts"
     weight = 2
   [[menu.main]]
     identifier = "contact"

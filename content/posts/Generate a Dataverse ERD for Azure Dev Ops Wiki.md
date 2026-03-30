@@ -1,7 +1,7 @@
 +++
 title = "Generate a Dataverse ERD for Azure Dev Ops Wiki"
 date = 2025-11-16
-draft = true
+draft = false
 tags = ["Dataverse", "Azure DevOps", "ERD", "Documentation", "Mermaid JS", "Power Platform"]
 +++
 

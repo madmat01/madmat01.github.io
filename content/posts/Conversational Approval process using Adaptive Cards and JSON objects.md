@@ -1,7 +1,7 @@
 +++
 title = "Conversational Approval process using Adaptive Cards and JSON objects"
 date = 2024-01-29
-draft = true
+draft = false
 tags = ["PowerApps", "AdaptiveCards", "Power Automate", "Adaptive Cards", "Microsoft Teams", "Low Code", "JSON", "Power Platform"]
 +++
 

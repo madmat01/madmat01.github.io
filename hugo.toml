@@ -47,6 +47,11 @@ theme = 'hugo-profile'
     image = "images/profile.png"
     roundImage = true
 
+    [params.hero.socialLinks]
+      [[params.hero.socialLinks.fontAwesomeIcons]]
+        icon = "fab fa-linkedin"
+        url = "https://www.linkedin.com/in/matthew-collinge1982/"
+
   [params.about]
     enable = true
     title = "About Me"
@@ -67,17 +72,12 @@ theme = 'hugo-profile'
 
 [menu]
   [[menu.main]]
-    identifier = "about"
-    name = "About"
-    url = "#about"
-    weight = 1
-  [[menu.main]]
     identifier = "posts"
     name = "Posts"
     url = "/#recent-posts"
-    weight = 2
+    weight = 1
   [[menu.main]]
     identifier = "contact"
     name = "Contact"
     url = "#contact"
-    weight = 3
+    weight = 2

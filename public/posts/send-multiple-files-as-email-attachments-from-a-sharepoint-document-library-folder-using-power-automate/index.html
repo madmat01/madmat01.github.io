@@ -1,87 +1,757 @@
-<!doctype html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><meta http-equiv=Accept-CH content="DPR, Viewport-Width, Width"><link rel=icon href=/fav.png type=image/gif><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" media=print onload='this.media="all"'><noscript><link href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel=stylesheet></noscript><link rel=stylesheet href=/css/font.css media=all><meta property="og:url" content="https://madmat01.github.io/posts/send-multiple-files-as-email-attachments-from-a-sharepoint-document-library-folder-using-power-automate/"><meta property="og:site_name" content="Matthew Collinge"><meta property="og:title" content="Send Multiple files as email attachments from a SharePoint Document Library Folder using Power Automate"><meta property="og:description" content="Have you ever needed to email multiple specific files as attachments from a SharePoint Document Library? There is documentation on how to send ALL the files in a given folder (https://learn.microsoft.com/en-us/microsoft-365/community/power-automate-send-sharepoint-files-as-attachments), but here we’d like to have some control over which files we want to email as attachments without having download the files beforehand.
-User interaction The previously mentioned documentation provides us with a good Power Automate solution to build from, but how do we include the interaction that allows the user to see the available files to pick from and to select just the files they’d like to email? Well, that’s where Adaptive Cards for Teams comes in. Adaptive Cards let us build an interactive and dynamic structure for a user interface for the actions of a Power Automate Flow."><meta property="og:locale" content="en_gb"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2024-03-23T00:00:00+00:00"><meta property="article:modified_time" content="2024-03-23T00:00:00+00:00"><meta property="article:tag" content="Power Automate"><meta property="article:tag" content="SharePoint"><meta property="article:tag" content="Outlook"><meta property="article:tag" content="Automation"><meta property="article:tag" content="Document Management"><meta property="article:tag" content="Cloud Flows"><meta name=twitter:card content="summary"><meta name=twitter:title content="Send Multiple files as email attachments from a SharePoint Document Library Folder using Power Automate"><meta name=twitter:description content="Have you ever needed to email multiple specific files as attachments from a SharePoint Document Library? There is documentation on how to send ALL the files in a given folder (https://learn.microsoft.com/en-us/microsoft-365/community/power-automate-send-sharepoint-files-as-attachments), but here we’d like to have some control over which files we want to email as attachments without having download the files beforehand.
-User interaction The previously mentioned documentation provides us with a good Power Automate solution to build from, but how do we include the interaction that allows the user to see the available files to pick from and to select just the files they’d like to email? Well, that’s where Adaptive Cards for Teams comes in. Adaptive Cards let us build an interactive and dynamic structure for a user interface for the actions of a Power Automate Flow."><link rel=stylesheet href=/bootstrap-5/css/bootstrap.min.css media=all><link rel=stylesheet href=/css/header.css media=all><link rel=stylesheet href=/css/language-switcher.css media=all><link rel=stylesheet href=/css/footer.css media=all><link rel=stylesheet href=/css/theme.css media=all><style>:root{--text-color:#1e293b;--text-secondary-color:#475569;--text-link-color:#0052cc;--background-color:#f0f2f5;--secondary-background-color:#dbeafe;--primary-color:#0052cc;--secondary-color:#ffffff;--text-color-dark:#e6edf3;--text-secondary-color-dark:#8b949e;--text-link-color-dark:#58a6ff;--background-color-dark:#0d1117;--secondary-background-color-dark:#1a2332;--primary-color-dark:#58a6ff;--secondary-color-dark:#161b22}body{font-size:1rem;font-weight:400;line-height:1.7;text-align:left}html{background-color:var(--background-color)!important}body::-webkit-scrollbar{height:0;width:8px;background-color:var(--background-color)}::-webkit-scrollbar-track{border-radius:1rem}::-webkit-scrollbar-thumb{border-radius:1rem;background:#b0b0b0;outline:1px solid var(--background-color)}#search-content::-webkit-scrollbar{width:.5em;height:.1em;background-color:var(--background-color)}</style><meta http-equiv=Content-Security-Policy content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com; form-action 'self'; base-uri 'self'; object-src 'none'"><script async src="https://www.googletagmanager.com/gtag/js?id=G-1EGVWHDPQT"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-1EGVWHDPQT")</script><meta http-equiv=X-Content-Type-Options content="nosniff"><meta name=referrer content="strict-origin-when-cross-origin"><link rel=stylesheet href=/css/custom.css><script src=/js/scroll-animations.1058878ac5958126da87f12a5106f9e7fd56bead46a2785c5a338e5329887b7c2952fc0d7991634c6a1c1125e6383707.js integrity=sha384-EFiHisWVgSbah/EqUQb55/1Wvq1GonhcWjOOUymIe3wpUvwNeZFjTGocESXmODcH crossorigin=anonymous defer></script><meta name=description content><link rel=stylesheet href=/css/single.css><script defer src=/fontawesome-6/all-6.4.2.js></script><link rel=stylesheet href=/style.css><title>Send Multiple files as email attachments from a SharePoint Document Library Folder using Power Automate | Matthew Collinge</title></head><body class=light><script>let localStorageValue=localStorage.getItem("pref-theme"),mediaQuery=window.matchMedia("(prefers-color-scheme: dark)").matches;switch(localStorageValue){case"dark":document.documentElement.classList.add("dark"),document.body.classList.add("dark");break;case"light":document.body.classList.remove("dark"),document.documentElement.classList.remove("dark");break;default:mediaQuery&&(document.documentElement.classList.add("dark"),document.body.classList.add("dark"));break}</script><a class=skip-to-content href=#hero>Skip to content</a><header id=profileHeader><nav class="pt-3 navbar navbar-expand-lg animate" role=navigation aria-label="Main navigation"><div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5"><a class="navbar-brand primary-font text-wrap" href=/ aria-label=" — home"></a><div><label for=search-desktop class=sr-only>Search</label>
-<input id=search-desktop autocomplete=off class="form-control mr-sm-2 d-none d-md-block" placeholder=Search... aria-label=Search oninput=searchOnChange(event)></div><button class=navbar-toggler type=button data-bs-toggle=collapse data-bs-target=#navbarContent aria-controls=navbarContent aria-expanded=false aria-label="Toggle navigation">
-<svg aria-hidden="true" height="24" viewBox="0 0 16 16" width="24" data-view-component="true"><path fill-rule="evenodd" d="M1 2.75A.75.75.0 011.75 2h12.5a.75.75.0 110 1.5H1.75A.75.75.0 011 2.75zm0 5A.75.75.0 011.75 7h12.5a.75.75.0 110 1.5H1.75A.75.75.0 011 7.75zM1.75 12a.75.75.0 100 1.5h12.5a.75.75.0 100-1.5H1.75z"/></svg></button><div class="collapse navbar-collapse text-wrap primary-font" id=navbarContent><ul class="navbar-nav ms-auto text-center"><li class="nav-item navbar-text d-block d-md-none"><div class=nav-link><label for=search-mobile class=sr-only>Search</label>
-<input id=search-mobile autocomplete=off class="form-control mr-sm-2" placeholder=Search... aria-label=Search oninput=searchOnChange(event)></div></li><li class="nav-item navbar-text"><a class=nav-link href=/#about aria-label=about>About Me</a></li><li class="nav-item navbar-text"><a class=nav-link href=/#contact aria-label=contact>Get in Touch</a></li><li class="nav-item navbar-text"><a class=nav-link href=/posts title>Posts</a></li><li class="nav-item navbar-text"><a class=nav-link href=#contact title>Contact</a></li><li class="nav-item navbar-text"><div class=text-center><button id=theme-toggle type=button aria-label="Toggle dark mode">
-<svg id="moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-<svg id="sun" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></li></ul></div></div></nav></header><div id=content><section id=single><div class=container><div class="row justify-content-center"><div class="col-sm-12 col-md-12 col-lg-9"><div class=pr-lg-4><div class="title mb-5"><h1 class="text-center mb-4">Send Multiple files as email attachments from a SharePoint Document Library Folder using Power Automate</h1><div class=text-center>Mar 23, 2024
-<span id=readingTime>min read</span></div></div><article class="page-content p-2"><p>Have you ever needed to email multiple specific files as attachments from a SharePoint Document Library? There is documentation on how to send ALL the files in a given folder (<a href=https://learn.microsoft.com/en-us/microsoft-365/community/power-automate-send-sharepoint-files-as-attachments)>https://learn.microsoft.com/en-us/microsoft-365/community/power-automate-send-sharepoint-files-as-attachments)</a>, but here we&rsquo;d like to have some control over which files we want to email as attachments without having download the files beforehand.</p><h2 id=user-interaction>User interaction</h2><p>The previously mentioned documentation provides us with a good Power Automate solution to build from, but how do we include the interaction that allows the user to see the available files to pick from and to select just the files they&rsquo;d like to email? Well, that&rsquo;s where Adaptive Cards for Teams comes in. Adaptive Cards let us build an interactive and dynamic structure for a user interface for the actions of a Power Automate Flow.</p><p>NOTE: I&rsquo;d love to develop a way to open up a new email tab with Outlook for the Web to do this, or even a PWA that&rsquo;s opens up in the SharePoint Sidebar&mldr; maybe one day.</p><h2 id=the-power-automate-process-in-summary>The Power Automate process in summary</h2><ol><li>Flow is triggered by the &ldquo;For a selected file&rdquo; trigger.</li><li>Flow will locate the parent folder</li><li>Flow will collect all the files</li><li>Flow will add the files to an attachment names string</li><li>An Adaptive Card will be sent to the user that Triggered the Flow</li><li>The Adaptive Card will replicate the layout of an email, with Sent To, Subject, Body and a pick list using the attachments array</li><li>The user fills out the fields, selects the files and clicks send.</li><li>For each of the selected files the Flow will retrieve the file content and Append to an Array.</li><li>Email is sent with selected Attachments</li></ol><h2 id=how-the-flow-works>How the flow works</h2><ol><li>The user can trigger the Flow by selecting a single file in a SharePoint Document Library and clicking on <strong>Automate > Send Attachments</strong></li></ol><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/kcy72mg6vfw33qizsotx.png alt="Flow Trigger - For Selected File">
-2. They are then then asked to <strong>"Run Flow"</strong></p><ol start=3><li><p>An Adaptive Card is sent to them via the Microsoft Teams Flow Bot where the user can input the <strong>Receipient Email</strong> (with Regex Validation), <strong>Subject</strong>, <strong>Body</strong> and a Dynamic Picklist of all the other files in the chosen folder. 😃</p></li><li><p>Once the user clicks <strong>"Send"</strong> the flow will verify that they actually selected any attachments and if so, send the email with the selected attachments via email from the user&rsquo;s mailbox.</p></li></ol><h2 id=how-it-is-built>How it is Built</h2><h2 id=for-a-selected-item>For a selected item</h2><p>To start building the Flow for a given SharePoint Document Library, you need to start from that Library and then select <em>Integrate > Power Automate > Create a Flow</em> then we can select a Template &ldquo;<strong>Request approval in Microsoft Teams when a SharePoint item is created</strong>&rdquo;. We&rsquo;re going to remove all the actions from this apart from the trigger.
-Doing this creates the relationship between the Document Library and the &lsquo;For a Selected Item&rsquo; Flow Trigger. For some reason, if you don&rsquo;t create the Flow this way, the Document Library refuses to show the Flow under &ldquo;Automate&rdquo;, which is very frustrating. 😩</p><h2 id=variables-to-initialise>Variables to Initialise</h2><ul><li>varUserEmail</li><li>varFolderPath</li><li>varAttachmentNames</li><li>varAttachmentNamesArray</li><li>varSelectedArray</li><li>BodyAsString</li><li>varCardObject</li></ul><p><strong>varSiteLibrary</strong> is an Object where I have set up the SharePoint Site and Document Library</p><pre><code>{
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
+<link rel="icon" href="/fav.png" type="image/gif">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+>
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      media="print" onload="this.media='all'" />
+<noscript>
+  <link
+          href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet">
+</noscript>
+
+
+<link rel="stylesheet" href="/css/font.css" media="all">
+
+
+
+<meta property="og:url" content="http://localhost:1313/posts/send-multiple-files-as-email-attachments-from-a-sharepoint-document-library-folder-using-power-automate/">
+  <meta property="og:site_name" content="Matthew Collinge">
+  <meta property="og:title" content="Send Multiple files as email attachments from a SharePoint Document Library Folder using Power Automate">
+  <meta property="og:description" content="Have you ever needed to email multiple specific files as attachments from a SharePoint Document Library? There is documentation on how to send ALL the files in a given folder (https://learn.microsoft.com/en-us/microsoft-365/community/power-automate-send-sharepoint-files-as-attachments), but here we’d like to have some control over which files we want to email as attachments without having download the files beforehand.
+User interaction The previously mentioned documentation provides us with a good Power Automate solution to build from, but how do we include the interaction that allows the user to see the available files to pick from and to select just the files they’d like to email? Well, that’s where Adaptive Cards for Teams comes in. Adaptive Cards let us build an interactive and dynamic structure for a user interface for the actions of a Power Automate Flow.">
+  <meta property="og:locale" content="en_gb">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-03-23T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-03-23T00:00:00+00:00">
+    <meta property="article:tag" content="Power Automate">
+    <meta property="article:tag" content="SharePoint">
+    <meta property="article:tag" content="Outlook">
+    <meta property="article:tag" content="Automation">
+    <meta property="article:tag" content="Document Management">
+    <meta property="article:tag" content="Cloud Flows">
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Send Multiple files as email attachments from a SharePoint Document Library Folder using Power Automate">
+  <meta name="twitter:description" content="Have you ever needed to email multiple specific files as attachments from a SharePoint Document Library? There is documentation on how to send ALL the files in a given folder (https://learn.microsoft.com/en-us/microsoft-365/community/power-automate-send-sharepoint-files-as-attachments), but here we’d like to have some control over which files we want to email as attachments without having download the files beforehand.
+User interaction The previously mentioned documentation provides us with a good Power Automate solution to build from, but how do we include the interaction that allows the user to see the available files to pick from and to select just the files they’d like to email? Well, that’s where Adaptive Cards for Teams comes in. Adaptive Cards let us build an interactive and dynamic structure for a user interface for the actions of a Power Automate Flow.">
+
+
+
+
+
+<link rel="stylesheet" href="/bootstrap-5/css/bootstrap.min.css" media="all"><link rel="stylesheet" href="/css/header.css" media="all">
+<link rel="stylesheet" href="/css/language-switcher.css" media="all">
+<link rel="stylesheet" href="/css/footer.css" media="all">
+
+
+<link rel="stylesheet" href="/css/theme.css" media="all">
+
+<style>
+    :root {
+        --text-color: #1e293b;
+        --text-secondary-color: #475569;
+        --text-link-color: #0052cc;
+        --background-color: #f0f2f5;
+        --secondary-background-color: #dbeafe;
+        --primary-color: #0052cc;
+        --secondary-color: #ffffff;
+
+         
+        --text-color-dark: #e6edf3;
+        --text-secondary-color-dark: #8b949e;
+        --text-link-color-dark: #58a6ff;
+        --background-color-dark: #0d1117;
+        --secondary-background-color-dark: #1a2332;
+        --primary-color-dark: #58a6ff;
+        --secondary-color-dark: #161b22;
+    }
+    body {
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.7;
+        text-align: left;
+    }
+
+    html {
+        background-color: var(--background-color) !important;
+    }
+
+    body::-webkit-scrollbar {
+        height: 0px;
+        width: 8px;
+        background-color: var(--background-color);
+    }
+
+    ::-webkit-scrollbar-track {
+        border-radius: 1rem;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 1rem;
+        background: #b0b0b0;
+        outline: 1px solid var(--background-color);
+    }
+
+    #search-content::-webkit-scrollbar {
+        width: .5em;
+        height: .1em;
+        background-color: var(--background-color);
+    }
+</style>
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com; form-action 'self'; base-uri 'self'; object-src 'none'">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EGVWHDPQT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1EGVWHDPQT');
+</script>
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="stylesheet" href="/css/custom.css"><script src="/js/scroll-animations.1058878ac5958126da87f12a5106f9e7fd56bead46a2785c5a338e5329887b7c2952fc0d7991634c6a1c1125e6383707.js" integrity="sha384-EFiHisWVgSbah/EqUQb55/1Wvq1GonhcWjOOUymIe3wpUvwNeZFjTGocESXmODcH" crossorigin="anonymous" defer></script>
+
+
+<meta name="description" content="">
+<link rel="stylesheet" href="/css/single.css">
+
+
+<script defer src="/fontawesome-6/all-6.4.2.js"></script>
+
+
+  
+  
+    <link rel="stylesheet" href="/style.css">
+  
+
+  <title>
+Send Multiple files as email attachments from a SharePoint Document Library Folder using Power Automate | Matthew Collinge
+
+  </title>
+</head>
+
+<body class="light">
+  
+  
+<script>
+    let localStorageValue = localStorage.getItem("pref-theme");
+    let mediaQuery = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    switch (localStorageValue) {
+        case "dark":
+            document.documentElement.classList.add('dark');
+            document.body.classList.add('dark');
+            break;
+        case "light":
+            document.body.classList.remove('dark');
+            document.documentElement.classList.remove('dark');
+            break;
+        default:
+            if (mediaQuery) {
+                document.documentElement.classList.add('dark');
+                document.body.classList.add('dark');
+            }
+            break;
+    }
+</script>
+
+
+
+
+
+<a class="skip-to-content" href="#hero">Skip to content</a>
+
+
+<header id="profileHeader">
+    <nav class="pt-3 navbar navbar-expand-lg animate" role="navigation" aria-label="Main navigation">
+        <div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5">
+            
+            <a class="navbar-brand primary-font text-wrap" href="/" aria-label=" — home">
+                
+                
+                
+            </a>
+
+            
+                <div>
+                    <label for="search-desktop" class="sr-only">Search</label>
+                    <input id="search-desktop" autocomplete="off" class="form-control mr-sm-2 d-none d-md-block" placeholder='Search...'
+                        aria-label="Search" oninput="searchOnChange(event)">
+                </div>
+            
+
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <svg aria-hidden="true" height="24" viewBox="0 0 16 16" version="1.1" width="24" data-view-component="true">
+                    <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"></path>
+                </svg>
+            </button>
+
+            
+            <div class="collapse navbar-collapse text-wrap primary-font" id="navbarContent">
+                <ul class="navbar-nav ms-auto text-center">
+                    
+                        <li class="nav-item navbar-text d-block d-md-none">
+                            <div class="nav-link">
+                                <label for="search-mobile" class="sr-only">Search</label>
+                                <input id="search-mobile" autocomplete="off" class="form-control mr-sm-2" placeholder='Search...' aria-label="Search" oninput="searchOnChange(event)">
+                            </div>
+                        </li>
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/#about" aria-label="about">
+                            About Me
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/#contact"
+                            aria-label="contact">
+                            Get in Touch
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    
+                    
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/posts" title="">
+                            
+                            Posts
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="#contact" title="">
+                            
+                            Contact
+                        </a>
+                    </li>
+                    
+                    
+
+                    <li class="nav-item navbar-text">
+                        
+                        <div class="text-center">
+                            <button id="theme-toggle" type="button" aria-label="Toggle dark mode">
+                                <svg id="moon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                </svg>
+                                <svg id="sun" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="5"></circle>
+                                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </li>
+                    
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>
+<div id="content">
+<section id="single">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-md-12 col-lg-9">
+        <div class="pr-lg-4">
+          <div class="title mb-5">
+            <h1 class="text-center mb-4">Send Multiple files as email attachments from a SharePoint Document Library Folder using Power Automate</h1>
+            <div class="text-center">
+              
+              Mar 23, 2024
+
+              
+              <span id="readingTime">
+                min read
+              </span>
+              
+            </div>
+          </div>
+          
+          <article class="page-content  p-2">
+          <p>Have you ever needed to email multiple specific files as attachments from a SharePoint Document Library? There is documentation on how to send ALL the files in a given folder (<a href="https://learn.microsoft.com/en-us/microsoft-365/community/power-automate-send-sharepoint-files-as-attachments)">https://learn.microsoft.com/en-us/microsoft-365/community/power-automate-send-sharepoint-files-as-attachments)</a>, but here we&rsquo;d like to have some control over which files we want to email as attachments without having download the files beforehand.</p>
+<h2 id="user-interaction">User interaction</h2>
+<p>The previously mentioned documentation provides us with a good Power Automate solution to build from, but how do we include the interaction that allows the user to see the available files to pick from and to select just the files they&rsquo;d like to email? Well, that&rsquo;s where Adaptive Cards for Teams comes in. Adaptive Cards let us build an interactive and dynamic structure for a user interface for the actions of a Power Automate Flow.</p>
+<p>NOTE: I&rsquo;d love to develop a way to open up a new email tab with Outlook for the Web to do this, or even a PWA that&rsquo;s opens up in the SharePoint Sidebar&hellip; maybe one day.</p>
+<h2 id="the-power-automate-process-in-summary">The Power Automate process in summary</h2>
+<ol>
+<li>Flow is triggered by the &ldquo;For a selected file&rdquo; trigger.</li>
+<li>Flow will locate the parent folder</li>
+<li>Flow will collect all the files</li>
+<li>Flow will add the files to an attachment names string</li>
+<li>An Adaptive Card will be sent to the user that Triggered the Flow</li>
+<li>The Adaptive Card will replicate the layout of an email, with Sent To, Subject, Body and a pick list using the attachments array</li>
+<li>The user fills out the fields, selects the files and clicks send.</li>
+<li>For each of the selected files the Flow will retrieve the file content and Append to an Array.</li>
+<li>Email is sent with selected Attachments</li>
+</ol>
+<h2 id="how-the-flow-works">How the flow works</h2>
+<ol>
+<li>The user can trigger the Flow by selecting a single file in a SharePoint Document Library and clicking on <strong>Automate &gt; Send Attachments</strong></li>
+</ol>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/kcy72mg6vfw33qizsotx.png" alt="Flow Trigger - For Selected File">
+2. They are then then asked to <strong>&quot;Run Flow&quot;</strong></p>
+<ol start="3">
+<li>
+<p>An Adaptive Card is sent to them via the Microsoft Teams Flow Bot where the user can input the <strong>Receipient Email</strong> (with Regex Validation), <strong>Subject</strong>, <strong>Body</strong> and a Dynamic Picklist of all the other files in the chosen folder. 😃</p>
+</li>
+<li>
+<p>Once the user clicks <strong>&quot;Send&quot;</strong> the flow will verify that they actually selected any attachments and if so, send the email with the selected attachments via email from the user&rsquo;s mailbox.</p>
+</li>
+</ol>
+<h2 id="how-it-is-built">How it is Built</h2>
+<h2 id="for-a-selected-item">For a selected item</h2>
+<p>To start building the Flow for a given SharePoint Document Library, you need to start from that Library and then select <em>Integrate &gt; Power Automate &gt; Create a Flow</em> then we can select a Template &ldquo;<strong>Request approval in Microsoft Teams when a SharePoint item is created</strong>&rdquo;. We&rsquo;re going to remove all the actions from this apart from the trigger.
+Doing this creates the relationship between the Document Library and the &lsquo;For a Selected Item&rsquo; Flow Trigger. For some reason, if you don&rsquo;t create the Flow this way, the Document Library refuses to show the Flow under &ldquo;Automate&rdquo;, which is very frustrating. 😩</p>
+<h2 id="variables-to-initialise">Variables to Initialise</h2>
+<ul>
+<li>varUserEmail</li>
+<li>varFolderPath</li>
+<li>varAttachmentNames</li>
+<li>varAttachmentNamesArray</li>
+<li>varSelectedArray</li>
+<li>BodyAsString</li>
+<li>varCardObject</li>
+</ul>
+<p><strong>varSiteLibrary</strong> is an Object where I have set up the SharePoint Site and Document Library</p>
+<pre><code>{
     &quot;Site&quot;: &quot;&lt;SharePoint Site&gt;&quot;,
     &quot;Library&quot;: &quot;&lt;Document Library&gt;&quot;
 }
-</code></pre><p>We can retreive these in our various actions just by referencing <strong>variables(&lsquo;varSiteLibrary&rsquo;)[&lsquo;Site&rsquo;]</strong> or <strong>variables(&lsquo;varSiteLibrary&rsquo;)[&lsquo;Site&rsquo;]</strong></p><h2 id=get-parent---the-folders-path>Get parent - the folder&rsquo;s path</h2><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qceqqsa221ghm3qkxlae.png alt="Set varFolderPath"></p><p>Here&rsquo;s the expression used to return the Folder Path without the &lsquo;/&rsquo; at the end, so we can use it in the next action.</p><pre tabindex=0><code>substring(
+</code></pre>
+<p>We can retreive these in our various actions just by referencing <strong>variables(&lsquo;varSiteLibrary&rsquo;)[&lsquo;Site&rsquo;]</strong> or <strong>variables(&lsquo;varSiteLibrary&rsquo;)[&lsquo;Site&rsquo;]</strong></p>
+<h2 id="get-parent---the-folders-path">Get parent - the folder&rsquo;s path</h2>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qceqqsa221ghm3qkxlae.png" alt="Set varFolderPath"></p>
+<p>Here&rsquo;s the expression used to return the Folder Path without the &lsquo;/&rsquo; at the end, so we can use it in the next action.</p>
+<pre tabindex="0"><code>substring(
     outputs(&#39;Get_file_properties_-_Folder&#39;)?[&#39;body/{Path}&#39;]
     ,0
     ,sub(
         length(outputs(&#39;Get_file_properties_-_Folder&#39;)?[&#39;body/{Path}&#39;]))
     ,1
 )
-</code></pre><h2 id=get-an-array-of-all-the-available-files-in-this-folder>Get an Array of all the available files in this folder</h2><p>Using "Get files (properties only)" and the Filter Query: <strong>FSObjType eq 0</strong> to return just the files and not folders.
-<img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/af2qf7p516y16itk64ds.png alt="Get files (properties only)"></p><p>Now we use "Apply to Each" for each value (file) found.
-<img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/20z37o5ufrn5nz0w3nno.png alt="Apply to Each"></p><p>Each value is run through the &ldquo;Get File Content&rdquo; action to then append it&rsquo;s File name with extension and a unique Identifier.
-Adaptive cards need to have a unique ID for each property, so I have used the Identifier property.</p><h3 id=append-to-string-varattachmentnames-schema>Append to String varAttachmentNames schema:</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;Input.Toggle&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;@{items(&#39;Apply_to_each&#39;)?[&#39;{FilenameWithExtension}&#39;]}&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#e6db74>&#34;Item_@{items(&#39;Apply_to_each&#39;)?[&#39;{Identifier}&#39;]}&#34;</span>,
-</span></span><span style=display:flex><span>}<span style=color:#960050;background-color:#1e0010>,</span>
-</span></span></code></pre></div><h3 id=in-parallel-append-to-string-varattachmentnamesarray-schema-we-will-need-this-later-to-get-the-file-names>In Parallel Append to String <strong>varAttachmentNamesArray</strong> schema (we will need this later to get the File Names):</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
-</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;FileName&#34;</span>: <span style=color:#e6db74>&#34;@{items(&#39;Apply_to_each&#39;)?[&#39;{FilenameWithExtension}&#39;]}&#34;</span>,
-</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;Identifier&#34;</span>: <span style=color:#e6db74>&#34;@{items(&#39;Apply_to_each&#39;)?[&#39;{Identifier}&#39;]}&#34;</span>
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><h2 id=post-adaptive-card-and-wait-for-a-response>Post adaptive card and wait for a response</h2><p>The full build of the Adaptive card is [here] (<a href=https://github.com/madmat01/devtoBlog/blob/main/Adaptive_Card.json)>https://github.com/madmat01/devtoBlog/blob/main/Adaptive_Card.json)</a>, but the key bit here is to include the varAttachments as a dynamic repeatable item within the Card. To do this we can place varAttachments inside of <strong>&ldquo;items&rdquo;: [ ]</strong> , so that each filename is shown with it&rsquo;s own Input Toggle.</p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/q78563ri2trvnj5uwneg.png alt="Array inside Adaptive Card">
-We replace this with our varAttachmentNames String</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;Container&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;items&#34;</span>: [
-</span></span><span style=display:flex><span>               <span style=color:#960050;background-color:#1e0010>@</span>{<span style=color:#960050;background-color:#1e0010>variables(&#39;varAttachmentNames&#39;)</span>}
-</span></span><span style=display:flex><span>            ]
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><h2 id=parse-the-adaptive-card-response>Parse the Adaptive Card response</h2><p>Now the fun part, doing something with all the data we&rsquo;ve gathered.
-To do this we need to Parse the JSON from the "Data" Property of the Adaptive Card Body.</p><p>The Card body used here is in the form of this expression. We will set this as <strong>varCardObject</strong></p><pre tabindex=0><code>body(&#39;Post_adaptive_card_and_wait_for_a_response&#39;)[&#39;data&#39;]
-</code></pre><p>We will set this as <strong>"varCardObject"</strong> and use is in the Content for the Parse JSON action.
-<img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1p8i7zuzjgryv2eb6f5g.png alt="Parse JSON"></p><p><strong>JSON Schema used</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;object&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;properties&#34;</span>: {
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;RecEmail&#34;</span>: {
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;string&#34;</span>
-</span></span><span style=display:flex><span>        },
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;Subject&#34;</span>: {
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;string&#34;</span>
-</span></span><span style=display:flex><span>        },
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;EmailBody&#34;</span>: {
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;string&#34;</span>
-</span></span><span style=display:flex><span>        },
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;Item_&#34;</span>: {
-</span></span><span style=display:flex><span>            <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;string&#34;</span>
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>Parsing this Data Object will allow us to extract the <strong>RecEmail</strong>, <strong>Subject</strong> and <strong>EmailBody</strong> for use in the Send Email Action later.</p><h3 id=extracting-the-selected-files>Extracting the selected files</h3><p>A challenging part of this process is extracting the list of just the Selected Files from the Adaptive Card. We only want to get the ones that have the Toggle set to "True".</p><p>To do this we&rsquo;ll need to convert the <strong>varCardObject</strong> in to a String so that we can split it using an expression.</p><p>Set the <strong>"BodyAsString"</strong> variable the the <strong>"Parse JSON Body"</strong>.</p><p>Then bring that into a Compose action to use a <strong>Split</strong> expression.
-<img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/hygdk94td7vjtooq4m73.png alt="Split Card Object String"></p><h3 id=compose---split>Compose - Split</h3><p>We will split the string at each <strong>_item</strong></p><pre tabindex=0><code>Split(variables(&#39;BodyAsString&#39;),&#39;Item_&#39;)
-</code></pre><h3 id=apply-to-each-split-item>Apply to Each Split Item</h3><p>In order to return just the selected (True) files we need to do an Apply to Each on the Output of <strong>Compose - Split</strong></p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/q7wid06gpugrvvef30ah.png alt="Apply to Each Split Item"></p><h3 id=condition>Condition</h3><p><strong>CurrentItem</strong> Contains:</p><pre tabindex=0><code>&#34;:&#34;True&#34;   
-</code></pre><h3 id=append-to-array-variable---varselectedarray>Append to array variable - varSelectedArray</h3><p>With each Current Item that matches the Condition we will Append it to our <strong>varSelectedArray</strong> and apply an expression to just give us just the File Identifier that we need. To do that we will use the expression:</p><pre tabindex=0><code>replace(
+</code></pre><h2 id="get-an-array-of-all-the-available-files-in-this-folder">Get an Array of all the available files in this folder</h2>
+<p>Using &quot;Get files (properties only)&quot; and the Filter Query: <strong>FSObjType eq 0</strong> to return just the files and not folders.
+<img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/af2qf7p516y16itk64ds.png" alt="Get files (properties only)"></p>
+<p>Now we use &quot;Apply to Each&quot; for each value (file) found.
+<img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/20z37o5ufrn5nz0w3nno.png" alt="Apply to Each"></p>
+<p>Each value is run through the &ldquo;Get File Content&rdquo; action to then append it&rsquo;s File name with extension and a unique Identifier.
+Adaptive cards need to have a unique ID for each property, so I have used the Identifier property.</p>
+<h3 id="append-to-string-varattachmentnames-schema">Append to String varAttachmentNames schema:</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;Input.Toggle&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;title&#34;</span>: <span style="color:#e6db74">&#34;@{items(&#39;Apply_to_each&#39;)?[&#39;{FilenameWithExtension}&#39;]}&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;Item_@{items(&#39;Apply_to_each&#39;)?[&#39;{Identifier}&#39;]}&#34;</span>,
+</span></span><span style="display:flex;"><span>}<span style="color:#960050;background-color:#1e0010">,</span>
+</span></span></code></pre></div><h3 id="in-parallel-append-to-string-varattachmentnamesarray-schema-we-will-need-this-later-to-get-the-file-names">In Parallel Append to String <strong>varAttachmentNamesArray</strong> schema (we will need this later to get the File Names):</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;FileName&#34;</span>: <span style="color:#e6db74">&#34;@{items(&#39;Apply_to_each&#39;)?[&#39;{FilenameWithExtension}&#39;]}&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Identifier&#34;</span>: <span style="color:#e6db74">&#34;@{items(&#39;Apply_to_each&#39;)?[&#39;{Identifier}&#39;]}&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="post-adaptive-card-and-wait-for-a-response">Post adaptive card and wait for a response</h2>
+<p>The full build of the Adaptive card is [here] (<a href="https://github.com/madmat01/devtoBlog/blob/main/Adaptive_Card.json)">https://github.com/madmat01/devtoBlog/blob/main/Adaptive_Card.json)</a>, but the key bit here is to include the varAttachments as a dynamic repeatable item within the Card. To do this we can place varAttachments inside of <strong>&ldquo;items&rdquo;: [ ]</strong> , so that each filename is shown with it&rsquo;s own Input Toggle.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/q78563ri2trvnj5uwneg.png" alt="Array inside Adaptive Card">
+We replace this with our varAttachmentNames String</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;Container&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;items&#34;</span>: [
+</span></span><span style="display:flex;"><span>               <span style="color:#960050;background-color:#1e0010">@</span>{<span style="color:#960050;background-color:#1e0010">variables(&#39;varAttachmentNames&#39;)</span>}
+</span></span><span style="display:flex;"><span>            ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="parse-the-adaptive-card-response">Parse the Adaptive Card response</h2>
+<p>Now the fun part, doing something with all the data we&rsquo;ve gathered.
+To do this we need to Parse the JSON from the &quot;Data&quot; Property of the Adaptive Card Body.</p>
+<p>The Card body used here is in the form of this expression. We will set this as <strong>varCardObject</strong></p>
+<pre tabindex="0"><code>body(&#39;Post_adaptive_card_and_wait_for_a_response&#39;)[&#39;data&#39;]
+</code></pre><p>We will set this as <strong>&quot;varCardObject&quot;</strong> and use is in the Content for the Parse JSON action.
+<img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1p8i7zuzjgryv2eb6f5g.png" alt="Parse JSON"></p>
+<p><strong>JSON Schema used</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;object&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;properties&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;RecEmail&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;string&#34;</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;Subject&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;string&#34;</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;EmailBody&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;string&#34;</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;Item_&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;string&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Parsing this Data Object will allow us to extract the <strong>RecEmail</strong>, <strong>Subject</strong> and <strong>EmailBody</strong> for use in the Send Email Action later.</p>
+<h3 id="extracting-the-selected-files">Extracting the selected files</h3>
+<p>A challenging part of this process is extracting the list of just the Selected Files from the Adaptive Card. We only want to get the ones that have the Toggle set to &quot;True&quot;.</p>
+<p>To do this we&rsquo;ll need to convert the <strong>varCardObject</strong> in to a String so that we can split it using an expression.</p>
+<p>Set the <strong>&quot;BodyAsString&quot;</strong> variable the the <strong>&quot;Parse JSON Body&quot;</strong>.</p>
+<p>Then bring that into a Compose action to use a <strong>Split</strong> expression.
+<img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/hygdk94td7vjtooq4m73.png" alt="Split Card Object String"></p>
+<h3 id="compose---split">Compose - Split</h3>
+<p>We will split the string at each <strong>_item</strong></p>
+<pre tabindex="0"><code>Split(variables(&#39;BodyAsString&#39;),&#39;Item_&#39;)
+</code></pre><h3 id="apply-to-each-split-item">Apply to Each Split Item</h3>
+<p>In order to return just the selected (True) files we need to do an Apply to Each on the Output of <strong>Compose - Split</strong></p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/q7wid06gpugrvvef30ah.png" alt="Apply to Each Split Item"></p>
+<h3 id="condition">Condition</h3>
+<p><strong>CurrentItem</strong> Contains:</p>
+<pre tabindex="0"><code>&#34;:&#34;True&#34;   
+</code></pre><h3 id="append-to-array-variable---varselectedarray">Append to array variable - varSelectedArray</h3>
+<p>With each Current Item that matches the Condition we will Append it to our <strong>varSelectedArray</strong> and apply an expression to just give us just the File Identifier that we need. To do that we will use the expression:</p>
+<pre tabindex="0"><code>replace(
     replace(
         items(&#39;Apply_to_each_-_Split_Item&#39;),
         &#39;&#34;:&#34;True&#34;,&#34;&#39;,&#39;&#39;
         )
         ,&#39;&#34;:&#34;True&#34;}&#39;,&#39;&#39;
     )
-</code></pre><h2 id=failover---no-attachments-have-been-selected>Failover - No Attachments have been selected</h2><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/orluwcayizht7inb6xju.png alt="Has Attachments Condition">
-In case the user forgets to actually select any attachments we can add a failover that checks the number of attachments</p><pre tabindex=0><code>length(variables(&#39;varSelectedArray&#39;))
-</code></pre><p>is or greater than 1. If the Condition is not matched, then we will send the User a Teams message "No attachments were selected, please try sending this again". Then the Flow will be Terminated</p><h2 id=get-the-file-content-and-prepare-attachments-for-each-of-the-files>Get the File Content and prepare attachments for each of the files</h2><h3 id=apply-to-each---selected-file>Apply to Each - Selected File</h3><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2wadfz84aa1uzx8h5gn4.png alt="Apply to Each Selected File">
-To give us an Array of Attachments that Outlook can send in an email we need to find two things for each selected file: The File Name with Extension and the ContentBytes.</p><p>To acheive this we can run two actions in Parallel for each item from the <strong>varSelectedArray</strong> which has a list of file identifiers.</p><h3 id=filter-array---for-identifier>Filter array - for Identifier</h3><p>From: <strong>varAttachmentNamesArray</strong>
-<strong>item().Identifier</strong> is equal to <strong>Current Item</strong></p><p><em>Advanced mode:</em></p><pre tabindex=0><code>@equals(item().Identifier, items(&#39;Apply_to_each_-_Selected_File&#39;))
-</code></pre><p>Using the expression below this can return us the matching FileName for the File Identifier</p><pre tabindex=0><code>first(body(&#39;Filter_array_-_for_Identifier&#39;))?[&#39;FileName&#39;]
-</code></pre><h3 id=get-file-content---each-file>Get file content - Each File</h3><p>Search the Site Address for the Current Item (file identifier) to return the File Content.</p><pre tabindex=0><code>@{body(&#39;Get_file_content_-_Each_File&#39;)}
-</code></pre><h3 id=append-to-array-variable---attachmentsarray>Append to array variable - AttachmentsArray</h3><p>So, to join these two together we Append each of these to the <strong>AttachmentsArray</strong> variable like this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
-</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;Name&#34;</span>: <span style=color:#960050;background-color:#1e0010>@</span>{<span style=color:#960050;background-color:#1e0010>first(body(&#39;Filter_array_-_for_Identifier&#39;))?[&#39;FileName&#39;]</span>},
-</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;ContentBytes&#34;</span>: <span style=color:#960050;background-color:#1e0010>@</span>{<span style=color:#960050;background-color:#1e0010>body(&#39;Get_file_content_-_Each_File&#39;)</span>}
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><h2 id=send-an-email>Send an email</h2><p>We can now use the data we&rsquo;ve gathered above to compose and send an email.</p><p>An important point to mention is that to add the AttchmentsArray we need to select the <strong>"Switch to input entire array"</strong> toggle so that we can insert the combined Name and Content that we put together in <strong>AttachmentsArray</strong>
-<img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qs4k78g3zc3ndk2bvtgp.png alt="Send an Email"></p></article></div></div><div class="col-sm-12 col-md-12 col-lg-3"><div id=stickySideBar class=sticky-sidebar><aside class=toc><h5>Table Of Contents</h5><div class=toc-content><nav id=TableOfContents><ul><li><a href=#user-interaction>User interaction</a></li><li><a href=#the-power-automate-process-in-summary>The Power Automate process in summary</a></li><li><a href=#how-the-flow-works>How the flow works</a></li><li><a href=#how-it-is-built>How it is Built</a></li><li><a href=#for-a-selected-item>For a selected item</a></li><li><a href=#variables-to-initialise>Variables to Initialise</a></li><li><a href=#get-parent---the-folders-path>Get parent - the folder&rsquo;s path</a></li><li><a href=#get-an-array-of-all-the-available-files-in-this-folder>Get an Array of all the available files in this folder</a><ul><li><a href=#append-to-string-varattachmentnames-schema>Append to String varAttachmentNames schema:</a></li><li><a href=#in-parallel-append-to-string-varattachmentnamesarray-schema-we-will-need-this-later-to-get-the-file-names>In Parallel Append to String <strong>varAttachmentNamesArray</strong> schema (we will need this later to get the File Names):</a></li></ul></li><li><a href=#post-adaptive-card-and-wait-for-a-response>Post adaptive card and wait for a response</a></li><li><a href=#parse-the-adaptive-card-response>Parse the Adaptive Card response</a><ul><li><a href=#extracting-the-selected-files>Extracting the selected files</a></li><li><a href=#compose---split>Compose - Split</a></li><li><a href=#apply-to-each-split-item>Apply to Each Split Item</a></li><li><a href=#condition>Condition</a></li><li><a href=#append-to-array-variable---varselectedarray>Append to array variable - varSelectedArray</a></li></ul></li><li><a href=#failover---no-attachments-have-been-selected>Failover - No Attachments have been selected</a></li><li><a href=#get-the-file-content-and-prepare-attachments-for-each-of-the-files>Get the File Content and prepare attachments for each of the files</a><ul><li><a href=#apply-to-each---selected-file>Apply to Each - Selected File</a></li><li><a href=#filter-array---for-identifier>Filter array - for Identifier</a></li><li><a href=#get-file-content---each-file>Get file content - Each File</a></li><li><a href=#append-to-array-variable---attachmentsarray>Append to array variable - AttachmentsArray</a></li></ul></li><li><a href=#send-an-email>Send an email</a></li></ul></nav></div></aside><aside class=tags><h5>Tags</h5><ul class="tags-ul list-unstyled list-inline"><li class=list-inline-item><a href=/tags/power-automate target=_blank>Power Automate</a></li><li class=list-inline-item><a href=/tags/sharepoint target=_blank>SharePoint</a></li><li class=list-inline-item><a href=/tags/outlook target=_blank>Outlook</a></li><li class=list-inline-item><a href=/tags/automation target=_blank>Automation</a></li><li class=list-inline-item><a href=/tags/document-management target=_blank>Document Management</a></li><li class=list-inline-item><a href=/tags/cloud-flows target=_blank>Cloud Flows</a></li></ul></aside><aside class=social><h5>Social</h5><div class=social-content><ul class=list-inline><li class="list-inline-item text-center"><a target=_blank href="https://www.linkedin.com/feed/?shareActive=true&text= https%3a%2f%2fmadmat01.github.io%2fposts%2fsend-multiple-files-as-email-attachments-from-a-sharepoint-document-library-folder-using-power-automate%2f"><i class="fab fa-linkedin"></i></a></li><li class="list-inline-item text-center"><a target=_blank href='https://twitter.com/share?text=Send%20Multiple%20files%20as%20email%20attachments%20from%20a%20SharePoint%20Document%20Library%20Folder%20using%20Power%20Automate&url=https%3a%2f%2fmadmat01.github.io%2fposts%2fsend-multiple-files-as-email-attachments-from-a-sharepoint-document-library-folder-using-power-automate%2f&hashtags=Power%20Automate%2cSharePoint%2cOutlook%2cAutomation%2cDocument%20Management%2cCloud%20Flows'><i class="fab fa-twitter"></i></a></li><li class="list-inline-item text-center"><a target=_blank href="https://api.whatsapp.com/send?text=Send%20Multiple%20files%20as%20email%20attachments%20from%20a%20SharePoint%20Document%20Library%20Folder%20using%20Power%20Automate: https%3a%2f%2fmadmat01.github.io%2fposts%2fsend-multiple-files-as-email-attachments-from-a-sharepoint-document-library-folder-using-power-automate%2f"><i class="fab fa-whatsapp"></i></a></li><li class="list-inline-item text-center"><a target=_blank href='mailto:?subject=Send%20Multiple%20files%20as%20email%20attachments%20from%20a%20SharePoint%20Document%20Library%20Folder%20using%20Power%20Automate&amp;body=Check%20out%20this%20site https%3a%2f%2fmadmat01.github.io%2fposts%2fsend-multiple-files-as-email-attachments-from-a-sharepoint-document-library-folder-using-power-automate%2f'><i class="fa fa-envelope"></i></a></li></ul></div></aside></div></div></div><div class=row><div class="col-sm-12 col-md-12 col-lg-9 p-4"></div></div></div><button class="p-2 px-3" onclick=topFunction() id=topScroll>
-<i class="fas fa-angle-up"></i></button></section><div class=progress><div id=scroll-progress-bar class=progress-bar role=progressbar aria-valuenow=0 aria-valuemin=0 aria-valuemax=100></div></div><script src=/js/scrollProgressBar.js></script><script>var topScroll=document.getElementById("topScroll");window.onscroll=function(){scrollFunction()};function scrollFunction(){document.body.scrollTop>20||document.documentElement.scrollTop>20?topScroll.style.display="block":topScroll.style.display="none"}function topFunction(){document.body.scrollTop=0,document.documentElement.scrollTop=0}let stickySideBarElem=document.getElementById("stickySideBar"),stickyNavBar=!1;if(stickyNavBar){let e=document.getElementById("profileHeader"),t=e.offsetHeight+15;stickySideBarElem.style.top=t+"px"}else stickySideBarElem.style.top="50px"</script><script src=/js/readingTime.js></script></div><footer><div class="text-center pt-2"></div><div class="container py-4"><div class="row justify-content-center"><div class="col-md-4 text-center">&copy; 2026 All Rights Reserved<div class=text-secondary>Made with
-<span class=text-danger>&#10084;
-</span>and
-<a href=https://github.com/gurusabarish/hugo-profile target=_blank title="Designed and developed by gurusabarish">Hugo Profile</a></div></div></div></div></footer><script src=/bootstrap-5/js/bootstrap.bundle.min.js></script><script>localStorage.getItem("pref-theme")==="dark"?(document.documentElement.classList.add("dark"),document.body.classList.add("dark")):localStorage.getItem("pref-theme")==="light"?(document.body.classList.remove("dark"),document.documentElement.classList.remove("dark")):window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches&&(document.documentElement.classList.add("dark"),document.body.classList.add("dark"))</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),document.documentElement.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),document.documentElement.classList.add("dark"),localStorage.setItem("pref-theme","dark"))});var tooltipTriggerList=[].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]')),tooltipList=tooltipTriggerList.map(function(e){return new bootstrap.Tooltip(e)})</script><script>window.searchIndexURL="/index.json"</script><script src=/js/search.js></script><section id=search-content class=py-2><div class=container id=search-results></div></section></body></html>
+</code></pre><h2 id="failover---no-attachments-have-been-selected">Failover - No Attachments have been selected</h2>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/orluwcayizht7inb6xju.png" alt="Has Attachments Condition">
+In case the user forgets to actually select any attachments we can add a failover that checks the number of attachments</p>
+<pre tabindex="0"><code>length(variables(&#39;varSelectedArray&#39;))
+</code></pre><p>is or greater than 1. If the Condition is not matched, then we will send the User a Teams message &quot;No attachments were selected, please try sending this again&quot;. Then the Flow will be Terminated</p>
+<h2 id="get-the-file-content-and-prepare-attachments-for-each-of-the-files">Get the File Content and prepare attachments for each of the files</h2>
+<h3 id="apply-to-each---selected-file">Apply to Each - Selected File</h3>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2wadfz84aa1uzx8h5gn4.png" alt="Apply to Each Selected File">
+To give us an Array of Attachments that Outlook can send in an email we need to find two things for each selected file: The File Name with Extension and the ContentBytes.</p>
+<p>To acheive this we can run two actions in Parallel for each item from the <strong>varSelectedArray</strong> which has a list of file identifiers.</p>
+<h3 id="filter-array---for-identifier">Filter array - for Identifier</h3>
+<p>From: <strong>varAttachmentNamesArray</strong>
+<strong>item().Identifier</strong> is equal to <strong>Current Item</strong></p>
+<p><em>Advanced mode:</em></p>
+<pre tabindex="0"><code>@equals(item().Identifier, items(&#39;Apply_to_each_-_Selected_File&#39;))
+</code></pre><p>Using the expression below this can return us the matching FileName for the File Identifier</p>
+<pre tabindex="0"><code>first(body(&#39;Filter_array_-_for_Identifier&#39;))?[&#39;FileName&#39;]
+</code></pre><h3 id="get-file-content---each-file">Get file content - Each File</h3>
+<p>Search the Site Address for the Current Item (file identifier) to return the File Content.</p>
+<pre tabindex="0"><code>@{body(&#39;Get_file_content_-_Each_File&#39;)}
+</code></pre><h3 id="append-to-array-variable---attachmentsarray">Append to array variable - AttachmentsArray</h3>
+<p>So, to join these two together we Append each of these to the <strong>AttachmentsArray</strong> variable like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;Name&#34;</span>: <span style="color:#960050;background-color:#1e0010">@</span>{<span style="color:#960050;background-color:#1e0010">first(body(&#39;Filter_array_-_for_Identifier&#39;))?[&#39;FileName&#39;]</span>},
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;ContentBytes&#34;</span>: <span style="color:#960050;background-color:#1e0010">@</span>{<span style="color:#960050;background-color:#1e0010">body(&#39;Get_file_content_-_Each_File&#39;)</span>}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="send-an-email">Send an email</h2>
+<p>We can now use the data we&rsquo;ve gathered above to compose and send an email.</p>
+<p>An important point to mention is that to add the AttchmentsArray we need to select the <strong>&quot;Switch to input entire array&quot;</strong> toggle so that we can insert the combined Name and Content that we put together in <strong>AttachmentsArray</strong>
+<img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qs4k78g3zc3ndk2bvtgp.png" alt="Send an Email"></p>
+
+          </article>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-3">
+        <div id="stickySideBar" class="sticky-sidebar">
+          
+          <aside class="toc">
+              <h5>
+                Table Of Contents
+              </h5>
+              <div class="toc-content">
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#user-interaction">User interaction</a></li>
+    <li><a href="#the-power-automate-process-in-summary">The Power Automate process in summary</a></li>
+    <li><a href="#how-the-flow-works">How the flow works</a></li>
+    <li><a href="#how-it-is-built">How it is Built</a></li>
+    <li><a href="#for-a-selected-item">For a selected item</a></li>
+    <li><a href="#variables-to-initialise">Variables to Initialise</a></li>
+    <li><a href="#get-parent---the-folders-path">Get parent - the folder&rsquo;s path</a></li>
+    <li><a href="#get-an-array-of-all-the-available-files-in-this-folder">Get an Array of all the available files in this folder</a>
+      <ul>
+        <li><a href="#append-to-string-varattachmentnames-schema">Append to String varAttachmentNames schema:</a></li>
+        <li><a href="#in-parallel-append-to-string-varattachmentnamesarray-schema-we-will-need-this-later-to-get-the-file-names">In Parallel Append to String <strong>varAttachmentNamesArray</strong> schema (we will need this later to get the File Names):</a></li>
+      </ul>
+    </li>
+    <li><a href="#post-adaptive-card-and-wait-for-a-response">Post adaptive card and wait for a response</a></li>
+    <li><a href="#parse-the-adaptive-card-response">Parse the Adaptive Card response</a>
+      <ul>
+        <li><a href="#extracting-the-selected-files">Extracting the selected files</a></li>
+        <li><a href="#compose---split">Compose - Split</a></li>
+        <li><a href="#apply-to-each-split-item">Apply to Each Split Item</a></li>
+        <li><a href="#condition">Condition</a></li>
+        <li><a href="#append-to-array-variable---varselectedarray">Append to array variable - varSelectedArray</a></li>
+      </ul>
+    </li>
+    <li><a href="#failover---no-attachments-have-been-selected">Failover - No Attachments have been selected</a></li>
+    <li><a href="#get-the-file-content-and-prepare-attachments-for-each-of-the-files">Get the File Content and prepare attachments for each of the files</a>
+      <ul>
+        <li><a href="#apply-to-each---selected-file">Apply to Each - Selected File</a></li>
+        <li><a href="#filter-array---for-identifier">Filter array - for Identifier</a></li>
+        <li><a href="#get-file-content---each-file">Get file content - Each File</a></li>
+        <li><a href="#append-to-array-variable---attachmentsarray">Append to array variable - AttachmentsArray</a></li>
+      </ul>
+    </li>
+    <li><a href="#send-an-email">Send an email</a></li>
+  </ul>
+</nav>
+              </div>
+          </aside>
+          
+
+          
+          <aside class="tags">
+            <h5>Tags</h5>
+            <ul class="tags-ul list-unstyled list-inline">
+              
+              
+              <li class="list-inline-item"><a href="/tags/power-automate"
+                target="_blank"
+              >Power Automate</a></li>
+              
+              
+              <li class="list-inline-item"><a href="/tags/sharepoint"
+                target="_blank"
+              >SharePoint</a></li>
+              
+              
+              <li class="list-inline-item"><a href="/tags/outlook"
+                target="_blank"
+              >Outlook</a></li>
+              
+              
+              <li class="list-inline-item"><a href="/tags/automation"
+                target="_blank"
+              >Automation</a></li>
+              
+              
+              <li class="list-inline-item"><a href="/tags/document-management"
+                target="_blank"
+              >Document Management</a></li>
+              
+              
+              <li class="list-inline-item"><a href="/tags/cloud-flows"
+                target="_blank"
+              >Cloud Flows</a></li>
+              
+            </ul>
+          </aside>
+          
+
+          
+          <aside class="social">
+            <h5>Social</h5>
+            <div class="social-content">
+              <ul class="list-inline">
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://www.linkedin.com/feed/?shareActive=true&text= http%3a%2f%2flocalhost%3a1313%2fposts%2fsend-multiple-files-as-email-attachments-from-a-sharepoint-document-library-folder-using-power-automate%2f">
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href='https://twitter.com/share?text=Send%20Multiple%20files%20as%20email%20attachments%20from%20a%20SharePoint%20Document%20Library%20Folder%20using%20Power%20Automate&url=http%3a%2f%2flocalhost%3a1313%2fposts%2fsend-multiple-files-as-email-attachments-from-a-sharepoint-document-library-folder-using-power-automate%2f&hashtags=Power%20Automate%2cSharePoint%2cOutlook%2cAutomation%2cDocument%20Management%2cCloud%20Flows'>
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://api.whatsapp.com/send?text=Send%20Multiple%20files%20as%20email%20attachments%20from%20a%20SharePoint%20Document%20Library%20Folder%20using%20Power%20Automate: http%3a%2f%2flocalhost%3a1313%2fposts%2fsend-multiple-files-as-email-attachments-from-a-sharepoint-document-library-folder-using-power-automate%2f">
+                    <i class="fab fa-whatsapp"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href='mailto:?subject=Send%20Multiple%20files%20as%20email%20attachments%20from%20a%20SharePoint%20Document%20Library%20Folder%20using%20Power%20Automate&amp;body=Check%20out%20this%20site http%3a%2f%2flocalhost%3a1313%2fposts%2fsend-multiple-files-as-email-attachments-from-a-sharepoint-document-library-folder-using-power-automate%2f'>
+                    <i class="fa fa-envelope"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </aside>
+          
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-9 p-4">
+        
+      </div>
+    </div>
+  </div>
+  <button class="p-2 px-3" onclick="topFunction()" id="topScroll">
+    <i class="fas fa-angle-up"></i>
+  </button>
+</section>
+
+
+<div class="progress">
+  <div id="scroll-progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<Script src="/js/scrollProgressBar.js"></script>
+
+
+<script>
+  var topScroll = document.getElementById("topScroll");
+  window.onscroll = function() {scrollFunction()};
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      topScroll.style.display = "block";
+    } else {
+      topScroll.style.display = "none";
+    }
+  }
+
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
+  
+  let stickySideBarElem = document.getElementById("stickySideBar");
+  let stickyNavBar =  false ;
+  if(stickyNavBar) {
+    let headerElem = document.getElementById("profileHeader");
+    let headerHeight = headerElem.offsetHeight + 15;
+    stickySideBarElem.style.top = headerHeight + "px";
+  } else {
+    stickySideBarElem.style.top = "50px";
+  }
+</script>
+
+
+<script src="/js/readingTime.js"></script>
+
+
+
+  </div><footer>
+    
+
+
+ 
+
+<div class="text-center pt-2">
+    
+
+    
+
+    
+
+    
+
+    
+</div><div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-4 text-center">
+            
+            &copy; 2026  All Rights Reserved
+            <div class="text-secondary">
+                Made with
+                <span class="text-danger">
+                    &#10084;
+                </span>
+                and
+                <a href="https://github.com/gurusabarish/hugo-profile" target="_blank"
+                    title="Designed and developed by gurusabarish">
+                    Hugo Profile
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</footer><script src="/bootstrap-5/js/bootstrap.bundle.min.js"></script>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+        document.documentElement.classList.remove('dark');
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+    }
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            document.documentElement.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+
+</script>
+
+
+    <script>
+      
+      window.searchIndexURL = "/index.json";
+    </script>
+    <script src="/js/search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+  <section id="search-content" class="py-2">
+    <div class="container" id="search-results"></div>
+  </section>
+</body>
+
+</html>

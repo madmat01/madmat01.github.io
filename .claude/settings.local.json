@@ -15,7 +15,8 @@
       "WebFetch(domain:api.github.com)",
       "Bash(curl -s \"https://api.github.com/repos/actions/upload-pages-artifact/git/refs/tags/v3\")",
       "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); print\\(data[''''object''''][''''sha''''], data[''''object''''][''''type'''']\\)\")",
-      "Bash(find c:/git/website1/themes/hugo-profile/ -name *.css -o -name *.scss)"
+      "Bash(find c:/git/website1/themes/hugo-profile/ -name *.css -o -name *.scss)",
+      "Bash(grep -h \"draft\\\\|date\\\\|title\" \"c:/git/website1/content/posts/\"*.md)"
     ]
   }
 }

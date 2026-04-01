@@ -1,7 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Power Platform on Matthew Collinge</title><link>https://madmat01.github.io/tags/power-platform/</link><description>Recent content in Power Platform on Matthew Collinge</description><generator>Hugo</generator><language>en-gb</language><lastBuildDate>Sun, 16 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://madmat01.github.io/tags/power-platform/index.xml" rel="self" type="application/rss+xml"/><item><title>Generate a Dataverse ERD for Azure Dev Ops Wiki</title><link>https://madmat01.github.io/posts/generate-a-dataverse-erd-for-azure-dev-ops-wiki/</link><pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate><guid>https://madmat01.github.io/posts/generate-a-dataverse-erd-for-azure-dev-ops-wiki/</guid><description>&lt;p&gt;Nobody likes manually writing and updating Documentation. ERDs (Entity Relationship Diagrams) provide a really helpful overview of what your database relationships look like.&lt;/p&gt;
-&lt;p&gt;Context: We are using Azure DevOps (ADO) to manage our CI/CD Pipelines using the &lt;a href="https://learn.microsoft.com/en-us/power-platform/alm/devops-build-tools"&gt;Power Platform Tools&lt;/a&gt; and therefore the Solutions are unpacked and stored in the Repository (there may be multiple Solutions inside of a Project).&lt;/p&gt;
-&lt;p&gt;The idea: working with Power Platform solutions stored in ADO, it would be great to visualise complex entity relationships right inside ADO. Visualizing these relationships can make solution design and troubleshooting much easier, it certainly helps me.&lt;/p&gt;</description></item><item><title>Conversational Approval process using Adaptive Cards and JSON objects</title><link>https://madmat01.github.io/posts/conversational-approval-process-using-adaptive-cards-and-json-objects/</link><pubDate>Mon, 29 Jan 2024 00:00:00 +0000</pubDate><guid>https://madmat01.github.io/posts/conversational-approval-process-using-adaptive-cards-and-json-objects/</guid><description>&lt;h2 id="introduction"&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;This is Part 3 of a series of posts where I try to explain how to send Form answers from a Power App into Power Automate and then send Adaptive Cards in Microsoft Teams to allow the Requestor and Approver make incremental changes to the Form answers.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://dev.to/mcombp/passing-objects-from-power-apps-to-power-automate-31ji"&gt;Part 1&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://dev.to/mcombp/passing-a-choices-list-from-power-apps-to-an-adaptive-card-2nga"&gt;Part 2&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;We&amp;rsquo;re going to start Part 3 by building a second Flow. In this Form Approval Process this Flow will actually be the one that sends an Adaptive Card to our Approver.&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Power Platform on Matthew Collinge</title>
+    <link>http://localhost:1313/tags/power-platform/</link>
+    <description>Recent content in Power Platform on Matthew Collinge</description>
+    <generator>Hugo</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sun, 16 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/power-platform/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Generate a Dataverse ERD for Azure Dev Ops Wiki</title>
+      <link>http://localhost:1313/posts/generate-a-dataverse-erd-for-azure-dev-ops-wiki/</link>
+      <pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/generate-a-dataverse-erd-for-azure-dev-ops-wiki/</guid>
+      <description>&lt;p&gt;Nobody likes manually writing and updating Documentation. ERDs (Entity Relationship Diagrams) provide a really helpful overview of what your database relationships look like.&lt;/p&gt;&#xA;&lt;p&gt;Context: We are using Azure DevOps (ADO) to manage our CI/CD Pipelines using the &lt;a href=&#34;https://learn.microsoft.com/en-us/power-platform/alm/devops-build-tools&#34;&gt;Power Platform Tools&lt;/a&gt; and therefore the Solutions are unpacked and stored in the Repository (there may be multiple Solutions inside of a Project).&lt;/p&gt;&#xA;&lt;p&gt;The idea: working with Power Platform solutions stored in ADO, it would be great to visualise complex entity relationships right inside ADO. Visualizing these relationships can make solution design and troubleshooting much easier, it certainly helps me.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Conversational Approval process using Adaptive Cards and JSON objects</title>
+      <link>http://localhost:1313/posts/conversational-approval-process-using-adaptive-cards-and-json-objects/</link>
+      <pubDate>Mon, 29 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/conversational-approval-process-using-adaptive-cards-and-json-objects/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;This is Part 3 of a series of posts where I try to explain how to send Form answers from a Power App into Power Automate and then send Adaptive Cards in Microsoft Teams to allow the Requestor and Approver make incremental changes to the Form answers.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://dev.to/mcombp/passing-objects-from-power-apps-to-power-automate-31ji&#34;&gt;Part 1&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://dev.to/mcombp/passing-a-choices-list-from-power-apps-to-an-adaptive-card-2nga&#34;&gt;Part 2&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;We&amp;rsquo;re going to start Part 3 by building a second Flow. In this Form Approval Process this Flow will actually be the one that sends an Adaptive Card to our Approver.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,23 +1,375 @@
-<!doctype html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><meta http-equiv=Accept-CH content="DPR, Viewport-Width, Width"><link rel=icon href=/fav.png type=image/gif><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" media=print onload='this.media="all"'><noscript><link href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel=stylesheet></noscript><link rel=stylesheet href=/css/font.css media=all><meta property="og:url" content="https://madmat01.github.io/posts/generate-a-dataverse-erd-for-azure-dev-ops-wiki/"><meta property="og:site_name" content="Matthew Collinge"><meta property="og:title" content="Generate a Dataverse ERD for Azure Dev Ops Wiki"><meta property="og:description" content="Nobody likes manually writing and updating Documentation. ERDs (Entity Relationship Diagrams) provide a really helpful overview of what your database relationships look like.
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
+<link rel="icon" href="/fav.png" type="image/gif">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+>
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      media="print" onload="this.media='all'" />
+<noscript>
+  <link
+          href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet">
+</noscript>
+
+
+<link rel="stylesheet" href="/css/font.css" media="all">
+
+
+
+<meta property="og:url" content="http://localhost:1313/posts/generate-a-dataverse-erd-for-azure-dev-ops-wiki/">
+  <meta property="og:site_name" content="Matthew Collinge">
+  <meta property="og:title" content="Generate a Dataverse ERD for Azure Dev Ops Wiki">
+  <meta property="og:description" content="Nobody likes manually writing and updating Documentation. ERDs (Entity Relationship Diagrams) provide a really helpful overview of what your database relationships look like.
 Context: We are using Azure DevOps (ADO) to manage our CI/CD Pipelines using the Power Platform Tools and therefore the Solutions are unpacked and stored in the Repository (there may be multiple Solutions inside of a Project).
-The idea: working with Power Platform solutions stored in ADO, it would be great to visualise complex entity relationships right inside ADO. Visualizing these relationships can make solution design and troubleshooting much easier, it certainly helps me."><meta property="og:locale" content="en_gb"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-11-16T00:00:00+00:00"><meta property="article:modified_time" content="2025-11-16T00:00:00+00:00"><meta property="article:tag" content="Dataverse"><meta property="article:tag" content="Azure DevOps"><meta property="article:tag" content="ERD"><meta property="article:tag" content="Documentation"><meta property="article:tag" content="Mermaid JS"><meta property="article:tag" content="Power Platform"><meta name=twitter:card content="summary"><meta name=twitter:title content="Generate a Dataverse ERD for Azure Dev Ops Wiki"><meta name=twitter:description content="Nobody likes manually writing and updating Documentation. ERDs (Entity Relationship Diagrams) provide a really helpful overview of what your database relationships look like.
+The idea: working with Power Platform solutions stored in ADO, it would be great to visualise complex entity relationships right inside ADO. Visualizing these relationships can make solution design and troubleshooting much easier, it certainly helps me.">
+  <meta property="og:locale" content="en_gb">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-11-16T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-11-16T00:00:00+00:00">
+    <meta property="article:tag" content="Dataverse">
+    <meta property="article:tag" content="Azure DevOps">
+    <meta property="article:tag" content="ERD">
+    <meta property="article:tag" content="Documentation">
+    <meta property="article:tag" content="Mermaid JS">
+    <meta property="article:tag" content="Power Platform">
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Generate a Dataverse ERD for Azure Dev Ops Wiki">
+  <meta name="twitter:description" content="Nobody likes manually writing and updating Documentation. ERDs (Entity Relationship Diagrams) provide a really helpful overview of what your database relationships look like.
 Context: We are using Azure DevOps (ADO) to manage our CI/CD Pipelines using the Power Platform Tools and therefore the Solutions are unpacked and stored in the Repository (there may be multiple Solutions inside of a Project).
-The idea: working with Power Platform solutions stored in ADO, it would be great to visualise complex entity relationships right inside ADO. Visualizing these relationships can make solution design and troubleshooting much easier, it certainly helps me."><link rel=stylesheet href=/bootstrap-5/css/bootstrap.min.css media=all><link rel=stylesheet href=/css/header.css media=all><link rel=stylesheet href=/css/language-switcher.css media=all><link rel=stylesheet href=/css/footer.css media=all><link rel=stylesheet href=/css/theme.css media=all><style>:root{--text-color:#1e293b;--text-secondary-color:#475569;--text-link-color:#0052cc;--background-color:#f0f2f5;--secondary-background-color:#dbeafe;--primary-color:#0052cc;--secondary-color:#ffffff;--text-color-dark:#e6edf3;--text-secondary-color-dark:#8b949e;--text-link-color-dark:#58a6ff;--background-color-dark:#0d1117;--secondary-background-color-dark:#1a2332;--primary-color-dark:#58a6ff;--secondary-color-dark:#161b22}body{font-size:1rem;font-weight:400;line-height:1.7;text-align:left}html{background-color:var(--background-color)!important}body::-webkit-scrollbar{height:0;width:8px;background-color:var(--background-color)}::-webkit-scrollbar-track{border-radius:1rem}::-webkit-scrollbar-thumb{border-radius:1rem;background:#b0b0b0;outline:1px solid var(--background-color)}#search-content::-webkit-scrollbar{width:.5em;height:.1em;background-color:var(--background-color)}</style><meta http-equiv=Content-Security-Policy content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com; form-action 'self'; base-uri 'self'; object-src 'none'"><script async src="https://www.googletagmanager.com/gtag/js?id=G-1EGVWHDPQT"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-1EGVWHDPQT")</script><meta http-equiv=X-Content-Type-Options content="nosniff"><meta name=referrer content="strict-origin-when-cross-origin"><link rel=stylesheet href=/css/custom.css><script src=/js/scroll-animations.1058878ac5958126da87f12a5106f9e7fd56bead46a2785c5a338e5329887b7c2952fc0d7991634c6a1c1125e6383707.js integrity=sha384-EFiHisWVgSbah/EqUQb55/1Wvq1GonhcWjOOUymIe3wpUvwNeZFjTGocESXmODcH crossorigin=anonymous defer></script><meta name=description content><link rel=stylesheet href=/css/single.css><script defer src=/fontawesome-6/all-6.4.2.js></script><link rel=stylesheet href=/style.css><title>Generate a Dataverse ERD for Azure Dev Ops Wiki | Matthew Collinge</title></head><body class=light><script>let localStorageValue=localStorage.getItem("pref-theme"),mediaQuery=window.matchMedia("(prefers-color-scheme: dark)").matches;switch(localStorageValue){case"dark":document.documentElement.classList.add("dark"),document.body.classList.add("dark");break;case"light":document.body.classList.remove("dark"),document.documentElement.classList.remove("dark");break;default:mediaQuery&&(document.documentElement.classList.add("dark"),document.body.classList.add("dark"));break}</script><a class=skip-to-content href=#hero>Skip to content</a><header id=profileHeader><nav class="pt-3 navbar navbar-expand-lg animate" role=navigation aria-label="Main navigation"><div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5"><a class="navbar-brand primary-font text-wrap" href=/ aria-label=" — home"></a><div><label for=search-desktop class=sr-only>Search</label>
-<input id=search-desktop autocomplete=off class="form-control mr-sm-2 d-none d-md-block" placeholder=Search... aria-label=Search oninput=searchOnChange(event)></div><button class=navbar-toggler type=button data-bs-toggle=collapse data-bs-target=#navbarContent aria-controls=navbarContent aria-expanded=false aria-label="Toggle navigation">
-<svg aria-hidden="true" height="24" viewBox="0 0 16 16" width="24" data-view-component="true"><path fill-rule="evenodd" d="M1 2.75A.75.75.0 011.75 2h12.5a.75.75.0 110 1.5H1.75A.75.75.0 011 2.75zm0 5A.75.75.0 011.75 7h12.5a.75.75.0 110 1.5H1.75A.75.75.0 011 7.75zM1.75 12a.75.75.0 100 1.5h12.5a.75.75.0 100-1.5H1.75z"/></svg></button><div class="collapse navbar-collapse text-wrap primary-font" id=navbarContent><ul class="navbar-nav ms-auto text-center"><li class="nav-item navbar-text d-block d-md-none"><div class=nav-link><label for=search-mobile class=sr-only>Search</label>
-<input id=search-mobile autocomplete=off class="form-control mr-sm-2" placeholder=Search... aria-label=Search oninput=searchOnChange(event)></div></li><li class="nav-item navbar-text"><a class=nav-link href=/#about aria-label=about>About Me</a></li><li class="nav-item navbar-text"><a class=nav-link href=/#contact aria-label=contact>Get in Touch</a></li><li class="nav-item navbar-text"><a class=nav-link href=/posts title>Posts</a></li><li class="nav-item navbar-text"><a class=nav-link href=#contact title>Contact</a></li><li class="nav-item navbar-text"><div class=text-center><button id=theme-toggle type=button aria-label="Toggle dark mode">
-<svg id="moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-<svg id="sun" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></li></ul></div></div></nav></header><div id=content><section id=single><div class=container><div class="row justify-content-center"><div class="col-sm-12 col-md-12 col-lg-9"><div class=pr-lg-4><div class="title mb-5"><h1 class="text-center mb-4">Generate a Dataverse ERD for Azure Dev Ops Wiki</h1><div class=text-center>Nov 16, 2025
-<span id=readingTime>min read</span></div></div><article class="page-content p-2"><p>Nobody likes manually writing and updating Documentation. ERDs (Entity Relationship Diagrams) provide a really helpful overview of what your database relationships look like.</p><p>Context: We are using Azure DevOps (ADO) to manage our CI/CD Pipelines using the <a href=https://learn.microsoft.com/en-us/power-platform/alm/devops-build-tools>Power Platform Tools</a> and therefore the Solutions are unpacked and stored in the Repository (there may be multiple Solutions inside of a Project).</p><p>The idea: working with Power Platform solutions stored in ADO, it would be great to visualise complex entity relationships right inside ADO. Visualizing these relationships can make solution design and troubleshooting much easier, it certainly helps me.</p><p>In this quick post, we&rsquo;ll use a short prompt using <a href=https://code.visualstudio.com/docs/copilot/chat/getting-started-chat>Chat in VS Code</a> to get an AI Agent to generate a <strong>Mermaid ERD</strong> from our Dataverse solution files and then we can copy it and publish it to our ADO Wiki.</p><hr><h2 id=-why-this-matters>✅ Why This Matters</h2><ul><li><strong>Better Documentation</strong>: ERDs help us understand entity relationships at a glance.</li><li><strong>Native Rendering</strong>: Mermaid diagrams render natively in ADO Wiki.</li><li><strong>Automation Ready</strong>: This process could be adapted for CI/CD pipelines later. For this we can implement <a href=https://mightora.io/tools/cicd/upload-md-to-wiki/>Ian Tweedie - Upload Markdown to Wiki</a></li></ul><hr><h2 id=step-1-clone-the-repository-in-vs-code><strong>Step 1: Clone the Repository in VS Code</strong></h2><ol><li>In <strong>Azure DevOps</strong>, go to <strong>Repos → Clone → IDE</strong>.
-<img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yjqxs72pved3ub22yx0d.png alt=azure-repo></li></ol><hr><ol start=2><li>Select <strong>Clone in VS Code</strong>.
-<img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/bddkwz0emux4yl82dd52.png alt="Clone in VS Code"></li></ol><hr><ol start=3><li>Choose a local folder where the repo will be stored.</li></ol><h2 id=step-2-locate-a-relationships-file><strong>Step 2: Locate a Relationships File</strong></h2><ol><li>In VS Code, navigate to the Power Platform solution folder inside the repo.</li><li>Go to: <strong>Other → Relationships.xml</strong>
-<img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/srw32z50uop8b6tus0ty.png alt="Relationships XML"></li></ol><hr><p>(if there is more than one Relationships.xml file, you may need to repeat these steps)
-3. Open <strong><code>Relationships.xml</code></strong> in VS Code.</p><h2 id=step-3-use-ai-to-generate-the-erd><strong>Step 3: Use AI to Generate the ERD</strong></h2><ol><li>Open <strong>Chat</strong> in VS Code with <code>Relationships.xml</code> in file context.</li><li>Paste this prompt:</li></ol><pre tabindex=0><code>Please scan this file and identify all Dataverse-related entities and their relationships. Focus on extracting entity names, attributes, and how they relate to each other (e.g. one-to-many, many-to-one, many-to-many). Then, generate a Mermaid entity-relationship diagram (ERD) that includes cardinality for each relationship.
+The idea: working with Power Platform solutions stored in ADO, it would be great to visualise complex entity relationships right inside ADO. Visualizing these relationships can make solution design and troubleshooting much easier, it certainly helps me.">
+
+
+
+
+
+<link rel="stylesheet" href="/bootstrap-5/css/bootstrap.min.css" media="all"><link rel="stylesheet" href="/css/header.css" media="all">
+<link rel="stylesheet" href="/css/language-switcher.css" media="all">
+<link rel="stylesheet" href="/css/footer.css" media="all">
+
+
+<link rel="stylesheet" href="/css/theme.css" media="all">
+
+<style>
+    :root {
+        --text-color: #1e293b;
+        --text-secondary-color: #475569;
+        --text-link-color: #0052cc;
+        --background-color: #f0f2f5;
+        --secondary-background-color: #dbeafe;
+        --primary-color: #0052cc;
+        --secondary-color: #ffffff;
+
+         
+        --text-color-dark: #e6edf3;
+        --text-secondary-color-dark: #8b949e;
+        --text-link-color-dark: #58a6ff;
+        --background-color-dark: #0d1117;
+        --secondary-background-color-dark: #1a2332;
+        --primary-color-dark: #58a6ff;
+        --secondary-color-dark: #161b22;
+    }
+    body {
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.7;
+        text-align: left;
+    }
+
+    html {
+        background-color: var(--background-color) !important;
+    }
+
+    body::-webkit-scrollbar {
+        height: 0px;
+        width: 8px;
+        background-color: var(--background-color);
+    }
+
+    ::-webkit-scrollbar-track {
+        border-radius: 1rem;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 1rem;
+        background: #b0b0b0;
+        outline: 1px solid var(--background-color);
+    }
+
+    #search-content::-webkit-scrollbar {
+        width: .5em;
+        height: .1em;
+        background-color: var(--background-color);
+    }
+</style>
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com; form-action 'self'; base-uri 'self'; object-src 'none'">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EGVWHDPQT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1EGVWHDPQT');
+</script>
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="stylesheet" href="/css/custom.css"><script src="/js/scroll-animations.1058878ac5958126da87f12a5106f9e7fd56bead46a2785c5a338e5329887b7c2952fc0d7991634c6a1c1125e6383707.js" integrity="sha384-EFiHisWVgSbah/EqUQb55/1Wvq1GonhcWjOOUymIe3wpUvwNeZFjTGocESXmODcH" crossorigin="anonymous" defer></script>
+
+
+<meta name="description" content="">
+<link rel="stylesheet" href="/css/single.css">
+
+
+<script defer src="/fontawesome-6/all-6.4.2.js"></script>
+
+
+  
+  
+    <link rel="stylesheet" href="/style.css">
+  
+
+  <title>
+Generate a Dataverse ERD for Azure Dev Ops Wiki | Matthew Collinge
+
+  </title>
+</head>
+
+<body class="light">
+  
+  
+<script>
+    let localStorageValue = localStorage.getItem("pref-theme");
+    let mediaQuery = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    switch (localStorageValue) {
+        case "dark":
+            document.documentElement.classList.add('dark');
+            document.body.classList.add('dark');
+            break;
+        case "light":
+            document.body.classList.remove('dark');
+            document.documentElement.classList.remove('dark');
+            break;
+        default:
+            if (mediaQuery) {
+                document.documentElement.classList.add('dark');
+                document.body.classList.add('dark');
+            }
+            break;
+    }
+</script>
+
+
+
+
+
+<a class="skip-to-content" href="#hero">Skip to content</a>
+
+
+<header id="profileHeader">
+    <nav class="pt-3 navbar navbar-expand-lg animate" role="navigation" aria-label="Main navigation">
+        <div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5">
+            
+            <a class="navbar-brand primary-font text-wrap" href="/" aria-label=" — home">
+                
+                
+                
+            </a>
+
+            
+                <div>
+                    <label for="search-desktop" class="sr-only">Search</label>
+                    <input id="search-desktop" autocomplete="off" class="form-control mr-sm-2 d-none d-md-block" placeholder='Search...'
+                        aria-label="Search" oninput="searchOnChange(event)">
+                </div>
+            
+
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <svg aria-hidden="true" height="24" viewBox="0 0 16 16" version="1.1" width="24" data-view-component="true">
+                    <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"></path>
+                </svg>
+            </button>
+
+            
+            <div class="collapse navbar-collapse text-wrap primary-font" id="navbarContent">
+                <ul class="navbar-nav ms-auto text-center">
+                    
+                        <li class="nav-item navbar-text d-block d-md-none">
+                            <div class="nav-link">
+                                <label for="search-mobile" class="sr-only">Search</label>
+                                <input id="search-mobile" autocomplete="off" class="form-control mr-sm-2" placeholder='Search...' aria-label="Search" oninput="searchOnChange(event)">
+                            </div>
+                        </li>
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/#about" aria-label="about">
+                            About Me
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/#contact"
+                            aria-label="contact">
+                            Get in Touch
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    
+                    
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/posts" title="">
+                            
+                            Posts
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="#contact" title="">
+                            
+                            Contact
+                        </a>
+                    </li>
+                    
+                    
+
+                    <li class="nav-item navbar-text">
+                        
+                        <div class="text-center">
+                            <button id="theme-toggle" type="button" aria-label="Toggle dark mode">
+                                <svg id="moon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                </svg>
+                                <svg id="sun" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="5"></circle>
+                                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </li>
+                    
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>
+<div id="content">
+<section id="single">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-md-12 col-lg-9">
+        <div class="pr-lg-4">
+          <div class="title mb-5">
+            <h1 class="text-center mb-4">Generate a Dataverse ERD for Azure Dev Ops Wiki</h1>
+            <div class="text-center">
+              
+              Nov 16, 2025
+
+              
+              <span id="readingTime">
+                min read
+              </span>
+              
+            </div>
+          </div>
+          
+          <article class="page-content  p-2">
+          <p>Nobody likes manually writing and updating Documentation. ERDs (Entity Relationship Diagrams) provide a really helpful overview of what your database relationships look like.</p>
+<p>Context: We are using Azure DevOps (ADO) to manage our CI/CD Pipelines using the <a href="https://learn.microsoft.com/en-us/power-platform/alm/devops-build-tools">Power Platform Tools</a> and therefore the Solutions are unpacked and stored in the Repository (there may be multiple Solutions inside of a Project).</p>
+<p>The idea: working with Power Platform solutions stored in ADO, it would be great to visualise complex entity relationships right inside ADO. Visualizing these relationships can make solution design and troubleshooting much easier, it certainly helps me.</p>
+<p>In this quick post, we&rsquo;ll use a short prompt using <a href="https://code.visualstudio.com/docs/copilot/chat/getting-started-chat">Chat in VS Code</a> to get an AI Agent to generate a <strong>Mermaid ERD</strong> from our Dataverse solution files and then we can copy it and publish it to our ADO Wiki.</p>
+<hr>
+<h2 id="-why-this-matters">✅ Why This Matters</h2>
+<ul>
+<li><strong>Better Documentation</strong>: ERDs help us understand entity relationships at a glance.</li>
+<li><strong>Native Rendering</strong>: Mermaid diagrams render natively in ADO Wiki.</li>
+<li><strong>Automation Ready</strong>: This process could be adapted for CI/CD pipelines later. For this we can implement <a href="https://mightora.io/tools/cicd/upload-md-to-wiki/">Ian Tweedie - Upload Markdown to Wiki
+</a></li>
+</ul>
+<hr>
+<h2 id="step-1-clone-the-repository-in-vs-code"><strong>Step 1: Clone the Repository in VS Code</strong></h2>
+<ol>
+<li>In <strong>Azure DevOps</strong>, go to <strong>Repos → Clone → IDE</strong>.
+<img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yjqxs72pved3ub22yx0d.png" alt="azure-repo"></li>
+</ol>
+<hr>
+<ol start="2">
+<li>Select <strong>Clone in VS Code</strong>.
+<img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/bddkwz0emux4yl82dd52.png" alt="Clone in VS Code"></li>
+</ol>
+<hr>
+<ol start="3">
+<li>Choose a local folder where the repo will be stored.</li>
+</ol>
+<h2 id="step-2-locate-a-relationships-file"><strong>Step 2: Locate a Relationships File</strong></h2>
+<ol>
+<li>In VS Code, navigate to the Power Platform solution folder inside the repo.</li>
+<li>Go to: <strong>Other → Relationships.xml</strong>
+<img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/srw32z50uop8b6tus0ty.png" alt="Relationships XML"></li>
+</ol>
+<hr>
+<p>(if there is more than one Relationships.xml file, you may need to repeat these steps)
+3. Open <strong><code>Relationships.xml</code></strong> in VS Code.</p>
+<h2 id="step-3-use-ai-to-generate-the-erd"><strong>Step 3: Use AI to Generate the ERD</strong></h2>
+<ol>
+<li>Open <strong>Chat</strong> in VS Code with <code>Relationships.xml</code> in file context.</li>
+<li>Paste this prompt:</li>
+</ol>
+<pre tabindex="0"><code>Please scan this file and identify all Dataverse-related entities and their relationships. Focus on extracting entity names, attributes, and how they relate to each other (e.g. one-to-many, many-to-one, many-to-many). Then, generate a Mermaid entity-relationship diagram (ERD) that includes cardinality for each relationship.
 
  Format the output as a Markdown file containing the Mermaid ERD code block. Ensure the diagram is readable and reflects the structure of the Dataverse schema as accurately as possible.
 
 If any assumptions are made due to missing or ambiguous information, please list them at the end of the Markdown file.
-</code></pre><h2 id=step-4-copy-the-mermaid-diagram><strong>Step 4: Copy the Mermaid Diagram</strong></h2><p>From the AI response, copy everything starting from:</p><p><strong>erDiagram</strong></p><pre tabindex=0><code class=language-mermaid data-lang=mermaid>erDiagram
+</code></pre><h2 id="step-4-copy-the-mermaid-diagram"><strong>Step 4: Copy the Mermaid Diagram</strong></h2>
+<p>From the AI response, copy everything starting from:</p>
+<p><strong>erDiagram</strong></p>
+<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">erDiagram
 
     CUSTOMER ||--o{ ORDER : &#34;1:N&#34;
     CUSTOMER ||--o{ ADDRESS : &#34;1:N&#34;
@@ -32,8 +384,270 @@ If any assumptions are made due to missing or ambiguous information, please list
 
     PAYMENT ||--|| ORDER : &#34;1:1&#34;
     SHIPMENT ||--o{ ORDER : &#34;1:N&#34;
-</code></pre><p>Example Mermaid</p><hr><h2 id=step-5-publish-to-ado-wiki><strong>Step 5: Publish to ADO Wiki</strong></h2><ol><li>In <strong>Azure DevOps</strong>, go to <strong>Overview → Wiki</strong>.</li><li>Click <strong>New Page</strong>.</li><li>Paste the Markdown (including the Mermaid block) into the <strong>left-hand pane</strong>.</li><li>Give the page a title.</li><li>Click <strong>Save</strong>.</li></ol><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/i11p2i6jozaiy4bgvutm.png alt="Dataverse Mermaid"></p><hr><h3 id=-pro-tip>✅ Pro Tip</h3><p>Mermaid diagrams render natively in ADO Wiki, so your ERD will be interactive and easy to read 😜.</p><hr><h2 id=possible-next-steps><strong>Possible Next Steps</strong></h2><ul><li>Automate this process using a pipeline - this is going to require me to learn some fancy PowerShell Scripts to parse the XML 😵‍💫.</li><li>This could allow Automatic Documentation as part of a Release, keeping the ERD up to date.</li><li>Add entity attributes for deeper insights.</li></ul></article></div></div><div class="col-sm-12 col-md-12 col-lg-3"><div id=stickySideBar class=sticky-sidebar><aside class=toc><h5>Table Of Contents</h5><div class=toc-content><nav id=TableOfContents><ul><li><a href=#-why-this-matters>✅ Why This Matters</a></li><li><a href=#step-1-clone-the-repository-in-vs-code><strong>Step 1: Clone the Repository in VS Code</strong></a></li><li><a href=#step-2-locate-a-relationships-file><strong>Step 2: Locate a Relationships File</strong></a></li><li><a href=#step-3-use-ai-to-generate-the-erd><strong>Step 3: Use AI to Generate the ERD</strong></a></li><li><a href=#step-4-copy-the-mermaid-diagram><strong>Step 4: Copy the Mermaid Diagram</strong></a></li><li><a href=#step-5-publish-to-ado-wiki><strong>Step 5: Publish to ADO Wiki</strong></a><ul><li><a href=#-pro-tip>✅ Pro Tip</a></li></ul></li><li><a href=#possible-next-steps><strong>Possible Next Steps</strong></a></li></ul></nav></div></aside><aside class=tags><h5>Tags</h5><ul class="tags-ul list-unstyled list-inline"><li class=list-inline-item><a href=/tags/dataverse target=_blank>Dataverse</a></li><li class=list-inline-item><a href=/tags/azure-devops target=_blank>Azure DevOps</a></li><li class=list-inline-item><a href=/tags/erd target=_blank>ERD</a></li><li class=list-inline-item><a href=/tags/documentation target=_blank>Documentation</a></li><li class=list-inline-item><a href=/tags/mermaid-js target=_blank>Mermaid JS</a></li><li class=list-inline-item><a href=/tags/power-platform target=_blank>Power Platform</a></li></ul></aside><aside class=social><h5>Social</h5><div class=social-content><ul class=list-inline><li class="list-inline-item text-center"><a target=_blank href="https://www.linkedin.com/feed/?shareActive=true&text= https%3a%2f%2fmadmat01.github.io%2fposts%2fgenerate-a-dataverse-erd-for-azure-dev-ops-wiki%2f"><i class="fab fa-linkedin"></i></a></li><li class="list-inline-item text-center"><a target=_blank href='https://twitter.com/share?text=Generate%20a%20Dataverse%20ERD%20for%20Azure%20Dev%20Ops%20Wiki&url=https%3a%2f%2fmadmat01.github.io%2fposts%2fgenerate-a-dataverse-erd-for-azure-dev-ops-wiki%2f&hashtags=Dataverse%2cAzure%20DevOps%2cERD%2cDocumentation%2cMermaid%20JS%2cPower%20Platform'><i class="fab fa-twitter"></i></a></li><li class="list-inline-item text-center"><a target=_blank href="https://api.whatsapp.com/send?text=Generate%20a%20Dataverse%20ERD%20for%20Azure%20Dev%20Ops%20Wiki: https%3a%2f%2fmadmat01.github.io%2fposts%2fgenerate-a-dataverse-erd-for-azure-dev-ops-wiki%2f"><i class="fab fa-whatsapp"></i></a></li><li class="list-inline-item text-center"><a target=_blank href='mailto:?subject=Generate%20a%20Dataverse%20ERD%20for%20Azure%20Dev%20Ops%20Wiki&amp;body=Check%20out%20this%20site https%3a%2f%2fmadmat01.github.io%2fposts%2fgenerate-a-dataverse-erd-for-azure-dev-ops-wiki%2f'><i class="fa fa-envelope"></i></a></li></ul></div></aside></div></div></div><div class=row><div class="col-sm-12 col-md-12 col-lg-9 p-4"></div></div></div><button class="p-2 px-3" onclick=topFunction() id=topScroll>
-<i class="fas fa-angle-up"></i></button></section><div class=progress><div id=scroll-progress-bar class=progress-bar role=progressbar aria-valuenow=0 aria-valuemin=0 aria-valuemax=100></div></div><script src=/js/scrollProgressBar.js></script><script>var topScroll=document.getElementById("topScroll");window.onscroll=function(){scrollFunction()};function scrollFunction(){document.body.scrollTop>20||document.documentElement.scrollTop>20?topScroll.style.display="block":topScroll.style.display="none"}function topFunction(){document.body.scrollTop=0,document.documentElement.scrollTop=0}let stickySideBarElem=document.getElementById("stickySideBar"),stickyNavBar=!1;if(stickyNavBar){let e=document.getElementById("profileHeader"),t=e.offsetHeight+15;stickySideBarElem.style.top=t+"px"}else stickySideBarElem.style.top="50px"</script><script src=/js/readingTime.js></script></div><footer><div class="text-center pt-2"></div><div class="container py-4"><div class="row justify-content-center"><div class="col-md-4 text-center">&copy; 2026 All Rights Reserved<div class=text-secondary>Made with
-<span class=text-danger>&#10084;
-</span>and
-<a href=https://github.com/gurusabarish/hugo-profile target=_blank title="Designed and developed by gurusabarish">Hugo Profile</a></div></div></div></div></footer><script src=/bootstrap-5/js/bootstrap.bundle.min.js></script><script>localStorage.getItem("pref-theme")==="dark"?(document.documentElement.classList.add("dark"),document.body.classList.add("dark")):localStorage.getItem("pref-theme")==="light"?(document.body.classList.remove("dark"),document.documentElement.classList.remove("dark")):window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches&&(document.documentElement.classList.add("dark"),document.body.classList.add("dark"))</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),document.documentElement.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),document.documentElement.classList.add("dark"),localStorage.setItem("pref-theme","dark"))});var tooltipTriggerList=[].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]')),tooltipList=tooltipTriggerList.map(function(e){return new bootstrap.Tooltip(e)})</script><script>window.searchIndexURL="/index.json"</script><script src=/js/search.js></script><section id=search-content class=py-2><div class=container id=search-results></div></section></body></html>
+</code></pre><p>Example Mermaid</p>
+<hr>
+<h2 id="step-5-publish-to-ado-wiki"><strong>Step 5: Publish to ADO Wiki</strong></h2>
+<ol>
+<li>In <strong>Azure DevOps</strong>, go to <strong>Overview → Wiki</strong>.</li>
+<li>Click <strong>New Page</strong>.</li>
+<li>Paste the Markdown (including the Mermaid block) into the <strong>left-hand pane</strong>.</li>
+<li>Give the page a title.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/i11p2i6jozaiy4bgvutm.png" alt="Dataverse Mermaid"></p>
+<hr>
+<h3 id="-pro-tip">✅ Pro Tip</h3>
+<p>Mermaid diagrams render natively in ADO Wiki, so your ERD will be interactive and easy to read 😜.</p>
+<hr>
+<h2 id="possible-next-steps"><strong>Possible Next Steps</strong></h2>
+<ul>
+<li>Automate this process using a pipeline - this is going to require me to learn some fancy PowerShell Scripts to parse the XML 😵‍💫.</li>
+<li>This could allow Automatic Documentation as part of a Release, keeping the ERD up to date.</li>
+<li>Add entity attributes for deeper insights.</li>
+</ul>
+
+          </article>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-3">
+        <div id="stickySideBar" class="sticky-sidebar">
+          
+          <aside class="toc">
+              <h5>
+                Table Of Contents
+              </h5>
+              <div class="toc-content">
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#-why-this-matters">✅ Why This Matters</a></li>
+    <li><a href="#step-1-clone-the-repository-in-vs-code"><strong>Step 1: Clone the Repository in VS Code</strong></a></li>
+    <li><a href="#step-2-locate-a-relationships-file"><strong>Step 2: Locate a Relationships File</strong></a></li>
+    <li><a href="#step-3-use-ai-to-generate-the-erd"><strong>Step 3: Use AI to Generate the ERD</strong></a></li>
+    <li><a href="#step-4-copy-the-mermaid-diagram"><strong>Step 4: Copy the Mermaid Diagram</strong></a></li>
+    <li><a href="#step-5-publish-to-ado-wiki"><strong>Step 5: Publish to ADO Wiki</strong></a>
+      <ul>
+        <li><a href="#-pro-tip">✅ Pro Tip</a></li>
+      </ul>
+    </li>
+    <li><a href="#possible-next-steps"><strong>Possible Next Steps</strong></a></li>
+  </ul>
+</nav>
+              </div>
+          </aside>
+          
+
+          
+          <aside class="tags">
+            <h5>Tags</h5>
+            <ul class="tags-ul list-unstyled list-inline">
+              
+              
+              <li class="list-inline-item"><a href="/tags/dataverse"
+                target="_blank"
+              >Dataverse</a></li>
+              
+              
+              <li class="list-inline-item"><a href="/tags/azure-devops"
+                target="_blank"
+              >Azure DevOps</a></li>
+              
+              
+              <li class="list-inline-item"><a href="/tags/erd"
+                target="_blank"
+              >ERD</a></li>
+              
+              
+              <li class="list-inline-item"><a href="/tags/documentation"
+                target="_blank"
+              >Documentation</a></li>
+              
+              
+              <li class="list-inline-item"><a href="/tags/mermaid-js"
+                target="_blank"
+              >Mermaid JS</a></li>
+              
+              
+              <li class="list-inline-item"><a href="/tags/power-platform"
+                target="_blank"
+              >Power Platform</a></li>
+              
+            </ul>
+          </aside>
+          
+
+          
+          <aside class="social">
+            <h5>Social</h5>
+            <div class="social-content">
+              <ul class="list-inline">
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://www.linkedin.com/feed/?shareActive=true&text= http%3a%2f%2flocalhost%3a1313%2fposts%2fgenerate-a-dataverse-erd-for-azure-dev-ops-wiki%2f">
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href='https://twitter.com/share?text=Generate%20a%20Dataverse%20ERD%20for%20Azure%20Dev%20Ops%20Wiki&url=http%3a%2f%2flocalhost%3a1313%2fposts%2fgenerate-a-dataverse-erd-for-azure-dev-ops-wiki%2f&hashtags=Dataverse%2cAzure%20DevOps%2cERD%2cDocumentation%2cMermaid%20JS%2cPower%20Platform'>
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://api.whatsapp.com/send?text=Generate%20a%20Dataverse%20ERD%20for%20Azure%20Dev%20Ops%20Wiki: http%3a%2f%2flocalhost%3a1313%2fposts%2fgenerate-a-dataverse-erd-for-azure-dev-ops-wiki%2f">
+                    <i class="fab fa-whatsapp"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href='mailto:?subject=Generate%20a%20Dataverse%20ERD%20for%20Azure%20Dev%20Ops%20Wiki&amp;body=Check%20out%20this%20site http%3a%2f%2flocalhost%3a1313%2fposts%2fgenerate-a-dataverse-erd-for-azure-dev-ops-wiki%2f'>
+                    <i class="fa fa-envelope"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </aside>
+          
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-9 p-4">
+        
+      </div>
+    </div>
+  </div>
+  <button class="p-2 px-3" onclick="topFunction()" id="topScroll">
+    <i class="fas fa-angle-up"></i>
+  </button>
+</section>
+
+
+<div class="progress">
+  <div id="scroll-progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<Script src="/js/scrollProgressBar.js"></script>
+
+
+<script>
+  var topScroll = document.getElementById("topScroll");
+  window.onscroll = function() {scrollFunction()};
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      topScroll.style.display = "block";
+    } else {
+      topScroll.style.display = "none";
+    }
+  }
+
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
+  
+  let stickySideBarElem = document.getElementById("stickySideBar");
+  let stickyNavBar =  false ;
+  if(stickyNavBar) {
+    let headerElem = document.getElementById("profileHeader");
+    let headerHeight = headerElem.offsetHeight + 15;
+    stickySideBarElem.style.top = headerHeight + "px";
+  } else {
+    stickySideBarElem.style.top = "50px";
+  }
+</script>
+
+
+<script src="/js/readingTime.js"></script>
+
+
+
+  </div><footer>
+    
+
+
+ 
+
+<div class="text-center pt-2">
+    
+
+    
+
+    
+
+    
+
+    
+</div><div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-4 text-center">
+            
+            &copy; 2026  All Rights Reserved
+            <div class="text-secondary">
+                Made with
+                <span class="text-danger">
+                    &#10084;
+                </span>
+                and
+                <a href="https://github.com/gurusabarish/hugo-profile" target="_blank"
+                    title="Designed and developed by gurusabarish">
+                    Hugo Profile
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</footer><script src="/bootstrap-5/js/bootstrap.bundle.min.js"></script>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+        document.documentElement.classList.remove('dark');
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+    }
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            document.documentElement.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+
+</script>
+
+
+    <script>
+      
+      window.searchIndexURL = "/index.json";
+    </script>
+    <script src="/js/search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+  <section id="search-content" class="py-2">
+    <div class="container" id="search-results"></div>
+  </section>
+</body>
+
+</html>

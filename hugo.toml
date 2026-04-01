@@ -11,6 +11,9 @@ theme = 'hugo-profile'
   animate = true
   customCSS = true
 
+  [params.theme]
+    defaultTheme = "dark"
+
   # Typography
   [params.font]
     fontSize   = "1rem"

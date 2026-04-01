@@ -1,19 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>UI Design on Matthew Collinge</title>
-    <link>http://localhost:1313/tags/ui-design/</link>
-    <description>Recent content in UI Design on Matthew Collinge</description>
-    <generator>Hugo</generator>
-    <language>en-gb</language>
-    <lastBuildDate>Sat, 13 Jan 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/ui-design/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Passing a Choices List from Power Apps to an Adaptive Card</title>
-      <link>http://localhost:1313/posts/passing-a-choices-list-from-power-apps-to-an-adaptive-card/</link>
-      <pubDate>Sat, 13 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/passing-a-choices-list-from-power-apps-to-an-adaptive-card/</guid>
-      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In a follow-on from my previous post &lt;a href=&#34;https://dev.to/mcombp/passing-objects-from-power-apps-to-power-automate-31ji&#34;&gt;Passing Objects from Power Apps to Power Automate&lt;/a&gt; I am now going to cover a method I have found to &amp;lsquo;render&amp;rsquo; our JSON Object in an Adaptive Card that is part of an Approval Process.&lt;/p&gt;&#xA;&lt;h2 id=&#34;recap&#34;&gt;Recap&lt;/h2&gt;&#xA;&lt;p&gt;After we have got our Object into Power Automate I mentioned that we can then reference a property by first referencing the name of the Object (varObject) and then the property name &lt;code&gt;variables(&#39;varObject&#39;)?[&#39;____&#39;]&lt;/code&gt;. These can be used inside of an Adaptive Card to show single text values, but what if we want to have a dynamically generated dropdown (choice) list inside of the Adaptive Card?&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>UI Design on Matthew Collinge</title><link>https://madmat01.github.io/tags/ui-design/</link><description>Recent content in UI Design on Matthew Collinge</description><generator>Hugo</generator><language>en-gb</language><lastBuildDate>Sat, 13 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://madmat01.github.io/tags/ui-design/index.xml" rel="self" type="application/rss+xml"/><item><title>Passing a Choices List from Power Apps to an Adaptive Card</title><link>https://madmat01.github.io/posts/passing-a-choices-list-from-power-apps-to-an-adaptive-card/</link><pubDate>Sat, 13 Jan 2024 00:00:00 +0000</pubDate><guid>https://madmat01.github.io/posts/passing-a-choices-list-from-power-apps-to-an-adaptive-card/</guid><description>&lt;h2 id="introduction"&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;In a follow-on from my previous post &lt;a href="https://dev.to/mcombp/passing-objects-from-power-apps-to-power-automate-31ji"&gt;Passing Objects from Power Apps to Power Automate&lt;/a&gt; I am now going to cover a method I have found to &amp;lsquo;render&amp;rsquo; our JSON Object in an Adaptive Card that is part of an Approval Process.&lt;/p&gt;
+&lt;h2 id="recap"&gt;Recap&lt;/h2&gt;
+&lt;p&gt;After we have got our Object into Power Automate I mentioned that we can then reference a property by first referencing the name of the Object (varObject) and then the property name &lt;code&gt;variables('varObject')?['____']&lt;/code&gt;. These can be used inside of an Adaptive Card to show single text values, but what if we want to have a dynamically generated dropdown (choice) list inside of the Adaptive Card?&lt;/p&gt;</description></item></channel></rss>

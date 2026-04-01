@@ -1,364 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
-<link rel="icon" href="/fav.png" type="image/gif">
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
->
-<link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      media="print" onload="this.media='all'" />
-<noscript>
-  <link
-          href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-          rel="stylesheet">
-</noscript>
-
-
-<link rel="stylesheet" href="/css/font.css" media="all">
-
-
-
-<meta property="og:url" content="http://localhost:1313/posts/conversational-approval-process-using-adaptive-cards-and-json-objects/">
-  <meta property="og:site_name" content="Matthew Collinge">
-  <meta property="og:title" content="Conversational Approval process using Adaptive Cards and JSON objects">
-  <meta property="og:description" content="Introduction This is Part 3 of a series of posts where I try to explain how to send Form answers from a Power App into Power Automate and then send Adaptive Cards in Microsoft Teams to allow the Requestor and Approver make incremental changes to the Form answers.
+<!doctype html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><meta http-equiv=Accept-CH content="DPR, Viewport-Width, Width"><link rel=icon href=/fav.png type=image/gif><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" media=print onload='this.media="all"'><noscript><link href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel=stylesheet></noscript><link rel=stylesheet href=/css/font.css media=all><meta property="og:url" content="https://madmat01.github.io/posts/conversational-approval-process-using-adaptive-cards-and-json-objects/"><meta property="og:site_name" content="Matthew Collinge"><meta property="og:title" content="Conversational Approval process using Adaptive Cards and JSON objects"><meta property="og:description" content="Introduction This is Part 3 of a series of posts where I try to explain how to send Form answers from a Power App into Power Automate and then send Adaptive Cards in Microsoft Teams to allow the Requestor and Approver make incremental changes to the Form answers.
 Part 1
 Part 2
-We’re going to start Part 3 by building a second Flow. In this Form Approval Process this Flow will actually be the one that sends an Adaptive Card to our Approver.">
-  <meta property="og:locale" content="en_gb">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-01-29T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-01-29T00:00:00+00:00">
-    <meta property="article:tag" content="PowerApps">
-    <meta property="article:tag" content="AdaptiveCards">
-    <meta property="article:tag" content="Power Automate">
-    <meta property="article:tag" content="Adaptive Cards">
-    <meta property="article:tag" content="Microsoft Teams">
-    <meta property="article:tag" content="Low Code">
-
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Conversational Approval process using Adaptive Cards and JSON objects">
-  <meta name="twitter:description" content="Introduction This is Part 3 of a series of posts where I try to explain how to send Form answers from a Power App into Power Automate and then send Adaptive Cards in Microsoft Teams to allow the Requestor and Approver make incremental changes to the Form answers.
+We’re going to start Part 3 by building a second Flow. In this Form Approval Process this Flow will actually be the one that sends an Adaptive Card to our Approver."><meta property="og:locale" content="en_gb"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2024-01-29T00:00:00+00:00"><meta property="article:modified_time" content="2024-01-29T00:00:00+00:00"><meta property="article:tag" content="PowerApps"><meta property="article:tag" content="AdaptiveCards"><meta property="article:tag" content="Power Automate"><meta property="article:tag" content="Adaptive Cards"><meta property="article:tag" content="Microsoft Teams"><meta property="article:tag" content="Low Code"><meta name=twitter:card content="summary"><meta name=twitter:title content="Conversational Approval process using Adaptive Cards and JSON objects"><meta name=twitter:description content="Introduction This is Part 3 of a series of posts where I try to explain how to send Form answers from a Power App into Power Automate and then send Adaptive Cards in Microsoft Teams to allow the Requestor and Approver make incremental changes to the Form answers.
 Part 1
 Part 2
-We’re going to start Part 3 by building a second Flow. In this Form Approval Process this Flow will actually be the one that sends an Adaptive Card to our Approver.">
-
-
-
-
-
-<link rel="stylesheet" href="/bootstrap-5/css/bootstrap.min.css" media="all"><link rel="stylesheet" href="/css/header.css" media="all">
-<link rel="stylesheet" href="/css/language-switcher.css" media="all">
-<link rel="stylesheet" href="/css/footer.css" media="all">
-
-
-<link rel="stylesheet" href="/css/theme.css" media="all">
-
-<style>
-    :root {
-        --text-color: #1e293b;
-        --text-secondary-color: #475569;
-        --text-link-color: #0052cc;
-        --background-color: #f0f2f5;
-        --secondary-background-color: #dbeafe;
-        --primary-color: #0052cc;
-        --secondary-color: #ffffff;
-
-         
-        --text-color-dark: #e6edf3;
-        --text-secondary-color-dark: #8b949e;
-        --text-link-color-dark: #58a6ff;
-        --background-color-dark: #0d1117;
-        --secondary-background-color-dark: #1a2332;
-        --primary-color-dark: #58a6ff;
-        --secondary-color-dark: #161b22;
-    }
-    body {
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.7;
-        text-align: left;
-    }
-
-    html {
-        background-color: var(--background-color) !important;
-    }
-
-    body::-webkit-scrollbar {
-        height: 0px;
-        width: 8px;
-        background-color: var(--background-color);
-    }
-
-    ::-webkit-scrollbar-track {
-        border-radius: 1rem;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        border-radius: 1rem;
-        background: #b0b0b0;
-        outline: 1px solid var(--background-color);
-    }
-
-    #search-content::-webkit-scrollbar {
-        width: .5em;
-        height: .1em;
-        background-color: var(--background-color);
-    }
-</style>
-
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com; form-action 'self'; base-uri 'self'; object-src 'none'">
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EGVWHDPQT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-1EGVWHDPQT');
-</script>
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta name="referrer" content="strict-origin-when-cross-origin">
-<link rel="stylesheet" href="/css/custom.css"><script src="/js/scroll-animations.1058878ac5958126da87f12a5106f9e7fd56bead46a2785c5a338e5329887b7c2952fc0d7991634c6a1c1125e6383707.js" integrity="sha384-EFiHisWVgSbah/EqUQb55/1Wvq1GonhcWjOOUymIe3wpUvwNeZFjTGocESXmODcH" crossorigin="anonymous" defer></script>
-
-
-<meta name="description" content="">
-<link rel="stylesheet" href="/css/single.css">
-
-
-<script defer src="/fontawesome-6/all-6.4.2.js"></script>
-
-
-  
-  
-    <link rel="stylesheet" href="/style.css">
-  
-
-  <title>
-Conversational Approval process using Adaptive Cards and JSON objects | Matthew Collinge
-
-  </title>
-</head>
-
-<body class="light">
-  
-  
-<script>
-    let localStorageValue = localStorage.getItem("pref-theme");
-    let mediaQuery = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    switch (localStorageValue) {
-        case "dark":
-            document.documentElement.classList.add('dark');
-            document.body.classList.add('dark');
-            break;
-        case "light":
-            document.body.classList.remove('dark');
-            document.documentElement.classList.remove('dark');
-            break;
-        default:
-            if (mediaQuery) {
-                document.documentElement.classList.add('dark');
-                document.body.classList.add('dark');
-            }
-            break;
-    }
-</script>
-
-
-
-
-
-<a class="skip-to-content" href="#hero">Skip to content</a>
-
-
-<header id="profileHeader">
-    <nav class="pt-3 navbar navbar-expand-lg animate" role="navigation" aria-label="Main navigation">
-        <div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5">
-            
-            <a class="navbar-brand primary-font text-wrap" href="/" aria-label=" — home">
-                
-                
-                
-            </a>
-
-            
-                <div>
-                    <label for="search-desktop" class="sr-only">Search</label>
-                    <input id="search-desktop" autocomplete="off" class="form-control mr-sm-2 d-none d-md-block" placeholder='Search...'
-                        aria-label="Search" oninput="searchOnChange(event)">
-                </div>
-            
-
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                <svg aria-hidden="true" height="24" viewBox="0 0 16 16" version="1.1" width="24" data-view-component="true">
-                    <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"></path>
-                </svg>
-            </button>
-
-            
-            <div class="collapse navbar-collapse text-wrap primary-font" id="navbarContent">
-                <ul class="navbar-nav ms-auto text-center">
-                    
-                        <li class="nav-item navbar-text d-block d-md-none">
-                            <div class="nav-link">
-                                <label for="search-mobile" class="sr-only">Search</label>
-                                <input id="search-mobile" autocomplete="off" class="form-control mr-sm-2" placeholder='Search...' aria-label="Search" oninput="searchOnChange(event)">
-                            </div>
-                        </li>
-                    
-
-                    
-                    <li class="nav-item navbar-text">
-                        <a class="nav-link" href="/#about" aria-label="about">
-                            About Me
-                        </a>
-                    </li>
-                    
-
-                    
-
-                    
-
-                    
-
-                    
-
-                    
-                    <li class="nav-item navbar-text">
-                        <a class="nav-link" href="/#contact"
-                            aria-label="contact">
-                            Get in Touch
-                        </a>
-                    </li>
-                    
-
-                    
-
-                    
-                    
-                    
-                    
-                    <li class="nav-item navbar-text">
-                        <a class="nav-link" href="/posts" title="">
-                            
-                            Posts
-                        </a>
-                    </li>
-                    
-                    
-                    
-                    
-                    <li class="nav-item navbar-text">
-                        <a class="nav-link" href="#contact" title="">
-                            
-                            Contact
-                        </a>
-                    </li>
-                    
-                    
-
-                    <li class="nav-item navbar-text">
-                        
-                        <div class="text-center">
-                            <button id="theme-toggle" type="button" aria-label="Toggle dark mode">
-                                <svg id="moon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                                </svg>
-                                <svg id="sun" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="5"></circle>
-                                    <line x1="12" y1="1" x2="12" y2="3"></line>
-                                    <line x1="12" y1="21" x2="12" y2="23"></line>
-                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                                    <line x1="1" y1="12" x2="3" y2="12"></line>
-                                    <line x1="21" y1="12" x2="23" y2="12"></line>
-                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                                </svg>
-                            </button>
-                        </div>
-                    </li>
-                    
-
-                </ul>
-
-            </div>
-        </div>
-    </nav>
-</header>
-<div id="content">
-<section id="single">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-sm-12 col-md-12 col-lg-9">
-        <div class="pr-lg-4">
-          <div class="title mb-5">
-            <h1 class="text-center mb-4">Conversational Approval process using Adaptive Cards and JSON objects</h1>
-            <div class="text-center">
-              
-              Jan 29, 2024
-
-              
-              <span id="readingTime">
-                min read
-              </span>
-              
-            </div>
-          </div>
-          
-          <article class="page-content  p-2">
-          <h2 id="introduction">Introduction</h2>
-<p>This is Part 3 of a series of posts where I try to explain how to send Form answers from a Power App into Power Automate and then send Adaptive Cards in Microsoft Teams to allow the Requestor and Approver make incremental changes to the Form answers.</p>
-<p><a href="https://dev.to/mcombp/passing-objects-from-power-apps-to-power-automate-31ji">Part 1</a></p>
-<p><a href="https://dev.to/mcombp/passing-a-choices-list-from-power-apps-to-an-adaptive-card-2nga">Part 2</a></p>
-<p>We&rsquo;re going to start Part 3 by building a second Flow. In this Form Approval Process this Flow will actually be the one that sends an Adaptive Card to our Approver.</p>
-<p>Here is an overview of what we&rsquo;re going to do here.</p>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/gle4iksyoo6f8ar1aazy.png" alt="Solution Process Flow"></p>
-<h2 id="why-dont-i-use-the-standard-approvals-actions">Why don&rsquo;t I use the standard Approvals Actions?</h2>
-<p>What I&rsquo;m trying to achieve is a more conversational process for the Approval, where the Requestor and Approver can both edit the data inside Message Cards in Teams until the Approver decides what to do with it.. We&rsquo;ll do this by passing our Object again, plus a few other useful Expressions.</p>
-<p>We&rsquo;re going to trigger this from our &ldquo;[proxy] - Object Flow&rdquo; we made in an earlier Post: <a href="https://dev.to/mcombp/passing-objects-from-power-apps-to-power-automate-31ji">Passing Objects from Power Apps to Power Automate</a>.</p>
-<h2 id="the-approvers-flow">The Approver&rsquo;s Flow</h2>
-<p>As this will be a Child Flow. We&rsquo;ll need a Manual trigger and I&rsquo;ll call this Flow <strong>&quot;[child] - Approver Card&quot;</strong>. We just need one text Input. <strong>varObject</strong> as this can contain everything we need.</p>
-<p>Then, we&rsquo;ll Initialize a Variable that will convert the Text Input to JSON.</p>
-<pre tabindex="0"><code>json(triggerBody()[&#39;text&#39;])
-</code></pre><p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/c8doqcunjsnxb3vtbhjq.png" alt="Power Automate - Manual Trigger"></p>
-<h2 id="adaptive-card">Adaptive Card</h2>
-<p>Let&rsquo;s add another action - <strong>Post adaptive card and wait for a response</strong>. We&rsquo;ll need to construct an Adaptive card for this. Again I would recommend you build your full Adaptive Card by previewing it with the Help of <a href="https://adaptivecards.io/designer">The Adaptive Card Designer</a> or the <a href="https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.vscode-adaptive-cards#:~:text=The%20Microsoft%20Adaptive%20Card%20Previewer,%2C%20and%20high%2Dcontrast%20themes.">VSCode Microsoft Adaptive Card Previewer</a></p>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nxyss5pinjgy81at54s3.png" alt="Power Automate - Post adaptive card and wait for a response"></p>
-<p><strong>Text Inputs</strong>
-I will start with the Text value we&rsquo;re getting for the &ldquo;Name&rdquo; field in the Form.</p>
-<ul>
-<li>We need a type, this will be <strong>Input.Text</strong></li>
-<li>We can specify the Label above the field as &ldquo;Name&rdquo;</li>
-<li>For the Value, we can reference the property inside of <strong>varObject</strong> by inserting &ldquo;@{variables(&lsquo;varObject&rsquo;)?[&lsquo;Name&rsquo;]}&rdquo;</li>
-<li>Finally, each field in the Adaptive Card needs an id, which we can keep exactly the same as the Object Property name to make it easier to reference in the future.</li>
-</ul>
-<p>In my scenario, we already have an input value, so &lsquo;Placeholder Text&rsquo; isn&rsquo;t really needed.</p>
-<pre tabindex="0"><code>    {
+We’re going to start Part 3 by building a second Flow. In this Form Approval Process this Flow will actually be the one that sends an Adaptive Card to our Approver."><link rel=stylesheet href=/bootstrap-5/css/bootstrap.min.css media=all><link rel=stylesheet href=/css/header.css media=all><link rel=stylesheet href=/css/language-switcher.css media=all><link rel=stylesheet href=/css/footer.css media=all><link rel=stylesheet href=/css/theme.css media=all><style>:root{--text-color:#1e293b;--text-secondary-color:#475569;--text-link-color:#0052cc;--background-color:#f0f2f5;--secondary-background-color:#dbeafe;--primary-color:#0052cc;--secondary-color:#ffffff;--text-color-dark:#e6edf3;--text-secondary-color-dark:#8b949e;--text-link-color-dark:#58a6ff;--background-color-dark:#0d1117;--secondary-background-color-dark:#1a2332;--primary-color-dark:#58a6ff;--secondary-color-dark:#161b22}body{font-size:1rem;font-weight:400;line-height:1.7;text-align:left}html{background-color:var(--background-color)!important}body::-webkit-scrollbar{height:0;width:8px;background-color:var(--background-color)}::-webkit-scrollbar-track{border-radius:1rem}::-webkit-scrollbar-thumb{border-radius:1rem;background:#b0b0b0;outline:1px solid var(--background-color)}#search-content::-webkit-scrollbar{width:.5em;height:.1em;background-color:var(--background-color)}</style><meta http-equiv=Content-Security-Policy content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com; form-action 'self'; base-uri 'self'; object-src 'none'"><script async src="https://www.googletagmanager.com/gtag/js?id=G-1EGVWHDPQT"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-1EGVWHDPQT")</script><meta http-equiv=X-Content-Type-Options content="nosniff"><meta name=referrer content="strict-origin-when-cross-origin"><link rel=stylesheet href=/css/custom.css><script src=/js/scroll-animations.1058878ac5958126da87f12a5106f9e7fd56bead46a2785c5a338e5329887b7c2952fc0d7991634c6a1c1125e6383707.js integrity=sha384-EFiHisWVgSbah/EqUQb55/1Wvq1GonhcWjOOUymIe3wpUvwNeZFjTGocESXmODcH crossorigin=anonymous defer></script><meta name=description content><link rel=stylesheet href=/css/single.css><script defer src=/fontawesome-6/all-6.4.2.js></script><link rel=stylesheet href=/style.css><title>Conversational Approval process using Adaptive Cards and JSON objects | Matthew Collinge</title></head><body class=light><script>let localStorageValue=localStorage.getItem("pref-theme"),mediaQuery=window.matchMedia("(prefers-color-scheme: dark)").matches;switch(localStorageValue){case"dark":document.documentElement.classList.add("dark"),document.body.classList.add("dark");break;case"light":document.body.classList.remove("dark"),document.documentElement.classList.remove("dark");break;default:mediaQuery&&(document.documentElement.classList.add("dark"),document.body.classList.add("dark"));break}</script><a class=skip-to-content href=#hero>Skip to content</a><header id=profileHeader><nav class="pt-3 navbar navbar-expand-lg animate" role=navigation aria-label="Main navigation"><div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5"><a class="navbar-brand primary-font text-wrap" href=/ aria-label=" — home"></a><div><label for=search-desktop class=sr-only>Search</label>
+<input id=search-desktop autocomplete=off class="form-control mr-sm-2 d-none d-md-block" placeholder=Search... aria-label=Search oninput=searchOnChange(event)></div><button class=navbar-toggler type=button data-bs-toggle=collapse data-bs-target=#navbarContent aria-controls=navbarContent aria-expanded=false aria-label="Toggle navigation">
+<svg aria-hidden="true" height="24" viewBox="0 0 16 16" width="24" data-view-component="true"><path fill-rule="evenodd" d="M1 2.75A.75.75.0 011.75 2h12.5a.75.75.0 110 1.5H1.75A.75.75.0 011 2.75zm0 5A.75.75.0 011.75 7h12.5a.75.75.0 110 1.5H1.75A.75.75.0 011 7.75zM1.75 12a.75.75.0 100 1.5h12.5a.75.75.0 100-1.5H1.75z"/></svg></button><div class="collapse navbar-collapse text-wrap primary-font" id=navbarContent><ul class="navbar-nav ms-auto text-center"><li class="nav-item navbar-text d-block d-md-none"><div class=nav-link><label for=search-mobile class=sr-only>Search</label>
+<input id=search-mobile autocomplete=off class="form-control mr-sm-2" placeholder=Search... aria-label=Search oninput=searchOnChange(event)></div></li><li class="nav-item navbar-text"><a class=nav-link href=/#about aria-label=about>About Me</a></li><li class="nav-item navbar-text"><a class=nav-link href=/#contact aria-label=contact>Get in Touch</a></li><li class="nav-item navbar-text"><a class=nav-link href=/posts title>Posts</a></li><li class="nav-item navbar-text"><a class=nav-link href=#contact title>Contact</a></li><li class="nav-item navbar-text"><div class=text-center><button id=theme-toggle type=button aria-label="Toggle dark mode">
+<svg id="moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg id="sun" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></li></ul></div></div></nav></header><div id=content><section id=single><div class=container><div class="row justify-content-center"><div class="col-sm-12 col-md-12 col-lg-9"><div class=pr-lg-4><div class="title mb-5"><h1 class="text-center mb-4">Conversational Approval process using Adaptive Cards and JSON objects</h1><div class=text-center>Jan 29, 2024
+<span id=readingTime>min read</span></div></div><article class="page-content p-2"><h2 id=introduction>Introduction</h2><p>This is Part 3 of a series of posts where I try to explain how to send Form answers from a Power App into Power Automate and then send Adaptive Cards in Microsoft Teams to allow the Requestor and Approver make incremental changes to the Form answers.</p><p><a href=https://dev.to/mcombp/passing-objects-from-power-apps-to-power-automate-31ji>Part 1</a></p><p><a href=https://dev.to/mcombp/passing-a-choices-list-from-power-apps-to-an-adaptive-card-2nga>Part 2</a></p><p>We&rsquo;re going to start Part 3 by building a second Flow. In this Form Approval Process this Flow will actually be the one that sends an Adaptive Card to our Approver.</p><p>Here is an overview of what we&rsquo;re going to do here.</p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/gle4iksyoo6f8ar1aazy.png alt="Solution Process Flow"></p><h2 id=why-dont-i-use-the-standard-approvals-actions>Why don&rsquo;t I use the standard Approvals Actions?</h2><p>What I&rsquo;m trying to achieve is a more conversational process for the Approval, where the Requestor and Approver can both edit the data inside Message Cards in Teams until the Approver decides what to do with it.. We&rsquo;ll do this by passing our Object again, plus a few other useful Expressions.</p><p>We&rsquo;re going to trigger this from our &ldquo;[proxy] - Object Flow&rdquo; we made in an earlier Post: <a href=https://dev.to/mcombp/passing-objects-from-power-apps-to-power-automate-31ji>Passing Objects from Power Apps to Power Automate</a>.</p><h2 id=the-approvers-flow>The Approver&rsquo;s Flow</h2><p>As this will be a Child Flow. We&rsquo;ll need a Manual trigger and I&rsquo;ll call this Flow <strong>"[child] - Approver Card"</strong>. We just need one text Input. <strong>varObject</strong> as this can contain everything we need.</p><p>Then, we&rsquo;ll Initialize a Variable that will convert the Text Input to JSON.</p><pre tabindex=0><code>json(triggerBody()[&#39;text&#39;])
+</code></pre><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/c8doqcunjsnxb3vtbhjq.png alt="Power Automate - Manual Trigger"></p><h2 id=adaptive-card>Adaptive Card</h2><p>Let&rsquo;s add another action - <strong>Post adaptive card and wait for a response</strong>. We&rsquo;ll need to construct an Adaptive card for this. Again I would recommend you build your full Adaptive Card by previewing it with the Help of <a href=https://adaptivecards.io/designer>The Adaptive Card Designer</a> or the <a href="https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.vscode-adaptive-cards#:~:text=The%20Microsoft%20Adaptive%20Card%20Previewer,%2C%20and%20high%2Dcontrast%20themes.">VSCode Microsoft Adaptive Card Previewer</a></p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nxyss5pinjgy81at54s3.png alt="Power Automate - Post adaptive card and wait for a response"></p><p><strong>Text Inputs</strong>
+I will start with the Text value we&rsquo;re getting for the &ldquo;Name&rdquo; field in the Form.</p><ul><li>We need a type, this will be <strong>Input.Text</strong></li><li>We can specify the Label above the field as &ldquo;Name&rdquo;</li><li>For the Value, we can reference the property inside of <strong>varObject</strong> by inserting &ldquo;@{variables(&lsquo;varObject&rsquo;)?[&lsquo;Name&rsquo;]}&rdquo;</li><li>Finally, each field in the Adaptive Card needs an id, which we can keep exactly the same as the Object Property name to make it easier to reference in the future.</li></ul><p>In my scenario, we already have an input value, so &lsquo;Placeholder Text&rsquo; isn&rsquo;t really needed.</p><pre tabindex=0><code>    {
       &#34;type&#34;: &#34;Input.Text&#34;,
       &#34;label&#34;: &#34;Name&#34;,
       &#34;value&#34;: &#34;@{variables(&#39;varObject&#39;)?[&#39;Name&#39;]}&#34;,
       &#34;id&#34;: &#34;Name&#34;
     },
-</code></pre><p>You can use the example above to build any other Text Inputs.</p>
-<p><strong>Toggle</strong>
-The &lsquo;Mortgaged&rsquo; field is a Boolean field in our Power Apps Form, so we can replicate this with <strong>Input.Toggle</strong>, similar to the Text Input we need to give an <strong>id</strong>, <strong>label</strong> and <strong>value</strong>.</p>
-<pre tabindex="0"><code>    {
+</code></pre><p>You can use the example above to build any other Text Inputs.</p><p><strong>Toggle</strong>
+The &lsquo;Mortgaged&rsquo; field is a Boolean field in our Power Apps Form, so we can replicate this with <strong>Input.Toggle</strong>, similar to the Text Input we need to give an <strong>id</strong>, <strong>label</strong> and <strong>value</strong>.</p><pre tabindex=0><code>    {
       &#34;type&#34;: &#34;Input.Toggle&#34;,
       &#34;title&#34;: &#34;Mortgaged&#34;,
       &#34;id&#34;: &#34;Mortgaged&#34;,
@@ -367,16 +28,14 @@ The &lsquo;Mortgaged&rsquo; field is a Boolean field in our Power Apps Form, so 
     },
 </code></pre><p><strong>Choices</strong>
 I have previously described how we can have a Choices Dropdown in this Blog Post:
-<a href="https://dev.to/mcombp/passing-a-choices-list-from-power-apps-to-an-adaptive-card-2nga">Passing a Choices List from Power Apps to an Adaptive Card</a> - in this example, we can add a Label: <strong>&ldquo;Country&rdquo;</strong></p>
-<pre tabindex="0"><code>    {
+<a href=https://dev.to/mcombp/passing-a-choices-list-from-power-apps-to-an-adaptive-card-2nga>Passing a Choices List from Power Apps to an Adaptive Card</a> - in this example, we can add a Label: <strong>&ldquo;Country&rdquo;</strong></p><pre tabindex=0><code>    {
     &#34;type&#34;: &#34;Input.ChoiceSet&#34;,
     &#34;label&#34;: &#34;Country&#34;,
     &#34;choices&#34;: @{variables(&#39;varObject&#39;)?[&#39;Countries&#39;]},
     &#34;id&#34;: &#34;Country&#34;,
     &#34;value&#34;: &#34;@{variables(&#39;varObject&#39;)?[&#39;Country&#39;]}&#34;
     }
-</code></pre><p>For the <strong>Rating</strong> Field, we know there&rsquo;s only five options, so we might as well enter these manually, giving us this:</p>
-<pre tabindex="0"><code>{
+</code></pre><p>For the <strong>Rating</strong> Field, we know there&rsquo;s only five options, so we might as well enter these manually, giving us this:</p><pre tabindex=0><code>{
       &#34;type&#34;: &#34;Input.ChoiceSet&#34;,
       &#34;choices&#34;: [
         {
@@ -405,8 +64,7 @@ I have previously described how we can have a Choices Dropdown in this Blog Post
       &#34;value&#34;: &#34;@{variables(&#39;varObject&#39;)?[&#39;Rating&#39;]}&#34;
     }
 </code></pre><p><strong>Actions</strong>
-That&rsquo;s the fields done, now we need some actions to respond with. These can be placed at the foot of the Adaptive Card like this and will be where the Approver makes their decision.</p>
-<pre tabindex="0"><code>  &#34;actions&#34;: [
+That&rsquo;s the fields done, now we need some actions to respond with. These can be placed at the foot of the Adaptive Card like this and will be where the Approver makes their decision.</p><pre tabindex=0><code>  &#34;actions&#34;: [
         {
             &#34;type&#34;: &#34;Action.Submit&#34;,
             &#34;title&#34;: &#34;Approve&#34;,
@@ -449,54 +107,26 @@ That&rsquo;s the fields done, now we need some actions to respond with. These ca
         &#34;id&#34;: &#34;acAssignCard&#34;
         }
     ]
-</code></pre><p>Feel free to elaborate on the options you provide, such as comments, or even an option to reassign. We&rsquo;ll use these soon in a Switch Action to decide on the next step. IF you want to use this you&rsquo;ll see that there&rsquo;s an expandable section (<a href="https://adaptivecards.io/explorer/Action.ShowCard.html)%5BAction.ShowCard%5D">https://adaptivecards.io/explorer/Action.ShowCard.html)[Action.ShowCard]</a> when <strong>ReAssign</strong> is selected, this is to ensure an email address is entered.
-<img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ih8l00gjkemqfszfmwt8.png" alt="Adaptive Card - Approver Actions"></p>
-<p><a href="https://github.com/madmat01/devtoBlog/blob/main/Approver%20Card.json">The JSON for the Approval Adaptive Card is here.</a></p>
-<h2 id="union">Union</h2>
-<p>Now we have an Adaptive card that we can send to an Approver and Wait for a response.</p>
-<p>We can now capture any changes that the Approver may have made back into our original <strong>varObject</strong>.</p>
-<p>Start by adding a Compose Action, and in the Compose Action we can enter this Expression</p>
-<pre tabindex="0"><code>union(variables(&#39;varObject&#39;),outputs(&#39;Post_adaptive_card_and_wait_for_a_response&#39;).body.data)
-</code></pre><p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/gpehha063xcao82dsbfj.png" alt="Compose - Union Body Data with varObject">
-What the Union expression does is combine the properties from the varObject with the data obtained from the response of the action <strong>Post_adaptive_card_and_wait_for_a_response</strong>. This is done to update or synchronize the values in the <strong>varObject</strong> with the field values changed in the Adaptive Card.</p>
-<p>Then we just need to feed the output of our Compose expression into Set the <strong>varObject</strong>.
-<img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/46viu3n3x7xrlcijz0q7.png" alt="Set variable - varObject"></p>
-<h2 id="switch">Switch</h2>
-<p>We&rsquo;ll add a switch Condition to allow us to decide the path of the Flow from this point using some Switch Cases, which match the the ID of our Actions.</p>
-<pre tabindex="0"><code>outputs(&#39;Post_adaptive_card_and_wait_for_a_response&#39;)?[&#39;body/submitActionId&#39;]
-</code></pre><p>We have the options: <strong>approve</strong>, <strong>respond</strong>, <strong>reject</strong>, <strong>ReAssign_To</strong> and we can decide what we we want to happen with each of these paths. I&rsquo;ll come to <strong>respond</strong> in a moment, but I will first give some examples of how you can use the other Switch Cases.</p>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/rw1sewu61kir7vzwn796.png" alt="Power Automate - Switch"></p>
-<p><strong>Approve</strong>
-This would be where you would define what you want to happen if the Adaptive Card is approved; Send an Email, update a SharePoint List Item etc&hellip;</p>
-<p><strong>Reject</strong>
-Here you could send Post a Standard Adaptive card or send an email to the Requestor.</p>
-<p><strong>ReAssign</strong>
-A good example for using the <strong>setProperty()</strong> expression would be if you had a defined Approver_Email in your varObject. You could use a Compose Action with:</p>
-<pre tabindex="0"><code>setProperty(variables(&#39;varObject&#39;), &#39;Approver_Email&#39;, outputs(&#39;Approver_adaptive_card&#39;)?[&#39;body/data/ReAssign_To&#39;])
-</code></pre><p>Then, Set Variable - varObject again with the output of the Compose Action.</p>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/4fq2s12iroz5syxmnkmv.png" alt="Power Automate - ReAssign"></p>
-<p><strong>Respond</strong>
-So for the Respond Case, we&rsquo;re going to create another Child Flow, it will be a copy of this Flow where the Requestor can make changes to re-submit to the Approver.</p>
-<h3 id="respond-to-a-powerapp-or-flow">Respond to a PowerApp or flow</h3>
-<p>To make sure this Child Card let&rsquo;s the Parent Flow it has run, place in a <strong>Respond to a PowerApp or flow</strong> as the last Action.</p>
-<h2 id="proxy---object-flow">[proxy] - Object Flow</h2>
-<p>Before we move on to the Requestor Card, we need to trigger this Child Flow from the <strong>[proxy] - Object Flow</strong> by making this the 3rd action in the Flow.
-<img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/c55672arxmxdf2qm64g0.png" alt="Object Flow - Run a Child Flow - [child] - Approver Card.png"></p>
-<h2 id="requestor-card">Requestor Card</h2>
-<p>Now - back to the <strong>[child] - Approver Card]</strong> Flow, so we can copy it&hellip;.
-<img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/exjjtr61ge4day8b0v6u.png" alt="Copy of - [child] - Approver Card"></p>
-<p>We&rsquo;ll call this: <strong>[child] - Requestor Card</strong> and add it to the same solution as our App and other Flows.</p>
-<p>Let&rsquo;s first make a couple of small adjustments to the <strong>Post adaptive card and wait for a response</strong> Message in this one by changing the first TextBlock with text Property from:
-<img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/90eynqlss86t35550rb7.png" alt="Image description"></p>
-<p>To:</p>
-<pre tabindex="0"><code>    {
+</code></pre><p>Feel free to elaborate on the options you provide, such as comments, or even an option to reassign. We&rsquo;ll use these soon in a Switch Action to decide on the next step. IF you want to use this you&rsquo;ll see that there&rsquo;s an expandable section (<a href=https://adaptivecards.io/explorer/Action.ShowCard.html)%5BAction.ShowCard%5D>https://adaptivecards.io/explorer/Action.ShowCard.html)[Action.ShowCard]</a> when <strong>ReAssign</strong> is selected, this is to ensure an email address is entered.
+<img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ih8l00gjkemqfszfmwt8.png alt="Adaptive Card - Approver Actions"></p><p><a href=https://github.com/madmat01/devtoBlog/blob/main/Approver%20Card.json>The JSON for the Approval Adaptive Card is here.</a></p><h2 id=union>Union</h2><p>Now we have an Adaptive card that we can send to an Approver and Wait for a response.</p><p>We can now capture any changes that the Approver may have made back into our original <strong>varObject</strong>.</p><p>Start by adding a Compose Action, and in the Compose Action we can enter this Expression</p><pre tabindex=0><code>union(variables(&#39;varObject&#39;),outputs(&#39;Post_adaptive_card_and_wait_for_a_response&#39;).body.data)
+</code></pre><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/gpehha063xcao82dsbfj.png alt="Compose - Union Body Data with varObject">
+What the Union expression does is combine the properties from the varObject with the data obtained from the response of the action <strong>Post_adaptive_card_and_wait_for_a_response</strong>. This is done to update or synchronize the values in the <strong>varObject</strong> with the field values changed in the Adaptive Card.</p><p>Then we just need to feed the output of our Compose expression into Set the <strong>varObject</strong>.
+<img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/46viu3n3x7xrlcijz0q7.png alt="Set variable - varObject"></p><h2 id=switch>Switch</h2><p>We&rsquo;ll add a switch Condition to allow us to decide the path of the Flow from this point using some Switch Cases, which match the the ID of our Actions.</p><pre tabindex=0><code>outputs(&#39;Post_adaptive_card_and_wait_for_a_response&#39;)?[&#39;body/submitActionId&#39;]
+</code></pre><p>We have the options: <strong>approve</strong>, <strong>respond</strong>, <strong>reject</strong>, <strong>ReAssign_To</strong> and we can decide what we we want to happen with each of these paths. I&rsquo;ll come to <strong>respond</strong> in a moment, but I will first give some examples of how you can use the other Switch Cases.</p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/rw1sewu61kir7vzwn796.png alt="Power Automate - Switch"></p><p><strong>Approve</strong>
+This would be where you would define what you want to happen if the Adaptive Card is approved; Send an Email, update a SharePoint List Item etc&mldr;</p><p><strong>Reject</strong>
+Here you could send Post a Standard Adaptive card or send an email to the Requestor.</p><p><strong>ReAssign</strong>
+A good example for using the <strong>setProperty()</strong> expression would be if you had a defined Approver_Email in your varObject. You could use a Compose Action with:</p><pre tabindex=0><code>setProperty(variables(&#39;varObject&#39;), &#39;Approver_Email&#39;, outputs(&#39;Approver_adaptive_card&#39;)?[&#39;body/data/ReAssign_To&#39;])
+</code></pre><p>Then, Set Variable - varObject again with the output of the Compose Action.</p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/4fq2s12iroz5syxmnkmv.png alt="Power Automate - ReAssign"></p><p><strong>Respond</strong>
+So for the Respond Case, we&rsquo;re going to create another Child Flow, it will be a copy of this Flow where the Requestor can make changes to re-submit to the Approver.</p><h3 id=respond-to-a-powerapp-or-flow>Respond to a PowerApp or flow</h3><p>To make sure this Child Card let&rsquo;s the Parent Flow it has run, place in a <strong>Respond to a PowerApp or flow</strong> as the last Action.</p><h2 id=proxy---object-flow>[proxy] - Object Flow</h2><p>Before we move on to the Requestor Card, we need to trigger this Child Flow from the <strong>[proxy] - Object Flow</strong> by making this the 3rd action in the Flow.
+<img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/c55672arxmxdf2qm64g0.png alt="Object Flow - Run a Child Flow - [child] - Approver Card.png"></p><h2 id=requestor-card>Requestor Card</h2><p>Now - back to the <strong>[child] - Approver Card]</strong> Flow, so we can copy it&mldr;.
+<img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/exjjtr61ge4day8b0v6u.png alt="Copy of - [child] - Approver Card"></p><p>We&rsquo;ll call this: <strong>[child] - Requestor Card</strong> and add it to the same solution as our App and other Flows.</p><p>Let&rsquo;s first make a couple of small adjustments to the <strong>Post adaptive card and wait for a response</strong> Message in this one by changing the first TextBlock with text Property from:
+<img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/90eynqlss86t35550rb7.png alt="Image description"></p><p>To:</p><pre tabindex=0><code>    {
       &#34;type&#34;: &#34;TextBlock&#34;,
       &#34;size&#34;: &#34;Medium&#34;,
       &#34;weight&#34;: &#34;Bolder&#34;,
       &#34;text&#34;: &#34;Requestor Request&#34;
     },
-</code></pre><p>Then we just need to swap out the <strong>&ldquo;actions&rdquo;: []</strong> section at the bottom of the Card. The Requestor won&rsquo;t have the same options as the Approver, so we can swap out the whole section for this:</p>
-<pre tabindex="0"><code>  &#34;actions&#34;: [
+</code></pre><p>Then we just need to swap out the <strong>&ldquo;actions&rdquo;: []</strong> section at the bottom of the Card. The Requestor won&rsquo;t have the same options as the Approver, so we can swap out the whole section for this:</p><pre tabindex=0><code>  &#34;actions&#34;: [
         {   
         &#34;type&#34;: &#34;Action.Submit&#34;,
         &#34;title&#34;: &#34;Re-Submit 🔁&#34;,
@@ -510,302 +140,11 @@ So for the Respond Case, we&rsquo;re going to create another Child Flow, it will
         &#34;style&#34;: &#34;destructive&#34;
       }
     ]
-</code></pre><p>And of course, change the Receipient, so that the message goes to our Receipient. The Union action is still here to update any changes which then update our varObject.</p>
-<h2 id="switch-1">Switch</h2>
-<p>As we&rsquo;ve changed the Actions, we&rsquo;ll now need to change the cases to <strong>&ldquo;acSubmit&rdquo;</strong> and <strong>&ldquo;acCancelRequest&rdquo;</strong>.</p>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ugdhlkvq4g2c9wv0rkyq.png" alt="Power Automate - Requestor Switch"></p>
-<p><strong>acCancelRequest</strong>
-Again, I&rsquo;ll leave it up to you what to do with this path; you may want to imform the Approver with another standard Adaptive Card message.</p>
-<p><strong>acSubmit</strong>
-So here&rsquo;s the key feature that allows us to perform this conversation loop between the Approver and Requestor. - We&rsquo;re now going to re-trigger <strong>[child] - Approver Card</strong> and with that, pass back the varObject as a String again.</p>
-<p>Create a <strong>&lsquo;Run a Child Flow&rsquo;</strong> action and select our <strong>[child] - Approver Card</strong> Flow we created earlier. For the varObject Text Input enter: <strong><em>string(variables(&lsquo;varObject&rsquo;))</em></strong> - this converts the <strong>varObject</strong> into a String again to pass to Approver Flow.</p>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ubt2qdgft8igtp7i0n86.png" alt="Child - Approver Card"></p>
-<h2 id="respond-to-a-powerapp-or-flow-1">Respond to a PowerApp or flow</h2>
-<p>Again, to make sure this Child Card let&rsquo;s the Parent Flow it has run, place in a <strong>Respond to a PowerApp or flow</strong> as the last Action.</p>
-<p><a href="https://github.com/madmat01/devtoBlog/blob/main/Requestor%20Card.json">JSON for the Requestor Adaptive Card is here</a></p>
-<h2 id="back-to-child---approver-card-to-finish-off">Back to [child] - Approver Card to finish off</h2>
-<p>All we need to do now is the mirror opposite of this in the <strong>[child] - Approver Card</strong> Flow. Go back to that flow and underneath the <strong>Case - respond</strong> create a <strong>&lsquo;Run a Child Flow&rsquo;</strong> action and select our <strong>[child] - Requestor Card</strong></p>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/7oj1sulh4pdr6khwse4i.png" alt="Run a Child Flow - [child] - Requestor Card"></p>
-<h2 id="testing-and-fine-tuning">Testing and fine tuning</h2>
-<p>To prevent any confusing repeat runs of these Flows, I would recommend changing the Retry Policy
-on each Run a Child Flow Action to <strong>None</strong></p>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/aqb4qi9z6w9r9sk4u46f.png" alt="Retry Policy - None"></p>
-<p>So, here are some examples that we should see in Microsoft Teams.</p>
-<h3 id="power-app-form">Power App Form</h3>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qoh1avf7c2tx9bpq8klx.png" alt="Power App Form"></p>
-<h3 id="approvers-1st-message">Approver&rsquo;s 1st Message</h3>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/cnqbp9bapdg8e2fibysx.png" alt="Approver&rsquo;s 1st Message "></p>
-<h3 id="requestors-1st-message">Requestor&rsquo;s 1st Message</h3>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tyq28vlocm90db1qe112.png" alt="Requestor&rsquo;s 1st Message "></p>
-<h3 id="approvers-2nd-message">Approver&rsquo;s 2nd Message</h3>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/w7zu2rfav31v1f7u0dob.png" alt="Approver&rsquo;s 2nd Message"></p>
-<h1 id="conclusion">Conclusion</h1>
-<p>Hopefully, that was a helpful guide. I have one final Post to add a little bit extra to this type of Approval process. Please leave any questions or comments below.</p>
-
-          </article>
-        </div>
-      </div>
-      <div class="col-sm-12 col-md-12 col-lg-3">
-        <div id="stickySideBar" class="sticky-sidebar">
-          
-          <aside class="toc">
-              <h5>
-                Table Of Contents
-              </h5>
-              <div class="toc-content">
-                <nav id="TableOfContents">
-  <ul>
-    <li><a href="#introduction">Introduction</a></li>
-    <li><a href="#why-dont-i-use-the-standard-approvals-actions">Why don&rsquo;t I use the standard Approvals Actions?</a></li>
-    <li><a href="#the-approvers-flow">The Approver&rsquo;s Flow</a></li>
-    <li><a href="#adaptive-card">Adaptive Card</a></li>
-    <li><a href="#union">Union</a></li>
-    <li><a href="#switch">Switch</a>
-      <ul>
-        <li><a href="#respond-to-a-powerapp-or-flow">Respond to a PowerApp or flow</a></li>
-      </ul>
-    </li>
-    <li><a href="#proxy---object-flow">[proxy] - Object Flow</a></li>
-    <li><a href="#requestor-card">Requestor Card</a></li>
-    <li><a href="#switch-1">Switch</a></li>
-    <li><a href="#respond-to-a-powerapp-or-flow-1">Respond to a PowerApp or flow</a></li>
-    <li><a href="#back-to-child---approver-card-to-finish-off">Back to [child] - Approver Card to finish off</a></li>
-    <li><a href="#testing-and-fine-tuning">Testing and fine tuning</a>
-      <ul>
-        <li><a href="#power-app-form">Power App Form</a></li>
-        <li><a href="#approvers-1st-message">Approver&rsquo;s 1st Message</a></li>
-        <li><a href="#requestors-1st-message">Requestor&rsquo;s 1st Message</a></li>
-        <li><a href="#approvers-2nd-message">Approver&rsquo;s 2nd Message</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-              </div>
-          </aside>
-          
-
-          
-          <aside class="tags">
-            <h5>Tags</h5>
-            <ul class="tags-ul list-unstyled list-inline">
-              
-              
-              <li class="list-inline-item"><a href="/tags/powerapps"
-                target="_blank"
-              >PowerApps</a></li>
-              
-              
-              <li class="list-inline-item"><a href="/tags/adaptivecards"
-                target="_blank"
-              >AdaptiveCards</a></li>
-              
-              
-              <li class="list-inline-item"><a href="/tags/power-automate"
-                target="_blank"
-              >Power Automate</a></li>
-              
-              
-              <li class="list-inline-item"><a href="/tags/adaptive-cards"
-                target="_blank"
-              >Adaptive Cards</a></li>
-              
-              
-              <li class="list-inline-item"><a href="/tags/microsoft-teams"
-                target="_blank"
-              >Microsoft Teams</a></li>
-              
-              
-              <li class="list-inline-item"><a href="/tags/low-code"
-                target="_blank"
-              >Low Code</a></li>
-              
-              
-              <li class="list-inline-item"><a href="/tags/json"
-                target="_blank"
-              >JSON</a></li>
-              
-              
-              <li class="list-inline-item"><a href="/tags/power-platform"
-                target="_blank"
-              >Power Platform</a></li>
-              
-            </ul>
-          </aside>
-          
-
-          
-          <aside class="social">
-            <h5>Social</h5>
-            <div class="social-content">
-              <ul class="list-inline">
-                <li class="list-inline-item text-center">
-                  <a target="_blank" href="https://www.linkedin.com/feed/?shareActive=true&text= http%3a%2f%2flocalhost%3a1313%2fposts%2fconversational-approval-process-using-adaptive-cards-and-json-objects%2f">
-                    <i class="fab fa-linkedin"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item text-center">
-                  <a target="_blank" href='https://twitter.com/share?text=Conversational%20Approval%20process%20using%20Adaptive%20Cards%20and%20JSON%20objects&url=http%3a%2f%2flocalhost%3a1313%2fposts%2fconversational-approval-process-using-adaptive-cards-and-json-objects%2f&hashtags=PowerApps%2cAdaptiveCards%2cPower%20Automate%2cAdaptive%20Cards%2cMicrosoft%20Teams%2cLow%20Code%2cJSON%2cPower%20Platform'>
-                    <i class="fab fa-twitter"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item text-center">
-                  <a target="_blank" href="https://api.whatsapp.com/send?text=Conversational%20Approval%20process%20using%20Adaptive%20Cards%20and%20JSON%20objects: http%3a%2f%2flocalhost%3a1313%2fposts%2fconversational-approval-process-using-adaptive-cards-and-json-objects%2f">
-                    <i class="fab fa-whatsapp"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item text-center">
-                  <a target="_blank" href='mailto:?subject=Conversational%20Approval%20process%20using%20Adaptive%20Cards%20and%20JSON%20objects&amp;body=Check%20out%20this%20site http%3a%2f%2flocalhost%3a1313%2fposts%2fconversational-approval-process-using-adaptive-cards-and-json-objects%2f'>
-                    <i class="fa fa-envelope"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </aside>
-          
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12 col-md-12 col-lg-9 p-4">
-        
-      </div>
-    </div>
-  </div>
-  <button class="p-2 px-3" onclick="topFunction()" id="topScroll">
-    <i class="fas fa-angle-up"></i>
-  </button>
-</section>
-
-
-<div class="progress">
-  <div id="scroll-progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-</div>
-<Script src="/js/scrollProgressBar.js"></script>
-
-
-<script>
-  var topScroll = document.getElementById("topScroll");
-  window.onscroll = function() {scrollFunction()};
-
-  function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-      topScroll.style.display = "block";
-    } else {
-      topScroll.style.display = "none";
-    }
-  }
-
-  function topFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  }
-
-  
-  let stickySideBarElem = document.getElementById("stickySideBar");
-  let stickyNavBar =  false ;
-  if(stickyNavBar) {
-    let headerElem = document.getElementById("profileHeader");
-    let headerHeight = headerElem.offsetHeight + 15;
-    stickySideBarElem.style.top = headerHeight + "px";
-  } else {
-    stickySideBarElem.style.top = "50px";
-  }
-</script>
-
-
-<script src="/js/readingTime.js"></script>
-
-
-
-  </div><footer>
-    
-
-
- 
-
-<div class="text-center pt-2">
-    
-
-    
-
-    
-
-    
-
-    
-</div><div class="container py-4">
-    <div class="row justify-content-center">
-        <div class="col-md-4 text-center">
-            
-            &copy; 2026  All Rights Reserved
-            <div class="text-secondary">
-                Made with
-                <span class="text-danger">
-                    &#10084;
-                </span>
-                and
-                <a href="https://github.com/gurusabarish/hugo-profile" target="_blank"
-                    title="Designed and developed by gurusabarish">
-                    Hugo Profile
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-</footer><script src="/bootstrap-5/js/bootstrap.bundle.min.js"></script>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.documentElement.classList.add('dark');
-        document.body.classList.add('dark');
-    } else if (localStorage.getItem("pref-theme") === "light") {
-        document.body.classList.remove('dark')
-        document.documentElement.classList.remove('dark');
-    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.documentElement.classList.add('dark');
-        document.body.classList.add('dark');
-    }
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.body.className.includes("dark")) {
-            document.body.classList.remove('dark');
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            document.body.classList.add('dark');
-            document.documentElement.classList.add('dark');
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
-
-</script>
-
-
-    <script>
-      
-      window.searchIndexURL = "/index.json";
-    </script>
-    <script src="/js/search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-  <section id="search-content" class="py-2">
-    <div class="container" id="search-results"></div>
-  </section>
-</body>
-
-</html>
+</code></pre><p>And of course, change the Receipient, so that the message goes to our Receipient. The Union action is still here to update any changes which then update our varObject.</p><h2 id=switch-1>Switch</h2><p>As we&rsquo;ve changed the Actions, we&rsquo;ll now need to change the cases to <strong>&ldquo;acSubmit&rdquo;</strong> and <strong>&ldquo;acCancelRequest&rdquo;</strong>.</p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ugdhlkvq4g2c9wv0rkyq.png alt="Power Automate - Requestor Switch"></p><p><strong>acCancelRequest</strong>
+Again, I&rsquo;ll leave it up to you what to do with this path; you may want to imform the Approver with another standard Adaptive Card message.</p><p><strong>acSubmit</strong>
+So here&rsquo;s the key feature that allows us to perform this conversation loop between the Approver and Requestor. - We&rsquo;re now going to re-trigger <strong>[child] - Approver Card</strong> and with that, pass back the varObject as a String again.</p><p>Create a <strong>&lsquo;Run a Child Flow&rsquo;</strong> action and select our <strong>[child] - Approver Card</strong> Flow we created earlier. For the varObject Text Input enter: <strong><em>string(variables(&lsquo;varObject&rsquo;))</em></strong> - this converts the <strong>varObject</strong> into a String again to pass to Approver Flow.</p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ubt2qdgft8igtp7i0n86.png alt="Child - Approver Card"></p><h2 id=respond-to-a-powerapp-or-flow-1>Respond to a PowerApp or flow</h2><p>Again, to make sure this Child Card let&rsquo;s the Parent Flow it has run, place in a <strong>Respond to a PowerApp or flow</strong> as the last Action.</p><p><a href=https://github.com/madmat01/devtoBlog/blob/main/Requestor%20Card.json>JSON for the Requestor Adaptive Card is here</a></p><h2 id=back-to-child---approver-card-to-finish-off>Back to [child] - Approver Card to finish off</h2><p>All we need to do now is the mirror opposite of this in the <strong>[child] - Approver Card</strong> Flow. Go back to that flow and underneath the <strong>Case - respond</strong> create a <strong>&lsquo;Run a Child Flow&rsquo;</strong> action and select our <strong>[child] - Requestor Card</strong></p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/7oj1sulh4pdr6khwse4i.png alt="Run a Child Flow - [child] - Requestor Card"></p><h2 id=testing-and-fine-tuning>Testing and fine tuning</h2><p>To prevent any confusing repeat runs of these Flows, I would recommend changing the Retry Policy
+on each Run a Child Flow Action to <strong>None</strong></p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/aqb4qi9z6w9r9sk4u46f.png alt="Retry Policy - None"></p><p>So, here are some examples that we should see in Microsoft Teams.</p><h3 id=power-app-form>Power App Form</h3><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qoh1avf7c2tx9bpq8klx.png alt="Power App Form"></p><h3 id=approvers-1st-message>Approver&rsquo;s 1st Message</h3><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/cnqbp9bapdg8e2fibysx.png alt="Approver&rsquo;s 1st Message "></p><h3 id=requestors-1st-message>Requestor&rsquo;s 1st Message</h3><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tyq28vlocm90db1qe112.png alt="Requestor&rsquo;s 1st Message "></p><h3 id=approvers-2nd-message>Approver&rsquo;s 2nd Message</h3><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/w7zu2rfav31v1f7u0dob.png alt="Approver&rsquo;s 2nd Message"></p><h1 id=conclusion>Conclusion</h1><p>Hopefully, that was a helpful guide. I have one final Post to add a little bit extra to this type of Approval process. Please leave any questions or comments below.</p></article></div></div><div class="col-sm-12 col-md-12 col-lg-3"><div id=stickySideBar class=sticky-sidebar><aside class=toc><h5>Table Of Contents</h5><div class=toc-content><nav id=TableOfContents><ul><li><a href=#introduction>Introduction</a></li><li><a href=#why-dont-i-use-the-standard-approvals-actions>Why don&rsquo;t I use the standard Approvals Actions?</a></li><li><a href=#the-approvers-flow>The Approver&rsquo;s Flow</a></li><li><a href=#adaptive-card>Adaptive Card</a></li><li><a href=#union>Union</a></li><li><a href=#switch>Switch</a><ul><li><a href=#respond-to-a-powerapp-or-flow>Respond to a PowerApp or flow</a></li></ul></li><li><a href=#proxy---object-flow>[proxy] - Object Flow</a></li><li><a href=#requestor-card>Requestor Card</a></li><li><a href=#switch-1>Switch</a></li><li><a href=#respond-to-a-powerapp-or-flow-1>Respond to a PowerApp or flow</a></li><li><a href=#back-to-child---approver-card-to-finish-off>Back to [child] - Approver Card to finish off</a></li><li><a href=#testing-and-fine-tuning>Testing and fine tuning</a><ul><li><a href=#power-app-form>Power App Form</a></li><li><a href=#approvers-1st-message>Approver&rsquo;s 1st Message</a></li><li><a href=#requestors-1st-message>Requestor&rsquo;s 1st Message</a></li><li><a href=#approvers-2nd-message>Approver&rsquo;s 2nd Message</a></li></ul></li></ul></nav></div></aside><aside class=tags><h5>Tags</h5><ul class="tags-ul list-unstyled list-inline"><li class=list-inline-item><a href=/tags/powerapps target=_blank>PowerApps</a></li><li class=list-inline-item><a href=/tags/adaptivecards target=_blank>AdaptiveCards</a></li><li class=list-inline-item><a href=/tags/power-automate target=_blank>Power Automate</a></li><li class=list-inline-item><a href=/tags/adaptive-cards target=_blank>Adaptive Cards</a></li><li class=list-inline-item><a href=/tags/microsoft-teams target=_blank>Microsoft Teams</a></li><li class=list-inline-item><a href=/tags/low-code target=_blank>Low Code</a></li><li class=list-inline-item><a href=/tags/json target=_blank>JSON</a></li><li class=list-inline-item><a href=/tags/power-platform target=_blank>Power Platform</a></li></ul></aside><aside class=social><h5>Social</h5><div class=social-content><ul class=list-inline><li class="list-inline-item text-center"><a target=_blank href="https://www.linkedin.com/feed/?shareActive=true&text= https%3a%2f%2fmadmat01.github.io%2fposts%2fconversational-approval-process-using-adaptive-cards-and-json-objects%2f"><i class="fab fa-linkedin"></i></a></li><li class="list-inline-item text-center"><a target=_blank href='https://twitter.com/share?text=Conversational%20Approval%20process%20using%20Adaptive%20Cards%20and%20JSON%20objects&url=https%3a%2f%2fmadmat01.github.io%2fposts%2fconversational-approval-process-using-adaptive-cards-and-json-objects%2f&hashtags=PowerApps%2cAdaptiveCards%2cPower%20Automate%2cAdaptive%20Cards%2cMicrosoft%20Teams%2cLow%20Code%2cJSON%2cPower%20Platform'><i class="fab fa-twitter"></i></a></li><li class="list-inline-item text-center"><a target=_blank href="https://api.whatsapp.com/send?text=Conversational%20Approval%20process%20using%20Adaptive%20Cards%20and%20JSON%20objects: https%3a%2f%2fmadmat01.github.io%2fposts%2fconversational-approval-process-using-adaptive-cards-and-json-objects%2f"><i class="fab fa-whatsapp"></i></a></li><li class="list-inline-item text-center"><a target=_blank href='mailto:?subject=Conversational%20Approval%20process%20using%20Adaptive%20Cards%20and%20JSON%20objects&amp;body=Check%20out%20this%20site https%3a%2f%2fmadmat01.github.io%2fposts%2fconversational-approval-process-using-adaptive-cards-and-json-objects%2f'><i class="fa fa-envelope"></i></a></li></ul></div></aside></div></div></div><div class=row><div class="col-sm-12 col-md-12 col-lg-9 p-4"></div></div></div><button class="p-2 px-3" onclick=topFunction() id=topScroll>
+<i class="fas fa-angle-up"></i></button></section><div class=progress><div id=scroll-progress-bar class=progress-bar role=progressbar aria-valuenow=0 aria-valuemin=0 aria-valuemax=100></div></div><script src=/js/scrollProgressBar.js></script><script>var topScroll=document.getElementById("topScroll");window.onscroll=function(){scrollFunction()};function scrollFunction(){document.body.scrollTop>20||document.documentElement.scrollTop>20?topScroll.style.display="block":topScroll.style.display="none"}function topFunction(){document.body.scrollTop=0,document.documentElement.scrollTop=0}let stickySideBarElem=document.getElementById("stickySideBar"),stickyNavBar=!1;if(stickyNavBar){let e=document.getElementById("profileHeader"),t=e.offsetHeight+15;stickySideBarElem.style.top=t+"px"}else stickySideBarElem.style.top="50px"</script><script src=/js/readingTime.js></script></div><footer><div class="text-center pt-2"></div><div class="container py-4"><div class="row justify-content-center"><div class="col-md-4 text-center">&copy; 2026 All Rights Reserved<div class=text-secondary>Made with
+<span class=text-danger>&#10084;
+</span>and
+<a href=https://github.com/gurusabarish/hugo-profile target=_blank title="Designed and developed by gurusabarish">Hugo Profile</a></div></div></div></div></footer><script src=/bootstrap-5/js/bootstrap.bundle.min.js></script><script>localStorage.getItem("pref-theme")==="dark"?(document.documentElement.classList.add("dark"),document.body.classList.add("dark")):localStorage.getItem("pref-theme")==="light"?(document.body.classList.remove("dark"),document.documentElement.classList.remove("dark")):window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches&&(document.documentElement.classList.add("dark"),document.body.classList.add("dark"))</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),document.documentElement.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),document.documentElement.classList.add("dark"),localStorage.setItem("pref-theme","dark"))});var tooltipTriggerList=[].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]')),tooltipList=tooltipTriggerList.map(function(e){return new bootstrap.Tooltip(e)})</script><script>window.searchIndexURL="/index.json"</script><script src=/js/search.js></script><section id=search-content class=py-2><div class=container id=search-results></div></section></body></html>

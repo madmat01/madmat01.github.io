@@ -104,6 +104,13 @@
 </style>
 
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com; form-action 'self'; base-uri 'self'; object-src 'none'">
+<script>
+  (function() {
+    if (localStorage.getItem("pref-theme") !== "light") {
+      document.documentElement.classList.add('dark');
+    }
+  })();
+</script>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1EGVWHDPQT"></script>
 <script>
@@ -685,6 +692,25 @@ Matthew Collinge
     <div class="container bg-transparent">
         <h3 class="text-center bg-transparent">Posts</h3>
         <div class="bg-transparent row justify-content-center px-3 py-5">
+            
+            <div class="col-lg-4 col-md-6 my-3">
+                <div class="card h-100">
+                    
+                    <div class="card-body p-4 shadow-sm">
+                        <a href="/posts/cloning-power-automate-flows-using-a-power-automate-flow/" class="primary-font card-title">
+                            <h5 class="card-title" title="Cloning Power Automate Flows using a Power Automate Flow">Cloning Power Automate …</h5>
+                        </a>
+                        <div class="card-text secondary-font">
+                            <p><h2 id="introduction">Introduction</h2>
+<p>When you build a document trigger on top of SharePoint, you quickly run into a fundamental constraint: <strong>a SharePoint trigger Flow is hardwired to a single Site and Library</strong>. There is no native way to point one Flow at a dynamic or configurable location — the Site URL and Library GUID are …</p></p>
+                        </div>
+                    </div>
+                    <div class="mt-auto post-footer py-3">
+                        <span class="float-start">April 16, 2026</span>
+                        <a href="/posts/cloning-power-automate-flows-using-a-power-automate-flow/" class="float-end btn btn-outline-info btn-sm">Read</a>
+                    </div>
+                </div>
+            </div>
             
             <div class="col-lg-4 col-md-6 my-3">
                 <div class="card h-100">

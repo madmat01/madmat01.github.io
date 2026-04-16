@@ -286,6 +286,7 @@ section {
   box-shadow: var(--shadow-md) !important;
   border-width: var(--border-thin) !important;
   overflow: hidden;
+  background-color: var(--secondary-color) !important;
 }
 
 #recent-posts .card:hover {
@@ -294,6 +295,16 @@ section {
 
 #recent-posts .card .card-body {
   padding: var(--sp-4) !important;
+  background-color: var(--secondary-color) !important;
+}
+
+#recent-posts .card .post-footer {
+  padding: 0.75rem 1rem !important;
+}
+
+.dark #recent-posts .card,
+.dark #recent-posts .card .card-body {
+  background-color: var(--secondary-color-dark) !important;
 }
 
 /* --- Hero SVG grid ----------------------------------------- */

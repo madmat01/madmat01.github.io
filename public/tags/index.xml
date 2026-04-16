@@ -6,20 +6,48 @@
     <description>Recent content in Tags on Matthew Collinge</description>
     <generator>Hugo</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sun, 16 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 Apr 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Azure DevOps</title>
-      <link>http://localhost:1313/tags/azure-devops/</link>
-      <pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/azure-devops/</guid>
+      <title>Automation</title>
+      <link>http://localhost:1313/tags/automation/</link>
+      <pubDate>Thu, 16 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/automation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Cloud Flows</title>
+      <link>http://localhost:1313/tags/cloud-flows/</link>
+      <pubDate>Thu, 16 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/cloud-flows/</guid>
       <description></description>
     </item>
     <item>
       <title>Dataverse</title>
       <link>http://localhost:1313/tags/dataverse/</link>
-      <pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 16 Apr 2026 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/dataverse/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Power Automate</title>
+      <link>http://localhost:1313/tags/power-automate/</link>
+      <pubDate>Thu, 16 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/power-automate/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Power Platform</title>
+      <link>http://localhost:1313/tags/power-platform/</link>
+      <pubDate>Thu, 16 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/power-platform/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Azure DevOps</title>
+      <link>http://localhost:1313/tags/azure-devops/</link>
+      <pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/azure-devops/</guid>
       <description></description>
     </item>
     <item>
@@ -41,13 +69,6 @@
       <link>http://localhost:1313/tags/mermaid-js/</link>
       <pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/mermaid-js/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Power Platform</title>
-      <link>http://localhost:1313/tags/power-platform/</link>
-      <pubDate>Sun, 16 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/power-platform/</guid>
       <description></description>
     </item>
     <item>
@@ -79,31 +100,10 @@
       <description></description>
     </item>
     <item>
-      <title>Power Automate</title>
-      <link>http://localhost:1313/tags/power-automate/</link>
-      <pubDate>Wed, 16 Oct 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/power-automate/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Table Extraction</title>
       <link>http://localhost:1313/tags/table-extraction/</link>
       <pubDate>Wed, 16 Oct 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/table-extraction/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Automation</title>
-      <link>http://localhost:1313/tags/automation/</link>
-      <pubDate>Sat, 23 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/automation/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Cloud Flows</title>
-      <link>http://localhost:1313/tags/cloud-flows/</link>
-      <pubDate>Sat, 23 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/cloud-flows/</guid>
       <description></description>
     </item>
     <item>

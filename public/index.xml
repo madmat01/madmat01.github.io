@@ -6,8 +6,15 @@
     <description>Recent content on Matthew Collinge</description>
     <generator>Hugo</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sun, 16 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 Apr 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cloning Power Automate Flows using a Power Automate Flow</title>
+      <link>http://localhost:1313/posts/cloning-power-automate-flows-using-a-power-automate-flow/</link>
+      <pubDate>Thu, 16 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/cloning-power-automate-flows-using-a-power-automate-flow/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;When you build a document trigger on top of SharePoint, you quickly run into a fundamental constraint: &lt;strong&gt;a SharePoint trigger Flow is hardwired to a single Site and Library&lt;/strong&gt;. There is no native way to point one Flow at a dynamic or configurable location — the Site URL and Library GUID are baked into the trigger definition at creation time.&lt;/p&gt;&#xA;&lt;p&gt;For a one-off deployment that&amp;rsquo;s fine. But when you&amp;rsquo;re setting up a standardised **Processes &amp;amp; Procedures ** programme across an organisation — where every Team or Business unit gets its own SharePoint Site — you need an approval trigger Flow for &lt;em&gt;each&lt;/em&gt; one. Creating and maintaining these by hand rapidly becomes a maintenance problem: if you fix a bug in one, you have to fix it in all of them.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Generate a Dataverse ERD for Azure Dev Ops Wiki</title>
       <link>http://localhost:1313/posts/generate-a-dataverse-erd-for-azure-dev-ops-wiki/</link>

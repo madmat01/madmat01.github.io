@@ -16,7 +16,16 @@
       "Bash(curl -s \"https://api.github.com/repos/actions/upload-pages-artifact/git/refs/tags/v3\")",
       "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); print\\(data[''''object''''][''''sha''''], data[''''object''''][''''type'''']\\)\")",
       "Bash(find c:/git/website1/themes/hugo-profile/ -name *.css -o -name *.scss)",
-      "Bash(grep -h \"draft\\\\|date\\\\|title\" \"c:/git/website1/content/posts/\"*.md)"
+      "Bash(grep -h \"draft\\\\|date\\\\|title\" \"c:/git/website1/content/posts/\"*.md)",
+      "Bash(git -C c:/git/website1 status --short)",
+      "Bash(git -C c:/git/website1 status)",
+      "Bash(git -C c:/git/website1 diff hugo.toml)",
+      "Bash(git -C c:/git/website1 status --porcelain -- layouts/ hugo.toml)",
+      "Bash(git -C c:/git/website1 log --oneline -5)",
+      "Bash(git -C c:/git/website1 show 409a0c9 --stat)",
+      "Bash(find /c/git/website1/themes/hugo-profile/layouts -name \"scripts.html\" -exec cat {} \\\\;)",
+      "Bash(xargs head *)",
+      "Bash(grep -l \"Cloning Power Automate\" public/posts/*/index.html)"
     ]
   }
 }

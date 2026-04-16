@@ -103,6 +103,13 @@
 </style>
 
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com; form-action 'self'; base-uri 'self'; object-src 'none'">
+<script>
+  (function() {
+    if (localStorage.getItem("pref-theme") !== "light") {
+      document.documentElement.classList.add('dark');
+    }
+  })();
+</script>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1EGVWHDPQT"></script>
 <script>
@@ -290,8 +297,8 @@ Tags | Matthew Collinge
             <div class="card h-100">
                 
                 <div class="card-body bg-transparent p-4 shadow-sm">
-                    <a href="/tags/power-automate/" class="primary-font card-title">
-                        <h5 class="card-title bg-transparent" title="Power Automate">Power Automate</h5>
+                    <a href="/tags/azure-ai/" class="primary-font card-title">
+                        <h5 class="card-title bg-transparent" title="Azure AI">Azure AI</h5>
                     </a>
                     <div class="card-text secondary-font">
                         <p></p>
@@ -299,7 +306,43 @@ Tags | Matthew Collinge
                 </div>
                 <div class="mt-auto post-footer bg-transparent py-3">
                     <span class="float-start bg-transparent">October 16, 2024</span>
-                    <a href="/tags/power-automate/" class="float-end btn btn-outline-info btn-sm">Read</a>
+                    <a href="/tags/azure-ai/" class="float-end btn btn-outline-info btn-sm">Read</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 my-3">
+            <div class="card h-100">
+                
+                <div class="card-body bg-transparent p-4 shadow-sm">
+                    <a href="/tags/document-intelligence/" class="primary-font card-title">
+                        <h5 class="card-title bg-transparent" title="Document Intelligence">Document Intelligence</h5>
+                    </a>
+                    <div class="card-text secondary-font">
+                        <p></p>
+                    </div>
+                </div>
+                <div class="mt-auto post-footer bg-transparent py-3">
+                    <span class="float-start bg-transparent">October 16, 2024</span>
+                    <a href="/tags/document-intelligence/" class="float-end btn btn-outline-info btn-sm">Read</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 my-3">
+            <div class="card h-100">
+                
+                <div class="card-body bg-transparent p-4 shadow-sm">
+                    <a href="/tags/ocr/" class="primary-font card-title">
+                        <h5 class="card-title bg-transparent" title="OCR">OCR</h5>
+                    </a>
+                    <div class="card-text secondary-font">
+                        <p></p>
+                    </div>
+                </div>
+                <div class="mt-auto post-footer bg-transparent py-3">
+                    <span class="float-start bg-transparent">October 16, 2024</span>
+                    <a href="/tags/ocr/" class="float-end btn btn-outline-info btn-sm">Read</a>
                 </div>
             </div>
         </div>
@@ -318,42 +361,6 @@ Tags | Matthew Collinge
                 <div class="mt-auto post-footer bg-transparent py-3">
                     <span class="float-start bg-transparent">October 16, 2024</span>
                     <a href="/tags/table-extraction/" class="float-end btn btn-outline-info btn-sm">Read</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-lg-4 col-md-6 my-3">
-            <div class="card h-100">
-                
-                <div class="card-body bg-transparent p-4 shadow-sm">
-                    <a href="/tags/automation/" class="primary-font card-title">
-                        <h5 class="card-title bg-transparent" title="Automation">Automation</h5>
-                    </a>
-                    <div class="card-text secondary-font">
-                        <p></p>
-                    </div>
-                </div>
-                <div class="mt-auto post-footer bg-transparent py-3">
-                    <span class="float-start bg-transparent">March 23, 2024</span>
-                    <a href="/tags/automation/" class="float-end btn btn-outline-info btn-sm">Read</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-lg-4 col-md-6 my-3">
-            <div class="card h-100">
-                
-                <div class="card-body bg-transparent p-4 shadow-sm">
-                    <a href="/tags/cloud-flows/" class="primary-font card-title">
-                        <h5 class="card-title bg-transparent" title="Cloud Flows">Cloud Flows</h5>
-                    </a>
-                    <div class="card-text secondary-font">
-                        <p></p>
-                    </div>
-                </div>
-                <div class="mt-auto post-footer bg-transparent py-3">
-                    <span class="float-start bg-transparent">March 23, 2024</span>
-                    <a href="/tags/cloud-flows/" class="float-end btn btn-outline-info btn-sm">Read</a>
                 </div>
             </div>
         </div>

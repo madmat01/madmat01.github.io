@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
+<link rel="icon" href="/fav.png" type="image/gif">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+>
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      media="print" onload="this.media='all'" />
+<noscript>
+  <link
+          href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet">
+</noscript>
+
+
+<link rel="stylesheet" href="/css/font.css" media="all">
+
+
+
+<meta property="og:url" content="http://localhost:1313/posts/cloning-power-automate-flows-using-a-power-automate-flow/">
+  <meta property="og:site_name" content="Matthew Collinge">
+  <meta property="og:title" content="Cloning Power Automate Flows using a Power Automate Flow">
+  <meta property="og:description" content="Introduction When you build a document trigger on top of SharePoint, you quickly run into a fundamental constraint: a SharePoint trigger Flow is hardwired to a single Site and Library. There is no native way to point one Flow at a dynamic or configurable location — the Site URL and Library GUID are baked into the trigger definition at creation time.
+For a one-off deployment that’s fine. But when you’re setting up a standardised **Processes &amp; Procedures ** programme across an organisation — where every Team or Business unit gets its own SharePoint Site — you need an approval trigger Flow for each one. Creating and maintaining these by hand rapidly becomes a maintenance problem: if you fix a bug in one, you have to fix it in all of them.">
+  <meta property="og:locale" content="en_gb">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-04-16T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-04-16T00:00:00+00:00">
+    <meta property="article:tag" content="Power Automate">
+    <meta property="article:tag" content="Power Platform">
+    <meta property="article:tag" content="Cloud Flows">
+    <meta property="article:tag" content="Automation">
+    <meta property="article:tag" content="Dataverse">
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Cloning Power Automate Flows using a Power Automate Flow">
+  <meta name="twitter:description" content="Introduction When you build a document trigger on top of SharePoint, you quickly run into a fundamental constraint: a SharePoint trigger Flow is hardwired to a single Site and Library. There is no native way to point one Flow at a dynamic or configurable location — the Site URL and Library GUID are baked into the trigger definition at creation time.
+For a one-off deployment that’s fine. But when you’re setting up a standardised **Processes &amp; Procedures ** programme across an organisation — where every Team or Business unit gets its own SharePoint Site — you need an approval trigger Flow for each one. Creating and maintaining these by hand rapidly becomes a maintenance problem: if you fix a bug in one, you have to fix it in all of them.">
+
+
+
+
+
+<link rel="stylesheet" href="/bootstrap-5/css/bootstrap.min.css" media="all"><link rel="stylesheet" href="/css/header.css" media="all">
+<link rel="stylesheet" href="/css/language-switcher.css" media="all">
+<link rel="stylesheet" href="/css/footer.css" media="all">
+
+
+<link rel="stylesheet" href="/css/theme.css" media="all">
+
+<style>
+    :root {
+        --text-color: #1e293b;
+        --text-secondary-color: #475569;
+        --text-link-color: #0052cc;
+        --background-color: #f0f2f5;
+        --secondary-background-color: #dbeafe;
+        --primary-color: #0052cc;
+        --secondary-color: #ffffff;
+
+         
+        --text-color-dark: #e6edf3;
+        --text-secondary-color-dark: #8b949e;
+        --text-link-color-dark: #58a6ff;
+        --background-color-dark: #0d1117;
+        --secondary-background-color-dark: #1a2332;
+        --primary-color-dark: #58a6ff;
+        --secondary-color-dark: #161b22;
+    }
+    body {
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.7;
+        text-align: left;
+    }
+
+    html {
+        background-color: var(--background-color) !important;
+    }
+
+    body::-webkit-scrollbar {
+        height: 0px;
+        width: 8px;
+        background-color: var(--background-color);
+    }
+
+    ::-webkit-scrollbar-track {
+        border-radius: 1rem;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 1rem;
+        background: #b0b0b0;
+        outline: 1px solid var(--background-color);
+    }
+
+    #search-content::-webkit-scrollbar {
+        width: .5em;
+        height: .1em;
+        background-color: var(--background-color);
+    }
+</style>
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com; form-action 'self'; base-uri 'self'; object-src 'none'">
+<script>
+  (function() {
+    if (localStorage.getItem("pref-theme") !== "light") {
+      document.documentElement.classList.add('dark');
+    }
+  })();
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EGVWHDPQT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1EGVWHDPQT');
+</script>
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="stylesheet" href="/css/custom.css"><script src="/js/scroll-animations.1058878ac5958126da87f12a5106f9e7fd56bead46a2785c5a338e5329887b7c2952fc0d7991634c6a1c1125e6383707.js" integrity="sha384-EFiHisWVgSbah/EqUQb55/1Wvq1GonhcWjOOUymIe3wpUvwNeZFjTGocESXmODcH" crossorigin="anonymous" defer></script>
+
+
+<meta name="description" content="">
+<link rel="stylesheet" href="/css/single.css">
+
+
+<script defer src="/fontawesome-6/all-6.4.2.js"></script>
+
+
+  
+  
+    <link rel="stylesheet" href="/style.css">
+  
+
+  <title>
+Cloning Power Automate Flows using a Power Automate Flow | Matthew Collinge
+
+  </title>
+</head>
+
+<body class="light">
+  
+  
+<script>
+    let localStorageValue = localStorage.getItem("pref-theme");
+    let mediaQuery = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    switch (localStorageValue) {
+        case "dark":
+            document.documentElement.classList.add('dark');
+            document.body.classList.add('dark');
+            break;
+        case "light":
+            document.body.classList.remove('dark');
+            document.documentElement.classList.remove('dark');
+            break;
+        default:
+            if (mediaQuery) {
+                document.documentElement.classList.add('dark');
+                document.body.classList.add('dark');
+            }
+            break;
+    }
+</script>
+
+
+
+
+
+<a class="skip-to-content" href="#hero">Skip to content</a>
+
+
+<header id="profileHeader">
+    <nav class="pt-3 navbar navbar-expand-lg animate" role="navigation" aria-label="Main navigation">
+        <div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5">
+            
+            <a class="navbar-brand primary-font text-wrap" href="/" aria-label=" — home">
+                
+                
+                
+            </a>
+
+            
+                <div>
+                    <label for="search-desktop" class="sr-only">Search</label>
+                    <input id="search-desktop" autocomplete="off" class="form-control mr-sm-2 d-none d-md-block" placeholder='Search...'
+                        aria-label="Search" oninput="searchOnChange(event)">
+                </div>
+            
+
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <svg aria-hidden="true" height="24" viewBox="0 0 16 16" version="1.1" width="24" data-view-component="true">
+                    <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"></path>
+                </svg>
+            </button>
+
+            
+            <div class="collapse navbar-collapse text-wrap primary-font" id="navbarContent">
+                <ul class="navbar-nav ms-auto text-center">
+                    
+                        <li class="nav-item navbar-text d-block d-md-none">
+                            <div class="nav-link">
+                                <label for="search-mobile" class="sr-only">Search</label>
+                                <input id="search-mobile" autocomplete="off" class="form-control mr-sm-2" placeholder='Search...' aria-label="Search" oninput="searchOnChange(event)">
+                            </div>
+                        </li>
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/#about" aria-label="about">
+                            About Me
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/#contact"
+                            aria-label="contact">
+                            Get in Touch
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    
+                    
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/posts" title="">
+                            
+                            Posts
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="#contact" title="">
+                            
+                            Contact
+                        </a>
+                    </li>
+                    
+                    
+
+                    <li class="nav-item navbar-text">
+                        
+                        <div class="text-center">
+                            <button id="theme-toggle" type="button" aria-label="Toggle dark mode">
+                                <svg id="moon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                </svg>
+                                <svg id="sun" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="5"></circle>
+                                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </li>
+                    
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>
+<div id="content">
+<section id="single">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-md-12 col-lg-9">
+        <div class="pr-lg-4">
+          <div class="title mb-5">
+            <h1 class="text-center mb-4">Cloning Power Automate Flows using a Power Automate Flow</h1>
+            <div class="text-center">
+              
+              Apr 16, 2026
+
+              
+              <span id="readingTime">
+                min read
+              </span>
+              
+            </div>
+          </div>
+          
+          <article class="page-content  p-2">
+          <h2 id="introduction">Introduction</h2>
+<p>When you build a document trigger on top of SharePoint, you quickly run into a fundamental constraint: <strong>a SharePoint trigger Flow is hardwired to a single Site and Library</strong>. There is no native way to point one Flow at a dynamic or configurable location — the Site URL and Library GUID are baked into the trigger definition at creation time.</p>
+<p>For a one-off deployment that&rsquo;s fine. But when you&rsquo;re setting up a standardised **Processes &amp; Procedures ** programme across an organisation — where every Team or Business unit gets its own SharePoint Site — you need an approval trigger Flow for <em>each</em> one. Creating and maintaining these by hand rapidly becomes a maintenance problem: if you fix a bug in one, you have to fix it in all of them.</p>
+<p>This post walks through the solution we built to address that: a <strong>Site-specific Provisioning Flow</strong> that clones a template approval trigger into a new, Site-specific Flow automatically, using nothing more than Dataverse, Power Automate, and a clean separation between configuration data and Flow logic.</p>
+<hr>
+<h2 id="the-spo-pp-system-at-a-glance">The SPO P&amp;P System at a Glance</h2>
+<p>Before diving into the provisioning Flow, it&rsquo;s worth establishing the wider architecture of the solution.</p>
+<p>Each Processes and &amp; Procedures Library is in a SharePoint Site. Authors upload documents to the Library. When a document is submitted for approval (its approval status set to <em>Pending Approval</em>), a Power Automate Flow fires, routes the approval through a standard and centralised process via Microsoft Teams, and on Approval publishes the document to its major version and updates the approval metadata. This process can be maintained and changed whenever required and is all done in one place.</p>
+<p>That last Flow, the one watching the Library for changes, is the one we need to clone. It is specific to a Site and Library. The goal of this project was to make provisioning a new P&amp;P Site a self-service operation: an admin fills in a record, runs a Flow from the Model Driven app, and everything wires itself up automatically 😀.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/9z5yln8nfnf5a014lwjf.png" alt="Screenshot: SPO P&amp;P Admin Model Driven App — Site Registries list view"></p>
+<hr>
+<h2 id="the-three-flows">The Three Flows</h2>
+<p>The solution contains three Power Automate Flows that work together:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Flow</th>
+          <th>Role</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>SPO PP - Provision Site Flow</strong></td>
+          <td>Orchestrator — clones the template and provisions a new Site-specific Flow</td>
+      </tr>
+      <tr>
+          <td><strong>SPO PP - Approval Trigger - TEMPLATE</strong></td>
+          <td>Template — the Flow definition that gets cloned for each new Site</td>
+      </tr>
+      <tr>
+          <td><strong>Child: PP Approval Standard Process</strong></td>
+          <td>Worker — handles the actual approval logic, called by every cloned trigger Flow</td>
+      </tr>
+  </tbody>
+</table>
+<p>The template and child Flows are permanent, shared fixtures. The cloned approval trigger Flows are ephemeral — one per Site, generated at provisioning time. We can have as many as we want of these, but point them all to the same child Power Automate Flow so we can control the centralised process in one place.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ug16ax4y3wxsmthetufk.png" alt="Diagram: Relationship between the three Flows"></p>
+<hr>
+<h2 id="the-site-registry-table">The Site Registry Table</h2>
+<p>The hub of the whole system is a custom Dataverse table: <strong><code>Site_Registry</code></strong> . It stores one row per P&amp;P Site and acts as the source of truth for both provisioning and ongoing operations.</p>
+<h3 id="custom-columns">Custom Columns</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Display Name</th>
+          <th>Logical Name</th>
+          <th>Type</th>
+          <th>Required</th>
+          <th>Purpose</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Site Name</strong></td>
+          <td><code>Sitename</code></td>
+          <td>Text</td>
+          <td>Yes</td>
+          <td>Human-readable name; also used as the Primary Name field and in the provisioned Flow&rsquo;s display name</td>
+      </tr>
+      <tr>
+          <td><strong>Site URL</strong></td>
+          <td><code>Siteurl</code></td>
+          <td>Text</td>
+          <td>Yes</td>
+          <td>Full URL of the SharePoint Site (e.g. <code>https://companySite.sharepoint.com/Sites/Finance</code>)</td>
+      </tr>
+      <tr>
+          <td><strong>Library GUID</strong></td>
+          <td><code>Libraryguid</code></td>
+          <td>Text</td>
+          <td>Yes</td>
+          <td>GUID of the Document Library within the Site — required by the SharePoint trigger</td>
+      </tr>
+      <tr>
+          <td><strong>Flow ID</strong></td>
+          <td><code>Flowid</code></td>
+          <td>Text</td>
+          <td>No</td>
+          <td>Written back by the provision Flow after cloning; links this registry entry to its live approval trigger Flow</td>
+      </tr>
+      <tr>
+          <td><strong>Site Registry ID</strong></td>
+          <td><code>Site_Registryid</code></td>
+          <td>GUID (Primary Key)</td>
+          <td>System</td>
+          <td>Auto-generated unique identifier for the row</td>
+      </tr>
+  </tbody>
+</table>
+<p>The <code>Flowid</code> column starts empty. It is the only field the provisioning process writes — everything else is entered by the admin before triggering provisioning.</p>
+<h3 id="why-library-guid-not-library-name">Why Library GUID, Not Library Name?</h3>
+<p>The SharePoint <code>When a file is created or modified (properties only)</code> trigger requires a list/Library GUID rather than its display name. GUIDs are stable across renames and don&rsquo;t break if someone tidies up the Library name. Recording the GUID in the Site Registry means provisioning is reliable regardless of what the Library is called. For our template, we can just use a development SharePoint site and a placeholder document Library to keep things simple and standard. I had tried inserting <code>placeholderName</code> and <code>Library-guid-name</code> as placeholders, but the Flow struggled to save.
+As a possible improvement in the Model Driven App, we could make selection easier by showing them a list of possible document libraries for the selected sites, so the user does not have to go and find the GUID.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/9kkprsra65gimikc4ovl.png" alt="Screenshot: Site Registry form in the Model Driven App — showing all custom columns"></p>
+<hr>
+<h2 id="the-approval-trigger-template">The Approval Trigger Template</h2>
+<p>The template Flow (<code>SPOPP-ApprovalTrigger-TEMPLATE</code>) is the blueprint for every Site-specific approval trigger. It lives in the solution and is <strong>never activated</strong> — it exists solely to be cloned.</p>
+<p>Its trigger is a SharePoint <code>When a file is created or modified (properties only)</code> action polling every 1 minute, pointed at two placeholders:</p>
+<ul>
+<li><strong>Site URL placeholder:</strong> <code>https://companysite.sharepoint.com/Sites/ITDevelopment</code></li>
+<li><strong>Library GUID placeholder:</strong> <code>a3f7c291-84e6-4d1a-b509-2e763dc18f45</code></li>
+</ul>
+<p>A trigger condition filters the events down to only relevant ones:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>ApprovalStatus = 3 (Pending Approval)
+</span></span><span style="display:flex;"><span>AND Editor is NOT the service account  
+</span></span></code></pre></div><p>This prevents the Flow from firing on system-generated updates and ensures it only acts when a real user has submitted a document for review.</p>
+<p>When the trigger fires, the Flow calls a single action inside a Try scope: <strong>Run a Child Flow — PP Approval Standard Process</strong>. It passes the item&rsquo;s ID, Site URL, Library GUID, author claims, full path, approval status, and editor claims to the child Flow, then waits for a response.</p>
+<p>The Catch scope sends an error notification email to the support desk if anything fails.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ixcz0r9400ubje6h654g.png" alt="Screenshot: Template Flow overview in Power Automate designer"></p>
+<h3 id="the-clientdata-column--the-key-to-cloning">The <code>clientdata</code> Column — the Key to Cloning</h3>
+<p>When Power Automate stores a Flow in Dataverse, it uses the <code>workFlows</code> (&ldquo;Processes&rdquo;) table. The Flow&rsquo;s entire definition — triggers, actions, connections, expressions — is serialised as JSON and stored in a column called <strong><code>clientdata</code></strong>.</p>
+<p>This is the column we read from the template and write to the new Flow. The string-replace approach works because the placeholders (the hardcoded Site URL and Library GUID) are literal strings embedded in that JSON. Swapping them out produces a valid, Site-specific Flow definition ready to run.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/47iz52xwmvr78y88siaz.png" alt="Screenshot: workFlows table row for the template, showing clientdata column in Dataverse"></p>
+<hr>
+<h2 id="the-provision-site-flow--step-by-step">The Provision Site Flow — Step by Step</h2>
+<p>The <strong>SPO PP - Provision Site Flow</strong> is triggered from the Model Driven App by an admin selecting a Site Registry row and running the Flow from the command bar.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/cklzky6h792c3mq1qsl2.png" alt="Trigger the Flow for a Site and Library"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>Trigger: Record Selected on Site_registries
+</span></span></code></pre></div><p>The trigger uses <code>splitOn</code>, meaning if multiple rows are selected the Flow runs once per row — each Site is provisioned independently.</p>
+<h2 id="screenshot-provision-site-flow--full-overview-in-power-automate-designer"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/94lcjkdw0i599smlgzca.png" alt="Screenshot: Provision Site Flow — full overview in Power Automate designer"></h2>
+<h3 id="step-1--initialise-variable-varclientdata">Step 1 — Initialise Variable (<code>varClientData</code>)</h3>
+<p>Before entering the Try scope, a string variable <code>varClientData</code> is initialised empty. This will hold the cloned Flow definition once the placeholders have been replaced.</p>
+<p>This is declared outside the Try scope deliberately: it needs to be initialised before any branching logic, and the scoped Try/Catch pattern requires variables to be declared at the root level to be accessible in both branches.</p>
+<hr>
+<h3 id="step-2--get-site-registry-row-get-a-row-by-id--site-registry-from-trigger">Step 2 — Get Site Registry Row (<code>Get a row by ID — Site Registry from Trigger</code>)</h3>
+<p>The trigger provides the <code>Site_Registryid</code> from the selected record, but only the ID and Site name are included in the trigger payload. We need the full row — specifically the <code>Siteurl</code> and <code>Libraryguid</code> — so the first action inside the Try scope fetches it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>Entity: Site_registries
+</span></span><span style="display:flex;"><span>Record ID: triggerBody()?[&#39;entity&#39;]?[&#39;Site_Registryid&#39;]
+</span></span></code></pre></div><p>The output of this action is referenced throughout the rest of the Flow.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/dkmovi5xev2sb892j9hg.png" alt="Screenshot: Get a row by ID action — Site Registry"></p>
+<hr>
+<h3 id="step-3--retrieve-the-template-flow-definition-list-rows--processes">Step 3 — Retrieve the Template Flow Definition (<code>List rows — Processes</code>)</h3>
+<p>Next, the Flow queries the Dataverse <code>workFlows</code> (&ldquo;Processes&rdquo;) table to retrieve the template&rsquo;s <code>clientdata</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>Entity: workFlows
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span><span style="color:#66d9ef">select</span>: clientdata, workFlowid
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>filter: workFlowid eq <span style="color:#e6db74">&#39;05a1a909-5b33-f111-88b3-6045bddd6b33&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span>top: <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>The template&rsquo;s workFlow ID is hardcoded here — it is a known, stable fixture in the solution. Using <code>$top: 1</code> ensures a single result is returned efficiently.</p>
+<p>The <code>clientdata</code> that comes back is the full JSON definition of the template Flow, including the hardcoded Site URL and Library GUID placeholders.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/afdgc0inkot5fu7vyjlc.png" alt="Screenshot: List rows action — retrieving template clientdata from workFlows table"></p>
+<hr>
+<h3 id="step-4--inject-real-values-set-variable--varclientdata">Step 4 — Inject Real Values (<code>Set variable — varClientData</code>)</h3>
+<p>This is the core of the cloning mechanism. A double-nested <code>replace()</code> expression swaps out both placeholders in a single operation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">replace</span>(
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">replace</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">first</span>(<span style="color:#a6e22e">outputs</span>(<span style="color:#e6db74">&#39;List_rows_-_Processes&#39;</span>)<span style="color:#f92672">?</span>[<span style="color:#e6db74">&#39;body/value&#39;</span>])<span style="color:#f92672">?</span>[<span style="color:#e6db74">&#39;clientdata&#39;</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;https://companySite.sharepoint.com/Sites/ITDevelopment&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">outputs</span>(<span style="color:#e6db74">&#39;Get_a_row_by_ID_-_Site_Registry_from_Trigger&#39;</span>)<span style="color:#f92672">?</span>[<span style="color:#e6db74">&#39;body/Siteurl&#39;</span>]
+</span></span><span style="display:flex;"><span>  ),
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#39;a3f7c291-84e6-4d1a-b509-2e763dc18f45&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">outputs</span>(<span style="color:#e6db74">&#39;Get_a_row_by_ID_-_Site_Registry_from_Trigger&#39;</span>)<span style="color:#f92672">?</span>[<span style="color:#e6db74">&#39;body/Libraryguid&#39;</span>]
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>The inner <code>replace</code> substitutes the Site URL. The outer <code>replace</code> then takes that result and substitutes the Library GUID. The outcome is stored in <code>varClientData</code>: a complete, valid Flow definition targeting the new Site&rsquo;s Library.</p>
+<p>No parsing, no schema manipulation — just string replacement in JSON.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/20oquqth4p8f7m8upm94.png" alt="Screenshot: Set variable action — showing the double replace expression"></p>
+<hr>
+<h3 id="step-5--create-the-new-flow-add-a-new-row--processes">Step 5 — Create the New Flow (<code>Add a new row — Processes</code>)</h3>
+<p>The modified definition is now written back to the <code>workFlows</code> (&ldquo;Processes&rdquo;) table as a new row, creating the cloned Flow:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">Entity</span>: <span style="color:#ae81ff">workFlows</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">item/name</span>:     <span style="color:#e6db74">&#34;SPO PP - Approval Trigger - {Sitename}&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">item/category</span>: <span style="color:#ae81ff">5</span>        <span style="color:#ae81ff">(Modern Flow)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">item/type</span>:     <span style="color:#ae81ff">1</span>        <span style="color:#ae81ff">(Definition)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">item/primaryentity</span>: <span style="color:#e6db74">&#34;none&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">item/xaml</span>:     <span style="color:#e6db74">&#34; &#34;</span>     <span style="color:#ae81ff">(required field, but not used for modern Flows)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">item/clientdata</span>: @<span style="color:#ae81ff">variables(&#39;varClientData&#39;)</span>
+</span></span></code></pre></div><p>The <code>category: 5</code> value identifies this as a cloud Flow. The <code>xaml</code> field is a legacy artefact required by the API but irrelevant for modern Flows apparently — a single space &quot; &quot; keeps it happy.</p>
+<p>The response from this action includes the new Flow&rsquo;s <code>workFlowid</code>, which is carried forward to the next two steps.</p>
+<p>The new Flow is created in a <strong>disabled/draft state</strong>. It will not run until it is manually opened, saved (to authenticate connections), and turned on. This is by design — connections must be authorised by a human with the appropriate permissions, not ideal for automations, but we can live with it.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/mx3cztsc3m03jwjs00gh.png" alt="Screenshot: Add a new row action — creating the cloned workFlow in Dataverse"></p>
+<hr>
+<h3 id="step-6--add-to-solution-perform-an-unbound-action--add-to-solution">Step 6 — Add to Solution (<code>Perform an unbound action — Add to Solution</code>)</h3>
+<p>With the Flow created, it exists in Dataverse but is not yet part of any solution. This step calls the <code>AddSolutionComponent</code> unbound action to register it under the <code>SPOPPSiteConfig</code> solution:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">ComponentId</span>:         <span style="color:#ae81ff">(new Flow&#39;s workFlowid)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">ComponentType</span>:       <span style="color:#ae81ff">29</span>    <span style="color:#ae81ff">(Cloud Flow)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">SolutionUniqueName</span>:  <span style="color:#ae81ff">SPOPPSiteConfig</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">AddRequiredComponents</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">DoNotIncludeSubcomponents</span>: <span style="color:#66d9ef">false</span>
+</span></span></code></pre></div><p>Component type <code>29</code> maps to cloud Flows in the Dataverse component type enumeration. By adding it to the solution, the provisioned Flow becomes visible in the main solution and is logically grouped with the rest of the P&amp;P components - making management cleaner.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/f3owyxvtdn9ygi2wpnaz.png" alt="Screenshot: Perform unbound action — AddSolutionComponent"></p>
+<hr>
+<h3 id="step-7--write-the-flow-id-back-to-site-registry-update-a-row--site-registry">Step 7 — Write the Flow ID Back to Site Registry (<code>Update a row — Site Registry</code>)</h3>
+<p>The final Dataverse write closes the loop: the new Flow&rsquo;s ID is written back to the Site Registry record that triggered this whole process. This is for record keeping maintenance mainly. As an added extra you could concatenate the full URL for the Flow if you wanted to.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>Entity: Site_registries
+</span></span><span style="display:flex;"><span>Record ID: triggerBody()?[&#39;entity&#39;][&#39;Site_Registryid&#39;]
+</span></span><span style="display:flex;"><span>Flowid: outputs(&#39;Add_a_new_row_-_Processes&#39;)?[&#39;body/workFlowid&#39;]
+</span></span></code></pre></div><p>After this step, the Site Registry row has a <code>Flow ID</code> value. This serves as:</p>
+<ul>
+<li>A human-readable audit trail (the admin can see which Flow was provisioned for which Site)</li>
+<li>A navigation link back to the provisioned Flow</li>
+<li>A signal that provisioning has completed for this Site</li>
+</ul>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ea3yr72bn16w4v7k1xzo.png" alt="Screenshot: Update a row action — writing the Flow ID back to Site Registry"></p>
+<hr>
+<h3 id="step-8--notify-via-teams-adaptive-card-post-card--turn-flow-on">Step 8 — Notify via Teams Adaptive Card (<code>Post card — Turn Flow On</code>)</h3>
+<p>The final action sends an Adaptive Card to the user who triggered the Flow via Teams (the <code>triggerOutputs()?['headers']['x-ms-user-email']</code> header on the trigger response identifies them):</p>
+<p>![Screenshot: Adaptive Card in Teams — SPO P&amp;P Flow Provisioning notification]
+<img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ww990b6ipx6dsfu2p5er.png" alt="Image description"></p>
+<p>As mentioned earlier, I tried to use some Power Automate actions to Turn On the Flow, But couldn&rsquo;t find any that worked, so this is our only workaround and a quick step for the end user, although not ideal. If you know a way to easily do this, please leave a comment.</p>
+<p>The card surfaces:</p>
+<ul>
+<li><strong>Completed automatically:</strong> a green checklist of everything the Flow did</li>
+<li><strong>Manual activation required:</strong> a warning block explaining the three steps the admin must take</li>
+<li><strong>Open Flow button:</strong> a direct link to the new Flow in the Power Automate portal</li>
+</ul>
+<p>The three manual steps are:</p>
+<ol>
+<li>Open the Flow via the link in the card</li>
+<li>Click <strong>Turn on</strong></li>
+</ol>
+<p>This manual step is a conscious design decision. Power Automate does not permit programmatic activation of a Flow that has connection references requiring user consent — the connections must be authorised interactively. The card makes this as frictionless as possible.</p>
+<hr>
+<h3 id="error-handling--scope-catch">Error Handling — Scope Catch</h3>
+<p>If any action inside the Try scope fails, times out, or is skipped, the Catch scope runs. It:</p>
+<ol>
+<li>Filters <code>result('Scope_-_Try')</code> to find the actions that failed, timed out, or were skipped</li>
+<li>Posts a plain Teams message to the triggering user with a direct link to the failed Flow run</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>❌ Provision Site Flow Failed
+</span></span><span style="display:flex;"><span>Site: {Sitename}
+</span></span><span style="display:flex;"><span>View Flow Run: [link]
+</span></span><span style="display:flex;"><span>Once resolved, re-trigger provisioning from the SPO P&amp;P Administration app.
+</span></span></code></pre></div><p>The admin can inspect the failed run, resolve the root cause, and re-trigger provisioning from the app. Because the Site Registry record is only updated in Step 7 (after everything else succeeds), a partial failure leaves the record in its original state — <code>Flow ID</code> will be blank, signalling that provisioning is incomplete and can safely be re-run.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/fuet0dyeb11dxfm5f97q.png" alt="Screenshot: Catch scope — Teams error message action"></p>
+<hr>
+<h2 id="the-child-approval-flow">The Child Approval Flow</h2>
+<p>This is the central Flow that the cloned trigger Flows hand off to. The team can iterate on this particular Flow / Process as much as is needed without having to worry about duplicate actions, etc., as the Process can be amended when needed.</p>
+<p>The <strong>Child: PP Approval Standard Process</strong> is a manually-triggered child Flow that accepts seven parameters from every approval trigger:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Parameter</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>ItemID</code></td>
+          <td>SharePoint list item ID</td>
+      </tr>
+      <tr>
+          <td><code>SiteURL</code></td>
+          <td>URL of the Site (passed through, not hardcoded)</td>
+      </tr>
+      <tr>
+          <td><code>ListGUID</code></td>
+          <td>Library GUID (passed through)</td>
+      </tr>
+      <tr>
+          <td><code>AuthorClaims</code></td>
+          <td>Claims string of the document author</td>
+      </tr>
+      <tr>
+          <td><code>FullPath</code></td>
+          <td>Server-relative path of the document</td>
+      </tr>
+      <tr>
+          <td><code>ApprovalStatus</code></td>
+          <td>Numeric approval status value from SharePoint</td>
+      </tr>
+      <tr>
+          <td><code>Editor</code></td>
+          <td>Claims string of the last editor</td>
+      </tr>
+  </tbody>
+</table>
+<p>On receipt, it:</p>
+<ol>
+<li>Checks the item isn&rsquo;t already approved (terminates gracefully if it is)</li>
+<li>Builds the server-relative URL via a <code>Compose</code> expression</li>
+<li>Calls the SharePoint REST API to <strong>publish</strong> the document (<code>_api/web/GetFileByServerRelativeUrl(...)/Publish</code>)</li>
+<li>Reads the updated file properties back from SharePoint</li>
+<li>Calls the SharePoint REST API to <strong>set the approval status</strong>  to Approved (<code>OData__ModerationStatus: 0</code>) and records the approval date and updates any other column metadata required.</li>
+<li>Posts a Teams message to the document author confirming approval and the new version number</li>
+</ol>
+<p>Because the Site URL and Library GUID are passed in as parameters (not hardcoded), this single child Flow serves every cloned approval trigger across the entire organisation.</p>
+<hr>
+<h2 id="how-it-all-fits-together">How It All Fits Together</h2>
+<p>Here&rsquo;s the end-to-end lifecycle for adding a new P&amp;P Site to the system:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>1. Admin creates a SharePoint Online Site and Document Library
+</span></span><span style="display:flex;"><span>2. Admin notes the Library GUID (from the SharePoint URL or list settings)
+</span></span><span style="display:flex;"><span>3. Admin opens the SPO P&amp;P Administration app
+</span></span><span style="display:flex;"><span>4. Admin creates a new Site Registry row:
+</span></span><span style="display:flex;"><span>      Site Name:    &#34;Finance&#34;
+</span></span><span style="display:flex;"><span>      Site URL:     https://companysite.sharepoint.com/Sites/Finance
+</span></span><span style="display:flex;"><span>      Library GUID: [GUID from SharePoint]
+</span></span><span style="display:flex;"><span>5. Admin selects the row and runs &#34;SPO PP - Provision Site Flow&#34; from the command bar
+</span></span><span style="display:flex;"><span>6. Flow runs (~10 seconds):
+</span></span><span style="display:flex;"><span>      - Reads Site Registry row
+</span></span><span style="display:flex;"><span>      - Fetches template clientdata from Dataverse
+</span></span><span style="display:flex;"><span>      - Replaces Site URL and Library GUID placeholders
+</span></span><span style="display:flex;"><span>      - Creates new Flow: &#34;SPO PP - Approval Trigger - Finance&#34;
+</span></span><span style="display:flex;"><span>      - Adds Flow to SPOPPSiteConfig solution
+</span></span><span style="display:flex;"><span>      - Writes Flow ID back to Site Registry
+</span></span><span style="display:flex;"><span>      - Sends Adaptive Card to The user that initiated the process via Teams
+</span></span><span style="display:flex;"><span>7. Admin clicks &#34;Open Flow&#34; in the Teams card
+</span></span><span style="display:flex;"><span>8. Admin saves and turns on the Flow
+</span></span><span style="display:flex;"><span>9. Finance P&amp;P Site is live — approval triggers are active
+</span></span></code></pre></div><p>From step 4 to a live Flow takes under a minute of admin time, with no Flow editing or cloning required.</p>
+<hr>
+<h2 id="key-design-decisions">Key Design Decisions</h2>
+<p><strong>Why string replacement instead of a proper API?</strong><br>
+Power Automate does not expose a public API for cloning Flows. The <code>clientdata</code> approach is the only programmatic path available without leaving the Power Platform. It is undocumented but stable — Microsoft&rsquo;s own import/export tooling uses the same <code>workFlows</code> (&ldquo;Processes&rdquo;)(&ldquo;Processes&rdquo;) table and <code>clientdata</code> column.</p>
+<p><strong>Why store Library GUID and not Library Name?</strong><br>
+GUIDs are immutable. Library names can be changed by Site owners without affecting the trigger. Storing the GUID avoids a class of hard-to-diagnose breakages.</p>
+<p><strong>Why manual activation?</strong><br>
+Connection references in Power Automate require user consent. There is no API to activate a Flow with unauthenticated connection references. The Adaptive Card makes the manual step as lightweight as possible.</p>
+<p><strong>Why add the Flow to the solution?</strong><br>
+It keeps all provisioned Flows grouped under <code>SPOPPSiteConfig</code> in the environment. This makes bulk management, export, and environment promotion practical — rather than having dozens of orphaned Flows scattered across the default solution.</p>
+<p><strong>Environment Constraint: Unmanaged Required</strong>
+⚠️ One big constraint worth flagging: the Environment where the provisioned flows are created must be <strong>unmanaged</strong>.
+The cloning mechanism writes new rows directly to the workflows table at runtime. Those flows are unmanaged artefacts — they exist outside the solution package and outside the ALM pipeline. That is intentional; they are site-specific, runtime-generated, and self-service by design.
+But it means a managed-solution environment is incompatible with this pattern. The provisioning Flow will run fine as a managed component, but the governance model of a managed environment conflicts with generating unmanaged Flow records inside it.</p>
+<p>The default environment is the most common candidate simply because it is typically unmanaged — but the constraint is unmanaged vs. managed, not default vs. non-default. Any unmanaged environment works.</p>
+<hr>
+<h2 id="summary">Summary</h2>
+<p>The project is delivered a self-service Site provisioning capability built on a single mechanism: reading a Flow&rsquo;s <code>clientdata</code> from Dataverse, replacing two placeholder strings, and writing the result back as a new workFlow row. The Site Registry table is the operational hub — it drives provisioning and records the outcome. The template Flow is the blueprint — stable, never activated, just there to be cloned.</p>
+<p>The result is a system where adding a new P&amp;P Site is a data entry task, not a development task.</p>
+
+          </article>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-3">
+        <div id="stickySideBar" class="sticky-sidebar">
+          
+          <aside class="toc">
+              <h5>
+                Table Of Contents
+              </h5>
+              <div class="toc-content">
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#the-spo-pp-system-at-a-glance">The SPO P&amp;P System at a Glance</a></li>
+    <li><a href="#the-three-flows">The Three Flows</a></li>
+    <li><a href="#the-site-registry-table">The Site Registry Table</a>
+      <ul>
+        <li><a href="#custom-columns">Custom Columns</a></li>
+        <li><a href="#why-library-guid-not-library-name">Why Library GUID, Not Library Name?</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-approval-trigger-template">The Approval Trigger Template</a>
+      <ul>
+        <li><a href="#the-clientdata-column--the-key-to-cloning">The <code>clientdata</code> Column — the Key to Cloning</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-provision-site-flow--step-by-step">The Provision Site Flow — Step by Step</a></li>
+    <li><a href="#screenshot-provision-site-flow--full-overview-in-power-automate-designer"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/94lcjkdw0i599smlgzca.png"></a>
+      <ul>
+        <li><a href="#step-1--initialise-variable-varclientdata">Step 1 — Initialise Variable (<code>varClientData</code>)</a></li>
+        <li><a href="#step-2--get-site-registry-row-get-a-row-by-id--site-registry-from-trigger">Step 2 — Get Site Registry Row (<code>Get a row by ID — Site Registry from Trigger</code>)</a></li>
+        <li><a href="#step-3--retrieve-the-template-flow-definition-list-rows--processes">Step 3 — Retrieve the Template Flow Definition (<code>List rows — Processes</code>)</a></li>
+        <li><a href="#step-4--inject-real-values-set-variable--varclientdata">Step 4 — Inject Real Values (<code>Set variable — varClientData</code>)</a></li>
+        <li><a href="#step-5--create-the-new-flow-add-a-new-row--processes">Step 5 — Create the New Flow (<code>Add a new row — Processes</code>)</a></li>
+        <li><a href="#step-6--add-to-solution-perform-an-unbound-action--add-to-solution">Step 6 — Add to Solution (<code>Perform an unbound action — Add to Solution</code>)</a></li>
+        <li><a href="#step-7--write-the-flow-id-back-to-site-registry-update-a-row--site-registry">Step 7 — Write the Flow ID Back to Site Registry (<code>Update a row — Site Registry</code>)</a></li>
+        <li><a href="#step-8--notify-via-teams-adaptive-card-post-card--turn-flow-on">Step 8 — Notify via Teams Adaptive Card (<code>Post card — Turn Flow On</code>)</a></li>
+        <li><a href="#error-handling--scope-catch">Error Handling — Scope Catch</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-child-approval-flow">The Child Approval Flow</a></li>
+    <li><a href="#how-it-all-fits-together">How It All Fits Together</a></li>
+    <li><a href="#key-design-decisions">Key Design Decisions</a></li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav>
+              </div>
+          </aside>
+          
+
+          
+          <aside class="tags">
+            <h5>Tags</h5>
+            <ul class="tags-ul list-unstyled list-inline">
+              
+              
+              <li class="list-inline-item"><a href="/tags/power-automate"
+                target="_blank"
+              >Power Automate</a></li>
+              
+              
+              <li class="list-inline-item"><a href="/tags/power-platform"
+                target="_blank"
+              >Power Platform</a></li>
+              
+              
+              <li class="list-inline-item"><a href="/tags/cloud-flows"
+                target="_blank"
+              >Cloud Flows</a></li>
+              
+              
+              <li class="list-inline-item"><a href="/tags/automation"
+                target="_blank"
+              >Automation</a></li>
+              
+              
+              <li class="list-inline-item"><a href="/tags/dataverse"
+                target="_blank"
+              >Dataverse</a></li>
+              
+            </ul>
+          </aside>
+          
+
+          
+          <aside class="social">
+            <h5>Social</h5>
+            <div class="social-content">
+              <ul class="list-inline">
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://www.linkedin.com/feed/?shareActive=true&text= http%3a%2f%2flocalhost%3a1313%2fposts%2fcloning-power-automate-flows-using-a-power-automate-flow%2f">
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href='https://twitter.com/share?text=Cloning%20Power%20Automate%20Flows%20using%20a%20Power%20Automate%20Flow&url=http%3a%2f%2flocalhost%3a1313%2fposts%2fcloning-power-automate-flows-using-a-power-automate-flow%2f&hashtags=Power%20Automate%2cPower%20Platform%2cCloud%20Flows%2cAutomation%2cDataverse'>
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://api.whatsapp.com/send?text=Cloning%20Power%20Automate%20Flows%20using%20a%20Power%20Automate%20Flow: http%3a%2f%2flocalhost%3a1313%2fposts%2fcloning-power-automate-flows-using-a-power-automate-flow%2f">
+                    <i class="fab fa-whatsapp"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href='mailto:?subject=Cloning%20Power%20Automate%20Flows%20using%20a%20Power%20Automate%20Flow&amp;body=Check%20out%20this%20site http%3a%2f%2flocalhost%3a1313%2fposts%2fcloning-power-automate-flows-using-a-power-automate-flow%2f'>
+                    <i class="fa fa-envelope"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </aside>
+          
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-9 p-4">
+        
+      </div>
+    </div>
+  </div>
+  <button class="p-2 px-3" onclick="topFunction()" id="topScroll">
+    <i class="fas fa-angle-up"></i>
+  </button>
+</section>
+
+
+<div class="progress">
+  <div id="scroll-progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<Script src="/js/scrollProgressBar.js"></script>
+
+
+<script>
+  var topScroll = document.getElementById("topScroll");
+  window.onscroll = function() {scrollFunction()};
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      topScroll.style.display = "block";
+    } else {
+      topScroll.style.display = "none";
+    }
+  }
+
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
+  
+  let stickySideBarElem = document.getElementById("stickySideBar");
+  let stickyNavBar =  false ;
+  if(stickyNavBar) {
+    let headerElem = document.getElementById("profileHeader");
+    let headerHeight = headerElem.offsetHeight + 15;
+    stickySideBarElem.style.top = headerHeight + "px";
+  } else {
+    stickySideBarElem.style.top = "50px";
+  }
+</script>
+
+
+<script src="/js/readingTime.js"></script>
+
+
+
+  </div><footer>
+    
+
+
+ 
+
+<div class="text-center pt-2">
+    
+
+    
+
+    
+
+    
+
+    
+</div><div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-4 text-center">
+            
+            &copy; 2026  All Rights Reserved
+            <div class="text-secondary">
+                Made with
+                <span class="text-danger">
+                    &#10084;
+                </span>
+                and
+                <a href="https://github.com/gurusabarish/hugo-profile" target="_blank"
+                    title="Designed and developed by gurusabarish">
+                    Hugo Profile
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</footer><script src="/bootstrap-5/js/bootstrap.bundle.min.js"></script>
+<script>
+    if (localStorage.getItem("pref-theme") !== "light") {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+    }
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            document.documentElement.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+
+</script>
+
+
+    <script>
+      
+      window.searchIndexURL = "/index.json";
+    </script>
+    <script src="/js/search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+  <section id="search-content" class="py-2">
+    <div class="container" id="search-results"></div>
+  </section>
+</body>
+
+</html>

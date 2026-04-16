@@ -116,6 +116,13 @@ User interaction The previously mentioned documentation provides us with a good 
 </style>
 
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com; form-action 'self'; base-uri 'self'; object-src 'none'">
+<script>
+  (function() {
+    if (localStorage.getItem("pref-theme") !== "light") {
+      document.documentElement.classList.add('dark');
+    }
+  })();
+</script>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1EGVWHDPQT"></script>
 <script>

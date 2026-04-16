@@ -1,0 +1,9 @@
+# Hugo build output — rebuilt by GitHub Actions on deploy
+public/
+
+# Claude Code local settings (machine-specific)
+.claude/settings.local.json
+
+# Hugo temp files
+.hugo_build.lock
+resources/_gen/

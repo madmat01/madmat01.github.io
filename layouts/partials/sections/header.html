@@ -1,220 +1,71 @@
-{{- /* theme is auto */}}
+<!-- Dark mode is always on for this design -->
 <script>
-    let localStorageValue = localStorage.getItem("pref-theme");
-    let mediaQuery = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    switch (localStorageValue) {
-        case "dark":
-            document.documentElement.classList.add('dark');
-            document.body.classList.add('dark');
-            break;
-        case "light":
-            document.body.classList.remove('dark');
-            document.documentElement.classList.remove('dark');
-            break;
-        default:
-            if (mediaQuery) {
-                document.documentElement.classList.add('dark');
-                document.body.classList.add('dark');
-            }
-            break;
-    }
+  document.documentElement.classList.add('dark');
+  document.body && document.body.classList.add('dark');
 </script>
 
-<!-- Show header on scroll up -->
-{{ if .Site.Params.navbar.stickyNavBar.enable | default false }}
-{{ $showNavBarOnScrollUp := .Site.Params.navbar.stickyNavBar.showOnScrollUp | default false }}
-<script>
-    var prevScrollPos = window.pageYOffset;
-    window.addEventListener("scroll", function showHeaderOnScroll() {
-        let profileHeaderElem = document.getElementById("profileHeader");
-        let currentScrollPos = window.pageYOffset;
-        let resetHeaderStyle = false;
-        let showNavBarOnScrollUp = {{ $showNavBarOnScrollUp }};
-        let showNavBar = showNavBarOnScrollUp ? prevScrollPos > currentScrollPos : currentScrollPos > 0;
-        if (showNavBar) {
-            profileHeaderElem.classList.add("showHeaderOnTop");
-        } else {
-            resetHeaderStyle = true;
-        }
-        if(currentScrollPos === 0) {
-            resetHeaderStyle = true;
-        }
-        if(resetHeaderStyle) {
-            profileHeaderElem.classList.remove("showHeaderOnTop");
-        }
-        prevScrollPos = currentScrollPos;
-    });
-</script>
-{{ end }}
+<a class="mc-skip-link" href="/#hero">Skip to content</a>
 
-<!-- Skip-to-content link for keyboard users -->
-<a class="skip-to-content" href="#hero">Skip to content</a>
+<header class="mc-header" id="profileHeader">
+  <nav class="mc-nav" role="navigation" aria-label="Main navigation">
+    <div class="mc-nav-inner">
 
-<!-- Navbar -->
-<header id="profileHeader">
-    <nav class="pt-3 navbar navbar-expand-lg {{ if .Site.Params.animate }}animate{{ end }}" role="navigation" aria-label="Main navigation">
-        <div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5">
-            <!-- navbar brand -->
-            <a class="navbar-brand primary-font text-wrap" href="{{ .Site.Home.RelPermalink }}" aria-label="{{ .Site.Params.navbar.brandName | default .Site.Params.title }} — home">
-                {{ if and (or (.Site.Params.favicon) (.Site.Params.navbar.brandLogo)) (.Site.Params.navbar.showBrandLogo | default true) }}
-                {{- /* FIX: added alt attribute to brand logo image */}}
-                <img src="{{ .Site.Params.navbar.brandLogo | default .Site.Params.favicon }}" width="30" height="30"
-                    class="d-inline-block align-top"
-                    alt="{{ .Site.Params.navbar.brandName | default .Site.Params.title }} logo">
-                {{ .Site.Params.navbar.brandName | default .Site.Params.title }}
-                {{ else }}
-                {{ .Site.Params.navbar.brandName | default .Site.Params.title }}
-                {{ end }}
-            </a>
+      <!-- Brand -->
+      <a class="mc-nav-brand" href="{{ .Site.Home.RelPermalink }}" aria-label="{{ .Site.Title }} — home">
+        {{ .Site.Params.navbar.brandName | default .Site.Title }}
+      </a>
 
-            {{ if not (.Site.Params.navbar.disableSearch | default false) }}
-                <div>
-                    {{- /* FIX: unique id="search-desktop" to avoid duplicate IDs */}}
-                    <label for="search-desktop" class="sr-only">Search</label>
-                    <input id="search-desktop" autocomplete="off" class="form-control mr-sm-2 d-none d-md-block" placeholder='{{ .Site.Params.navbar.searchPlaceholder | default (i18n "search_placeholder") }}'
-                        aria-label="Search" oninput="searchOnChange(event)">
-                </div>
-            {{ end }}
+      <!-- Desktop links -->
+      <ul class="mc-nav-links" role="list">
+        {{ range .Site.Menus.main }}
+        <li>
+          <a class="mc-nav-link" href="{{ .URL }}">{{ .Name }}</a>
+        </li>
+        {{ end }}
+      </ul>
 
-            <!-- navbar toggler -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                <svg aria-hidden="true" height="24" viewBox="0 0 16 16" version="1.1" width="24" data-view-component="true">
-                    <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"></path>
-                </svg>
-            </button>
+      <!-- CTA + hamburger -->
+      <div class="mc-nav-end">
+        <a class="mc-nav-cta" href="/#contact">Get in Touch</a>
+        <button class="mc-nav-toggler" id="mcNavToggler"
+                aria-label="Toggle navigation" aria-expanded="false" aria-controls="mcMobileNav">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <line x1="2" y1="5"  x2="20" y2="5"/>
+            <line x1="2" y1="11" x2="20" y2="11"/>
+            <line x1="2" y1="17" x2="20" y2="17"/>
+          </svg>
+        </button>
+      </div>
 
-            <!-- navbar content -->
-            <div class="collapse navbar-collapse text-wrap primary-font" id="navbarContent">
-                <ul class="navbar-nav {{ .Site.Params.navbar.align | default "ms-auto"}} text-center">
-                    {{ if not (.Site.Params.navbar.disableSearch | default false) }}
-                        <li class="nav-item navbar-text d-block d-md-none">
-                            <div class="nav-link">
-                                {{- /* FIX: unique id="search-mobile" to avoid duplicate IDs */}}
-                                <label for="search-mobile" class="sr-only">Search</label>
-                                <input id="search-mobile" autocomplete="off" class="form-control mr-sm-2" placeholder='{{ .Site.Params.navbar.searchPlaceholder | default (i18n "search_placeholder") }}' aria-label="Search" oninput="searchOnChange(event)">
-                            </div>
-                        </li>
-                    {{ end }}
+    </div>
 
-                    {{ if and (.Site.Params.about.enable | default false) (not (.Site.Params.navbar.menus.disableAbout | default false)) }}
-                    <li class="nav-item navbar-text">
-                        <a class="nav-link" href="{{ .Site.Home.RelPermalink }}#about" aria-label="about">
-                            {{ .Site.Params.about.title | default (i18n "nav_about") }}
-                        </a>
-                    </li>
-                    {{ end }}
-
-                    {{ if and (.Site.Params.experience.enable | default false) (not (.Site.Params.navbar.menus.disableExperience | default false)) }}
-                    <li class="nav-item navbar-text">
-                        <a class="nav-link" href="{{ .Site.Home.RelPermalink }}#experience"
-                            aria-label="experience">
-                            {{ .Site.Params.experience.title | default (i18n "nav_experience") }}
-                        </a>
-                    </li>
-                    {{ end }}
-
-                    {{ if and (.Site.Params.education.enable | default false) (not (.Site.Params.navbar.menus.disableEducation | default false)) }}
-                    <li class="nav-item navbar-text">
-                        <a class="nav-link" href="{{ .Site.Home.RelPermalink }}#education"
-                            aria-label="education">
-                            {{ .Site.Params.education.title | default (i18n "nav_education") }}
-                        </a>
-                    </li>
-                    {{ end }}
-
-                    {{ if and (.Site.Params.projects.enable | default false) (not (.Site.Params.navbar.menus.disableProjects | default false)) }}
-                    <li class="nav-item navbar-text">
-                        <a class="nav-link" href="{{ .Site.Home.RelPermalink }}#projects"
-                            aria-label="projects">
-                            {{ .Site.Params.projects.title | default (i18n "nav_projects") }}
-                        </a>
-                    </li>
-                    {{ end }}
-
-                    {{ if and (.Site.Params.achievements.enable | default false) (not (.Site.Params.navbar.menus.disableAchievements | default false)) }}
-                    <li class="nav-item navbar-text">
-                        <a class="nav-link" href="{{ .Site.Home.RelPermalink }}#achievements"
-                            aria-label="achievements">
-                            {{ .Site.Params.achievements.title | default (i18n "nav_achievements") }}
-                        </a>
-                    </li>
-                    {{ end }}
-
-                    {{ if and (.Site.Params.contact.enable | default false) (not (.Site.Params.navbar.menus.disableContact | default false)) }}
-                    <li class="nav-item navbar-text">
-                        <a class="nav-link" href="{{ .Site.Home.RelPermalink }}#contact"
-                            aria-label="contact">
-                            {{ .Site.Params.contact.title | default (i18n "nav_contact") }}
-                        </a>
-                    </li>
-                    {{ end }}
-
-                    {{ if and .Site.Menus.main (.Site.Params.navbar.enableSeparator | default false) }}
-                        <li class="nav-item navbar-text d-none d-lg-block d-xl-block"><div class="nav-link nav-link-sep"></div></li>
-                        <div class="dropdown-divider"></div>
-                    {{ end }}
-
-                    <!-- custom menus from the user -->
-                    {{ range .Site.Menus.main }}
-                    {{ if .HasChildren }}
-                    <!-- Dropdown menu -->
-                    <li class="nav-item navbar-text dropdown">
-                        <a class="nav-link dropdown-toggle" href="{{ .URL }}" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{ .Title }}">
-                            {{ .Name }}
-                        </a>
-                        <div class="dropdown-menu shadow-lg rounded" aria-labelledby="navbarDropdown">
-                            {{ range .Children }}
-                            <a class="dropdown-item text-center nav-link" href="{{ .URL }}"
-                                title="{{ .Title }}">
-                                {{ .Name }}
-                            </a>
-                            {{ end }}
-                        </div>
-                    </li>
-                    {{else}}
-                    <!-- Single menu item -->
-                    <li class="nav-item navbar-text">
-                        <a class="nav-link" href="{{.URL}}" title="{{ .Title }}">
-                            {{ .Pre }}
-                            {{ .Name }}
-                        </a>
-                    </li>
-                    {{end}}
-                    {{end}}
-
-                    {{- partial "sections/language-switcher.html" . -}}
-
-                    {{ if (not .Site.Params.theme.disableThemeToggle | default false) }}
-                    <li class="nav-item navbar-text">
-                        <!-- darkmode mode toggle -->
-                        <div class="text-center">
-                            <button id="theme-toggle" type="button" aria-label="Toggle dark mode">
-                                {{- /* FIX: aria-hidden on decorative SVG children; button has aria-label */}}
-                                <svg id="moon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                                </svg>
-                                <svg id="sun" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="5"></circle>
-                                    <line x1="12" y1="1" x2="12" y2="3"></line>
-                                    <line x1="12" y1="21" x2="12" y2="23"></line>
-                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                                    <line x1="1" y1="12" x2="3" y2="12"></line>
-                                    <line x1="21" y1="12" x2="23" y2="12"></line>
-                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                                </svg>
-                            </button>
-                        </div>
-                    </li>
-                    {{ end }}
-
-                </ul>
-
-            </div>
-        </div>
-    </nav>
+    <!-- Mobile menu -->
+    <div class="mc-mobile-nav" id="mcMobileNav" aria-hidden="true" role="menu">
+      {{ range .Site.Menus.main }}
+      <a class="mc-mobile-nav-link" href="{{ .URL }}" role="menuitem">{{ .Name }}</a>
+      {{ end }}
+      <a class="mc-mobile-nav-cta" href="/#contact" role="menuitem">Get in Touch</a>
+    </div>
+  </nav>
 </header>
+
+<script>
+  (function () {
+    var toggler = document.getElementById('mcNavToggler');
+    var mobileNav = document.getElementById('mcMobileNav');
+    if (!toggler || !mobileNav) return;
+    toggler.addEventListener('click', function () {
+      var isOpen = mobileNav.classList.toggle('is-open');
+      toggler.setAttribute('aria-expanded', isOpen);
+      mobileNav.setAttribute('aria-hidden', !isOpen);
+    });
+    // Close on outside click
+    document.addEventListener('click', function (e) {
+      if (!toggler.contains(e.target) && !mobileNav.contains(e.target)) {
+        mobileNav.classList.remove('is-open');
+        toggler.setAttribute('aria-expanded', 'false');
+        mobileNav.setAttribute('aria-hidden', 'true');
+      }
+    });
+  })();
+</script>

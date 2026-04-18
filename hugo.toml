@@ -9,10 +9,11 @@ theme = 'hugo-profile'
 [params]
   # Theme customization
   animate = true
-  customCSS = true
+  customCSS = false
 
   [params.theme]
     defaultTheme = "dark"
+    disableThemeToggle = true
 
   # Typography
   [params.font]
@@ -21,34 +22,33 @@ theme = 'hugo-profile'
     lineHeight = "1.7"
     textAlign  = "left"
 
-  # Color palette — 60-30-10 rule
-  # 60% background (#f0f2f5), 30% surface (#ffffff), 10% accent (#0052cc)
+  # M3 Dark Design System — Obsidian Monolith
   [params.color]
-    textColor                 = "#1e293b"
-    secondaryTextColor        = "#475569"
-    textLinkColor             = "#0052cc"
-    backgroundColor           = "#f0f2f5"
-    secondaryBackgroundColor  = "#dbeafe"
-    primaryColor              = "#0052cc"
-    secondaryColor            = "#ffffff"
+    textColor                 = "#ffffff"
+    secondaryTextColor        = "#adaaaa"
+    textLinkColor             = "#afa2ff"
+    backgroundColor           = "#0e0e0e"
+    secondaryBackgroundColor  = "#1a1a1a"
+    primaryColor              = "#afa2ff"
+    secondaryColor            = "#1a1a1a"
 
     [params.color.darkmode]
-      textColor                = "#e6edf3"
-      secondaryTextColor       = "#8b949e"
-      textLinkColor            = "#58a6ff"
-      backgroundColor          = "#0d1117"
-      secondaryBackgroundColor = "#1a2332"
-      primaryColor             = "#58a6ff"
-      secondaryColor           = "#161b22"
+      textColor                = "#ffffff"
+      secondaryTextColor       = "#adaaaa"
+      textLinkColor            = "#afa2ff"
+      backgroundColor          = "#0e0e0e"
+      secondaryBackgroundColor = "#1a1a1a"
+      primaryColor             = "#afa2ff"
+      secondaryColor           = "#1a1a1a"
 
   [params.hero]
     enable = true
-    intro = "Hello, my name is"
+    intro = "Power Platform Specialist"
     title = "Matthew Collinge"
-    subtitle = "Power Platform Specialist | Dataverse, Power Apps & Power Automate"
-    content = "I am a Microsoft Power Platform specialist with expertise in Dataverse, Power Apps, and Power Automate. I am also an AI enthusiast and active speaker in the tech community."
+    tagline = "I build intelligent business solutions with Microsoft Power Platform."
+    content = "Microsoft Power Platform specialist with expertise in Dataverse, Power Apps, and Power Automate. AI enthusiast and active speaker in the tech community."
     image = "images/profile.png"
-    roundImage = true
+    roundImage = false
 
     [params.hero.socialLinks]
       [[params.hero.socialLinks.fontAwesomeIcons]]
@@ -70,8 +70,9 @@ theme = 'hugo-profile'
   [params.contact]
     enable = true
     title = "Get in Touch"
-    content = "If you have any questions or want to collaborate, feel free to reach out!"
+    content = "Whether you have a project in mind or just want to connect, I'd love to hear from you."
     email = "matthewjcollinge@gmail.com"
+    btnName = "Say Hello"
 
 [menu]
   [[menu.main]]
@@ -82,5 +83,5 @@ theme = 'hugo-profile'
   [[menu.main]]
     identifier = "contact"
     name = "Contact"
-    url = "#contact"
+    url = "/#contact"
     weight = 2

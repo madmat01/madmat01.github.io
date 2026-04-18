@@ -276,3 +276,35 @@ test.describe('Styling', () => {
     expect(bodyFontFamily).toContain('Inter');
   });
 });
+
+test.describe('Link audit', () => {
+  test('all internal path links on homepage return 200', async ({ page }) => {
+    await page.goto('/');
+    const hrefs = await page.locator('a[href]').evaluateAll(
+      els => els.map(e => e.getAttribute('href'))
+    );
+    const internal = [...new Set(hrefs.filter(h => h && h.startsWith('/') && !h.startsWith('//') && !h.includes('#')))];
+    for (const href of internal) {
+      const resp = await page.goto(href);
+      expect(resp.status(), `${href} returned non-200`).toBe(200);
+    }
+  });
+
+  test('all anchor links on homepage resolve to existing elements', async ({ page }) => {
+    await page.goto('/');
+    const hrefs = await page.locator('a[href]').evaluateAll(
+      els => els.map(e => e.getAttribute('href'))
+    );
+    const anchors = [...new Set(hrefs.filter(h => h && h.startsWith('#')))];
+    for (const anchor of anchors) {
+      await expect(page.locator(anchor), `${anchor} not found in DOM`).toBeAttached();
+    }
+  });
+
+  test('/posts listing returns 200 and shows entries', async ({ page }) => {
+    const resp = await page.goto('/posts');
+    expect(resp.status()).toBe(200);
+    const entries = page.locator('.card-title, .mc-post-title');
+    expect(await entries.count()).toBeGreaterThan(0);
+  });
+});

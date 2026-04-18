@@ -2,6 +2,7 @@
 title = "Passing a Choices List from Power Apps to an Adaptive Card"
 date = 2024-01-13
 draft = false
+image = "/images/posts/choices-list-adaptive-card.jpeg"
 tags = ["Power Apps", "Adaptive Cards", "Power Automate", "JSON", "UI Design", "Low Code"]
 +++
 

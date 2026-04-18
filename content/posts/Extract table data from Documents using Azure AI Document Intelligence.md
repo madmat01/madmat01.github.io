@@ -2,6 +2,7 @@
 title = "Extract table data from Documents using Azure AI Document Intelligence"
 date = 2024-10-16
 draft = false
+image = "/images/posts/document-intelligence.jpeg"
 tags = ["Azure AI", "Document Intelligence", "Power Automate", "AI Builder", "OCR", "Table Extraction"]
 summary = "How to use the Azure AI Document Intelligence Layout Model REST API with Power Automate to extract text and table data from PDF documents."
 +++

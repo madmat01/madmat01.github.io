@@ -403,11 +403,8 @@ section { padding: 0 !important; }
   aspect-ratio: 4 / 5;
   object-fit: cover;
   border-radius: var(--r-lg);
-  filter: grayscale(60%);
-  transition: filter 0.7s ease;
   display: block;
 }
-.mc-hero-photo-wrap:hover .mc-hero-photo { filter: grayscale(0%); }
 
 /* Content — right column */
 .mc-hero-content {
@@ -862,11 +859,6 @@ footer .container,
   max-width: var(--max-w) !important;
   margin: 0 auto !important;
   padding: var(--sp-6) var(--pad-x) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  flex-wrap: wrap !important;
-  gap: var(--sp-3) !important;
 }
 
 footer p,

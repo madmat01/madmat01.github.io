@@ -2,6 +2,7 @@
 title = "Cloning Power Automate Flows using a Power Automate Flow"
 date = 2026-04-16
 draft = false
+image = "/images/posts/cloning-flows.png"
 tags = ["Power Automate", "Power Platform", "Cloud Flows", "Automation", "Dataverse"]
 +++
 

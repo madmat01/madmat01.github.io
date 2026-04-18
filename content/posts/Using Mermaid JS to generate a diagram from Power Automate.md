@@ -2,6 +2,7 @@
 title = "Using Mermaid JS to generate a diagram from Power Automate"
 date = 2024-02-20
 draft = false
+image = "/images/posts/mermaid-js.png"
 tags = ["Mermaid JS", "Power Automate", "Documentation", "Diagrams", "Markdown", "Automation"]
 +++
 

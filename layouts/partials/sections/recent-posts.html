@@ -1,32 +1,51 @@
-<section id="recent-posts" class="py-0 py-sm-5">
-    <div class="container bg-transparent">
-        <h3 class="text-center bg-transparent">{{ .Site.Params.recentPosts.title | default (i18n "recentPosts") }}</h3>
-        <div class="bg-transparent row justify-content-center px-3 py-5">
-            {{ range (where .Site.RegularPages "Type" "posts") }}
-            <div class="col-lg-4 col-md-6 my-3">
-                <div class="card h-100">
-                    {{ if .Params.image }}
-                    <div class="card-header">
-                        <a href="{{ .RelPermalink }}">
-                            <img src="{{ .Params.image }}" class="card-img-top" alt="{{ .Title }}">
-                        </a>
-                    </div>
-                    {{ end }}
-                    <div class="card-body p-4 shadow-sm">
-                        <a href="{{ .RelPermalink }}" class="primary-font card-title">
-                            <h5 class="card-title" title="{{ .Title }}">{{ .Title | truncate 25 }}</h5>
-                        </a>
-                        <div class="card-text secondary-font">
-                            <p>{{ .Summary | truncate 300}}</p>
-                        </div>
-                    </div>
-                    <div class="mt-auto post-footer py-3">
-                        <span class="float-start">{{ .Date | time.Format (":date_long" | default "January 2, 2006") }}</span>
-                        <a href="{{ .RelPermalink }}" class="float-end btn btn-outline-info btn-sm">{{ .Site.Params.terms.read | default (i18n "read") }}</a>
-                    </div>
-                </div>
-            </div>
-            {{ end }}
-        </div>
+<section id="recent-posts" class="mc-section" aria-labelledby="posts-heading">
+  <div class="mc-container">
+
+    <div class="mc-section-header mc-section-header--split">
+      <div>
+        <h2 id="posts-heading" class="mc-section-title">{{ .Site.Params.recentPosts.title | default "Latest Insights" }}</h2>
+        <p class="mc-section-subtitle">Thoughts on Power Platform, automation, and modern development.</p>
+      </div>
+      <a class="mc-view-all" href="/posts" aria-label="View all posts">
+        View All Posts
+        <i class="fas fa-arrow-right mc-view-all-icon" aria-hidden="true"></i>
+      </a>
     </div>
+
+    <div class="mc-posts-grid">
+      {{ range (where .Site.RegularPages "Type" "posts") }}
+      <article class="mc-post-card">
+
+        <!-- Card header with gradient + tag -->
+        <div class="mc-post-card-header">
+          {{ if .Params.image }}
+          <img src="{{ .Params.image }}" class="mc-post-card-img" alt="{{ .Title }}">
+          {{ else }}
+          <div class="mc-post-card-gradient" aria-hidden="true"></div>
+          {{ end }}
+          {{ with (index .Params.tags 0) }}
+          <span class="mc-post-tag">{{ . }}</span>
+          {{ end }}
+        </div>
+
+        <!-- Card body -->
+        <div class="mc-post-card-body">
+          <time class="mc-post-date" datetime="{{ .Date.Format "2006-01-02" }}">
+            {{ .Date | time.Format "Jan 2, 2006" }}
+          </time>
+          <h3 class="mc-post-title">
+            <a href="{{ .RelPermalink }}" class="mc-post-title-link">{{ .Title }}</a>
+          </h3>
+          <p class="mc-post-excerpt">{{ .Summary | truncate 120 }}</p>
+          <a href="{{ .RelPermalink }}" class="mc-post-read-link" aria-label="Read: {{ .Title }}">
+            Read Article
+            <i class="fas fa-arrow-right mc-post-read-icon" aria-hidden="true"></i>
+          </a>
+        </div>
+
+      </article>
+      {{ end }}
+    </div>
+
+  </div>
 </section>

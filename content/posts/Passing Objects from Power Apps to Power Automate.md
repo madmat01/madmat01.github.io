@@ -2,6 +2,7 @@
 title = "Passing Objects from Power Apps to Power Automate"
 date = 2024-01-10
 draft = false
+image = "/images/posts/passing-objects-power-automate.jpeg"
 tags = ["Power Apps", "Power Automate", "JSON", "Data Transfer", "Development", "Performance"]
 +++
 

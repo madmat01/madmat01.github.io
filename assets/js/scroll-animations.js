@@ -1,26 +1,14 @@
 /**
  * scroll-animations.js
- * Adds `.is-animated` to section headings and skill list items when they
- * enter the viewport. The CSS transitions in style.css do the actual
- * animation — this script only controls *when* they fire.
- *
- * Respects prefers-reduced-motion: if the user has requested reduced motion,
- * elements are made visible immediately with no transition.
+ * Adds `.is-animated` to section titles and skill chips when they enter
+ * the viewport. CSS transitions in style.css do the actual animation.
+ * Respects prefers-reduced-motion.
  */
 (function () {
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Selectors to observe
-  var headingSelector = [
-    '#about h3',
-    '#experience h3',
-    '#education .container > h3',
-    '#achievements h3',
-    '#contact h3',
-    '#recent-posts h3'
-  ].join(', ');
-
-  var skillItemSelector = '#about ul li';
+  var headingSelector = '.mc-section-title';
+  var skillItemSelector = '.mc-chip';
 
   function animateImmediately(els) {
     els.forEach(function (el) {

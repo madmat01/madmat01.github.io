@@ -1,9 +1,1 @@
-/* Override hero min-height to reduce gap before About Me section */
-#hero {
-    min-height: auto !important;
-    padding-bottom: 2rem !important;
-}
-
-#recent-posts h3 {
-    color: var(--text-secondary-color) !important;
-}
+/* Superseded by static/style.css — kept empty to avoid 404 */

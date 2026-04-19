@@ -482,6 +482,11 @@ section { padding: 0 !important; }
 
 /* Hero responsive */
 @media (max-width: 768px) {
+  #hero {
+    min-height: 0 !important;
+    padding-top: var(--sp-8) !important;
+    padding-bottom: 60px !important;
+  }
   .mc-hero-inner {
     flex-direction: column;
     text-align: center;
@@ -603,6 +608,7 @@ section { padding: 0 !important; }
   grid-template-columns: 1fr 1fr;
   gap: var(--sp-8);
   align-items: start;
+  overflow: hidden;
 }
 
 .mc-about-body {
@@ -648,6 +654,7 @@ section { padding: 0 !important; }
   .mc-about-card {
     grid-template-columns: 1fr;
     gap: var(--sp-5);
+    padding: var(--sp-4);
   }
 }
 

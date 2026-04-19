@@ -10,3 +10,7 @@ public/
 # Hugo temp files
 .hugo_build.lock
 resources/_gen/
+
+# Node / Playwright
+node_modules/
+test-results/

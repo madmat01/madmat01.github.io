@@ -22,24 +22,24 @@ theme = 'hugo-profile'
     lineHeight = "1.7"
     textAlign  = "left"
 
-  # M3 Dark Design System — Obsidian Monolith
+  # M3 Dark Design System — Obsidian Mint
   [params.color]
     textColor                 = "#ffffff"
-    secondaryTextColor        = "#adaaaa"
-    textLinkColor             = "#afa2ff"
-    backgroundColor           = "#0e0e0e"
-    secondaryBackgroundColor  = "#1a1a1a"
-    primaryColor              = "#afa2ff"
-    secondaryColor            = "#1a1a1a"
+    secondaryTextColor        = "#9e9e9e"
+    textLinkColor             = "#00FF9D"
+    backgroundColor           = "#0a0a0a"
+    secondaryBackgroundColor  = "#141414"
+    primaryColor              = "#00FF9D"
+    secondaryColor            = "#141414"
 
     [params.color.darkmode]
       textColor                = "#ffffff"
-      secondaryTextColor       = "#adaaaa"
-      textLinkColor            = "#afa2ff"
-      backgroundColor          = "#0e0e0e"
-      secondaryBackgroundColor = "#1a1a1a"
-      primaryColor             = "#afa2ff"
-      secondaryColor           = "#1a1a1a"
+      secondaryTextColor       = "#9e9e9e"
+      textLinkColor            = "#00FF9D"
+      backgroundColor          = "#0a0a0a"
+      secondaryBackgroundColor = "#141414"
+      primaryColor             = "#00FF9D"
+      secondaryColor           = "#141414"
 
   [params.hero]
     enable = true

@@ -1,6 +1,6 @@
 /* ============================================================
    Matthew Collinge — M3 Dark Design System
-   "Obsidian Monolith" — Manrope + Inter, lavender primary
+   "Obsidian Mint" — Manrope + Inter, cyber mint primary
    ============================================================ */
 
 /* ============================================================
@@ -8,23 +8,23 @@
    ============================================================ */
 :root {
   /* M3 Color palette */
-  --m3-bg:               #0e0e0e;
-  --m3-surface:          #0e0e0e;
-  --m3-surface-low:      #131313;
-  --m3-surface-c:        #1a1a1a;
-  --m3-surface-high:     #20201f;
-  --m3-surface-highest:  #262626;
-  --m3-surface-bright:   #2c2c2c;
+  --m3-bg:               #0a0a0a;
+  --m3-surface:          #0a0a0a;
+  --m3-surface-low:      #0f0f0f;
+  --m3-surface-c:        #141414;
+  --m3-surface-high:     #1a1a1a;
+  --m3-surface-highest:  #202020;
+  --m3-surface-bright:   #262626;
   --m3-on-surface:       #ffffff;
-  --m3-on-surface-var:   #adaaaa;
-  --m3-primary:          #afa2ff;
-  --m3-primary-dim:      #745bf3;
-  --m3-primary-c:        #a192ff;
-  --m3-on-primary:       #2c0097;
-  --m3-secondary:        #26f4fd;
-  --m3-tertiary:         #ff9ac3;
-  --m3-outline:          #767575;
-  --m3-outline-var:      #484847;
+  --m3-on-surface-var:   #9e9e9e;
+  --m3-primary:          #00FF9D;
+  --m3-primary-dim:      #02BF8E;
+  --m3-primary-c:        #00e68a;
+  --m3-on-primary:       #002918;
+  --m3-secondary:        #0FD5FF;
+  --m3-tertiary:         #02BF8E;
+  --m3-outline:          #4a4a4a;
+  --m3-outline-var:      #2e2e2e;
 
   /* Typography */
   --font-headline: "Manrope", system-ui, sans-serif;
@@ -428,12 +428,13 @@ section { padding: 0 !important; }
   width: fit-content;
 }
 
-.mc-hero-h1 {
+#hero .mc-hero-h1 {
   font-size: clamp(2.4rem, 5vw, 4.5rem) !important;
   font-weight: 800 !important;
   letter-spacing: -0.03em;
   line-height: 1.1 !important;
   margin: 0 !important;
+  color: #ffffff !important;
 }
 
 .mc-hero-h1-accent {

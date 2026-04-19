@@ -1,0 +1,50 @@
+{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+<section class="mc-section" aria-labelledby="posts-list-heading">
+  <div class="mc-container">
+
+    <div class="mc-section-header">
+      <h1 id="posts-list-heading" class="mc-section-title">{{ .Title }}</h1>
+      <p class="mc-section-subtitle">Thoughts on Power Platform, automation, and modern development.</p>
+    </div>
+
+    <div class="mc-posts-grid">
+      {{ range .Paginator.Pages }}
+      <article class="mc-post-card">
+        <div class="mc-post-card-header">
+          {{ if .Params.image }}
+          <img src="{{ .Params.image }}" class="mc-post-card-img" alt="{{ .Title }}">
+          {{ else }}
+          <div class="mc-post-card-gradient" aria-hidden="true"></div>
+          {{ end }}
+          {{ with (index .Params.tags 0) }}
+          <span class="mc-post-tag">{{ . }}</span>
+          {{ end }}
+        </div>
+        <div class="mc-post-card-body">
+          <time class="mc-post-date" datetime="{{ .Date.Format "2006-01-02" }}">
+            {{ .Date | time.Format "Jan 2, 2006" }}
+          </time>
+          <h2 class="mc-post-title">
+            <a href="{{ .RelPermalink }}" class="mc-post-title-link">{{ .Title }}</a>
+          </h2>
+          <p class="mc-post-excerpt">{{ .Summary | truncate 120 }}</p>
+          <a href="{{ .RelPermalink }}" class="mc-post-read-link" aria-label="Read: {{ .Title }}">
+            Read Article
+            <i class="fas fa-arrow-right mc-post-read-icon" aria-hidden="true"></i>
+          </a>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+
+    <div class="row justify-content-center mt-4">
+      <div class="col-auto">
+        {{template "_internal/pagination.html" . }}
+      </div>
+    </div>
+
+  </div>
+</section>
+{{ end }}

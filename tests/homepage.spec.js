@@ -190,15 +190,35 @@ test.describe('Contact section', () => {
   });
 
   test('Say Hello button is present and visible', async ({ page }) => {
-    const btn = page.locator('#contact .mc-btn-primary');
+    const btn = page.locator('#mc-contact-btn');
     await expect(btn).toBeVisible();
     await expect(btn).toContainText('Say Hello');
   });
 
-  test('Say Hello button links to email', async ({ page }) => {
-    const btn = page.locator('#contact .mc-btn-primary');
-    const href = await btn.getAttribute('href');
-    expect(href).toMatch(/mailto:|#/);
+  test('Say Hello button carries obfuscated email that decodes correctly', async ({ page }) => {
+    const encoded = await page.locator('#mc-contact-btn').getAttribute('data-e');
+    expect(encoded).toBeTruthy();
+    const decoded = await page.evaluate(b64 => atob(b64), encoded);
+    expect(decoded).toBe('matthewjcollinge@gmail.com');
+  });
+
+  test('plain-text email is absent from rendered HTML', async ({ page }) => {
+    const html = await page.content();
+    expect(html).not.toContain('matthewjcollinge@gmail.com');
+  });
+
+  test('clicking Say Hello triggers window.open with correct mailto URL', async ({ page }) => {
+    await page.addInitScript(() => {
+      window.__openedUrls = [];
+      window.open = (url) => { window.__openedUrls.push(url); };
+    });
+    await page.goto('/');
+
+    await page.locator('#mc-contact-btn').click();
+
+    const opened = await page.evaluate(() => window.__openedUrls);
+    expect(opened).toHaveLength(1);
+    expect(opened[0]).toBe('mailto:matthewjcollinge@gmail.com');
   });
 });
 

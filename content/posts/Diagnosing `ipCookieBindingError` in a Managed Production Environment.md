@@ -6,7 +6,7 @@ image = "/images/posts/Lever.png"
 tags = ["PowerPlatform", "Security"]
 +++
 
-This post was written alongside Claude Opus 4.8 using a custom "My Voice" skill. Every word is checked and verified by me — but without Claude's help it wouldn't have got written, and I think being upfront about that matters. Here goes.
+This post was written alongside Claude Opus 4.8 using a custom "My Voice" skill. Every word is checked and verified by me — but without Claude's help it wouldn't have got written, and I think being upfront about that matters. Here goes....
 
 # Diagnosing `ipCookieBindingError` in a Managed Production Environment
 
